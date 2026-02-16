@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Kerala Government Ticket</title>
 
 <!-- Meta Pixel (kept) -->
@@ -39,12 +39,12 @@ body{
 
 /* ---------- HEADER FULL WIDTH (center logos) ---------- */
 .header{
-  width:100vw;         /* ensure full viewport width */
+  width:100vw;
   left:0;
   background:#e2e7cd;
   display:flex;
   align-items:center;
-  justify-content:center; /* center logos */
+  justify-content:center;
   padding:10px 16px;
   gap:12px;
   border-bottom:2px solid rgba(0,0,0,0.06);
@@ -55,7 +55,6 @@ body{
 .header .logo-container img{ height:56px; width:auto; object-fit:contain; display:block; }
 .header h1{ font-size:16px; color:#0f3b2f; margin-left:6px; font-weight:800; white-space:nowrap; }
 
-/* Make header stack on very small screens */
 @media (max-width:540px){
   .header{ flex-direction:row; align-items:center; padding:10px; gap:8px; }
   .header .logo-container img{ height:42px; }
@@ -65,7 +64,7 @@ body{
 /* ---------- PAGE WRAP (center content) ---------- */
 .page-wrap{
   max-width:1100px;
-  margin:0 auto;     /* header covers full width; content centered */
+  margin:0 auto;
   padding:12px 14px;
 }
 
@@ -85,7 +84,7 @@ body{
 .topLogo img{
   max-width:100%;
   max-height:100%;
-  object-fit:contain; /* contain so full image fits inside frame */
+  object-fit:contain;
   display:block;
   border-radius:6px;
   box-shadow: inset 0 0 40px rgba(0,0,0,0.03);
@@ -105,11 +104,8 @@ body{
   display:flex;
   align-items:center;
   gap:8px;
-  /* blink/pulse animation */
   animation:livePulse 1.2s ease-in-out infinite;
 }
-
-/* subtle glow + scale for live indicator */
 @keyframes livePulse{
   0% { transform: scale(1); box-shadow:0 6px 18px rgba(39,174,96,0.12); opacity:1; }
   50% { transform: scale(1.03); box-shadow:0 12px 30px rgba(39,174,96,0.22); opacity:0.85; }
@@ -185,6 +181,25 @@ button.primary:disabled{ opacity:.5; cursor:not-allowed; }
 /* disclaimer */
 .disclaimer{ font-size:12px; text-align:center; padding:12px; background:#f8f9fa; color:#555; }
 
+/* whatsapp floating button */
+.whatsapp-float{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:99999;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(180deg,#25D366,#128C7E);
+  box-shadow:0 8px 24px rgba(0,0,0,0.18);
+  cursor:pointer;
+  text-decoration:none;
+}
+.whatsapp-float svg{ width:26px; height:26px; display:block; }
+
 /* responsive tweaks */
 @media (max-width:640px){
   .topLogo{ height:200px; }
@@ -229,8 +244,8 @@ button.primary:disabled{ opacity:.5; cursor:not-allowed; }
     <section class="formInner" aria-labelledby="ticket-heading">
       <h2 id="ticket-heading">Kerala Government Ticket</h2>
 
-      <input id="name" placeholder="Full Name" autocomplete="name" aria-label="Full name">
-      <input id="mobile" placeholder="Mobile Number" inputmode="tel" autocomplete="tel" aria-label="Mobile number">
+      <input id="name" placeholder="Full Name" autocomplete="name" aria-label="Full name" />
+      <input id="mobile" placeholder="Mobile Number" inputmode="tel" autocomplete="tel" aria-label="Mobile number" />
 
       <select id="state" aria-label="Select State">
         <option value="">Select State</option>
@@ -252,7 +267,7 @@ button.primary:disabled{ opacity:.5; cursor:not-allowed; }
 
       <div class="ticketBox" aria-live="polite" aria-atomic="true">
         <div class="ticketAmount" id="ticketAmount">💰 Total Amount: ₹0</div>
-        <div class="ticketTitle">🎟 Select Lucky Ticket (₹149 per ticket)</div>
+        <div class="ticketTitle">🎟 Select Lucky Ticket (₹150 per paid ticket)</div>
 
         <select id="ticket" multiple aria-label="Select tickets"></select>
 
@@ -266,7 +281,7 @@ button.primary:disabled{ opacity:.5; cursor:not-allowed; }
       <!-- hidden breakdown kept for logic (visually hidden by CSS) -->
       <div class="ticketAmount" id="breakdown" style="font-size:13px;"></div>
 
-      <input id="amount" placeholder="Total Amount (₹)" readonly aria-label="Total amount">
+      <input id="amount" placeholder="Total Amount (₹)" readonly aria-label="Total amount" />
       <button id="submitBtn" class="primary" disabled aria-disabled="true">Submit & Continue</button>
     </section>
   </main>
@@ -294,7 +309,7 @@ button.primary:disabled{ opacity:.5; cursor:not-allowed; }
   <section class="lottery-container" aria-label="Winner feedback">
     <div class="feedback-container">
       <div class="feedback-track" id="feedbackTrack">
-        <!-- many cards kept (same content as before) -->
+        <!-- sample cards -->
         <div class="feedback-card">
           <div class="winner-badge">WINNER</div>
           <div class="user-info"><div class="avatar">RK</div><div class="user-details"><h4>Rajesh Kumar</h4><p>From Kochi</p></div></div>
@@ -315,8 +330,6 @@ button.primary:disabled{ opacity:.5; cursor:not-allowed; }
           <div class="feedback-text">"Finally won ₹1,20,000 in Win-Win after 3 years."</div>
           <div class="lottery-details"><span class="prize-amount">₹1,20,000</span><span class="timestamp"></span></div>
         </div>
-
-        <!-- ... (kept all earlier cards) ... -->
 
         <div class="feedback-card">
           <div class="winner-badge">WINNER</div>
@@ -340,19 +353,26 @@ button.primary:disabled{ opacity:.5; cursor:not-allowed; }
 
 </div> <!-- page-wrap -->
 
-<!-- SCRIPTS: All original logic preserved, with feedback animation optimized -->
-<script>
-/* ---------- TIMER (unchanged behaviour) ---------- */
-let time=1800;
-setInterval(()=>{
-  let m=Math.floor(time/60), s=time%60;
-  const timerEl = document.getElementById("timer");
-  if(timerEl) timerEl.textContent = `⏳ Booking closes in ${m}:${s.toString().padStart(2,"0")}`;
-  if(time>0) time--;
-},1000);
+<!-- Floating WhatsApp button (side icon) -->
+<a id="whatsappFloat" class="whatsapp-float" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+  <!-- WhatsApp SVG -->
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M20.52 3.48A11.88 11.88 0 0 0 12 .75C6.21.75 1.5 5.46 1.5 11.25c0 1.99.53 3.92 1.54 5.62L1 23l6.42-2.02A11.5 11.5 0 0 0 12 22.75c5.79 0 10.5-4.71 10.5-10.5 0-1.9-.53-3.7-1.98-5.77z" fill="#fff" opacity=".08"/>
+    <path d="M16.47 14.35c-.26-.13-1.53-.75-1.77-.83-.24-.09-.42-.13-.6.13-.17.26-.67.83-.82 1-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.08-1.28-.77-.65-1.29-1.45-1.44-1.71-.15-.26-.02-.4.11-.53.11-.11.24-.3.36-.45.12-.15.16-.26.26-.43.09-.17.04-.32-.02-.45-.06-.12-.6-1.45-.82-1.99-.22-.52-.45-.45-.62-.46l-.53-.01c-.18 0-.45.06-.69.32-.24.25-.92.9-.92 2.2 0 1.29.94 2.54 1.07 2.72.13.17 1.84 3 4.46 4.1 3.11 1.29 3.11.86 3.67.81.56-.05 1.53-.63 1.75-1.24.22-.61.22-1.13.15-1.24-.07-.12-.26-.17-.52-.3z" fill="#fff"/>
+  </svg>
+</a>
 
-/* ---------- TICKET LOGIC (kept, unaltered logic) ---------- */
-const TICKET_PRICE = 149, MIN_TICKETS = 2;
+<!-- SCRIPTS -->
+<script>
+/* ---------- CONFIG ---------- */
+// Updated pricing & bundle logic per request:
+// 1 paid ticket = ₹150
+// 2 paid tickets = ₹300 -> +1 free
+// 5 paid tickets = ₹750 -> +2 free
+const TICKET_PRICE = 150;
+const MIN_TICKETS = 1; // allow single ticket purchase
+
+// Elements
 const ticket = document.getElementById("ticket"),
       selectedList = document.getElementById("selectedList"),
       freeList = document.getElementById("freeList"),
@@ -365,9 +385,10 @@ const ticket = document.getElementById("ticket"),
       mobileI = document.getElementById("mobile"),
       state = document.getElementById("state"),
       previewModal = document.getElementById("previewModal"),
-      previewContent = document.getElementById("previewContent");
+      previewContent = document.getElementById("previewContent"),
+      whatsappFloat = document.getElementById("whatsappFloat");
 
-// populate 100 sample tickets (same as before)
+// populate 100 sample tickets
 for(let i=0;i<100;i++){
   let n=("000000"+Math.floor(Math.random()*999999)).slice(-6);
   let o=document.createElement("option");
@@ -375,17 +396,26 @@ for(let i=0;i<100;i++){
   ticket.appendChild(o);
 }
 
+/* ---------- BUNDLE CALC ---------- */
+/*
+ Packing strategy:
+  - Use as many 5-packs as possible (each paid 5 gives +2 free)
+  - Then use as many 2-packs as possible (each paid 2 gives +1 free)
+  - Remaining singles give no free tickets
+ Price updated: price = paid * ₹150 (equivalent to 1->150,2->300,5->750)
+*/
 function calculateBundle(paid){
-  if(paid < 1) return {price:0, free:0, bd:{fives:0,twos:0,ones:0}};
+  if(!paid || paid < 1) return {price:0, free:0, bd:{fives:0, twos:0, ones:0}};
   let fives = Math.floor(paid / 5);
   let rem = paid % 5;
   let twos = Math.floor(rem / 2);
   let ones = rem % 2;
-  let price = fives*650 + twos*299 + ones*149;
-  let free = fives*2 + twos*1;
+  let free = fives * 2 + twos * 1; // free tickets from bundles
+  let price = paid * TICKET_PRICE;
   return {price, free, bd:{fives, twos, ones}};
 }
 
+/* generate unique free tickets not colliding with selected paid ones */
 function generateFreeTickets(free, existing){
   let tickets = new Set(existing);
   let newTickets = [];
@@ -400,12 +430,13 @@ function generateFreeTickets(free, existing){
   return newTickets;
 }
 
+/* ---------- REFRESH UI ---------- */
 function refresh(){
   let sel = [...ticket.selectedOptions].map(o=>o.value);
   let paid = sel.length;
   let {price, free, bd} = calculateBundle(paid);
 
-  counter.textContent = `Selected: ${paid} paid tickets, Free: ${free}`;
+  counter.textContent = `Selected: ${paid} paid tickets · Free: ${free}`;
   selectedList.innerHTML = "";
   sel.forEach(t=>{
     let c = document.createElement("div");
@@ -416,8 +447,11 @@ function refresh(){
 
   let freeTickets = [];
   if(paid >= MIN_TICKETS){
-    amount.value = "₹ "+price;
+    amount.value = "₹ " + price;
+    ticketAmount.style.display = "block";
     ticketAmount.textContent = `💰 Total Amount: ₹ ${price} (for ${paid} paid + ${free} free)`;
+
+    // generate free tickets based on bundle calculation
     freeTickets = generateFreeTickets(free, sel);
     freeList.innerHTML = "";
     freeTickets.forEach(t=>{
@@ -426,19 +460,27 @@ function refresh(){
       c.innerHTML = `${t}`;
       freeList.appendChild(c);
     });
-    breakdown.innerHTML = `Paid: ${paid}<br>Free: ${free}<br>Total Tickets: ${paid+free}<br>Price Breakdown: ${bd.fives} x ₹650 (5-pack +2 free), ${bd.twos} x ₹299 (2-pack +1 free), ${bd.ones} x ₹149 (single)<br>Grand Total: ₹${price}`;
+
+    breakdown.style.display = "block";
+    breakdown.innerHTML = `Paid: ${paid}<br>Free: ${free}<br>Total Tickets: ${paid+free}<br>Price Breakdown: ${bd.fives} x (5-pack ₹750 +2 free), ${bd.twos} x (2-pack ₹300 +1 free), ${bd.ones} x (single ₹150)<br>Grand Total: ₹${price}`;
   } else {
     amount.value = "";
-    ticketAmount.textContent = "💰 Minimum 2 tickets required";
+    ticketAmount.style.display = "block";
+    ticketAmount.textContent = "💰 Minimum 1 ticket required";
     freeList.innerHTML = "";
+    breakdown.style.display = "none";
     breakdown.innerHTML = "";
   }
 
-  submitBtn.disabled = !(paid>=MIN_TICKETS && nameI.value && mobileI.value && state.value);
+  // enable submit only if required fields present and at least MIN_TICKETS paid
+  const canSubmit = (paid >= MIN_TICKETS) && nameI.value.trim().length>0 && mobileI.value.trim().length>0 && state.value.trim().length>0;
+  submitBtn.disabled = !canSubmit;
   submitBtn.setAttribute('aria-disabled', submitBtn.disabled ? 'true' : 'false');
+
   return {sel, freeTickets, price, paid, free, bd};
 }
 
+/* listeners */
 ticket.addEventListener("change", refresh);
 [nameI, mobileI, state].forEach(i=>i.addEventListener("input", refresh));
 
@@ -455,20 +497,21 @@ submitBtn.onclick = () => {
   try{ fbq('track','Lead'); } catch(e){}
   let {sel, freeTickets, price, paid, free, bd} = refresh();
   previewContent.innerHTML = `
-<b>Name:</b> ${nameI.value}
-<b>Mobile:</b> ${mobileI.value}
-<b>State:</b> ${state.value}
+<b>Name:</b> ${escapeHtml(nameI.value)}
+<b>Mobile:</b> ${escapeHtml(mobileI.value)}
+<b>State:</b> ${escapeHtml(state.value)}
 
 <b>Paid Tickets:</b> ${paid}
 <b>Free Tickets:</b> ${free}
 <b>Total Delivered:</b> ${paid+free}
+
 <b>Selected Tickets (Paid):</b>
 ${sel.join('\n')}
 
 <b>Free Tickets:</b>
 ${freeTickets.join('\n')}
 
-<b>Price Breakdown:</b> ${bd.fives} x ₹650 (5-pack +2 free), ${bd.twos} x ₹299 (2-pack +1 free), ${bd.ones} x ₹149 (single)
+<b>Price Breakdown:</b> ${bd.fives} x (5-pack ₹750 +2 free), ${bd.twos} x (2-pack ₹300 +1 free), ${bd.ones} x (single ₹150)
 <b>Total Amount:</b> ₹${price}
 
 <b>Payment Mode:</b> WhatsApp Confirmation
@@ -479,16 +522,35 @@ ${freeTickets.join('\n')}
 
 function closePreview(){ previewModal.style.display = "none"; isSubmitting = false; }
 
+/* open whatsapp with prefilled message — called from modal confirm or floating button */
+function openWhatsApp(prefilledMsg){
+  // target number (change if you want a different number)
+  const number = "+918406997885";
+  const url = "https://wa.me/" + number.replace(/\D/g,'') + "?text=" + encodeURIComponent(prefilledMsg);
+  window.open(url, "_blank");
+}
+
+/* called on confirm in modal */
 function proceedWhatsApp(){
   let {sel, freeTickets, price, paid, free} = refresh();
   let tickets = sel.concat(freeTickets).join(", ");
   let msg = `New Booking\nName: ${nameI.value}\nMobile: ${mobileI.value}\nState: ${state.value}\n\nTickets:\n${tickets}\n\nTotal Tickets: ${paid + free}\nAmount: ₹${price}`;
-  window.open("https://wa.me/+918406997885?text="+encodeURIComponent(msg), "_blank");
+  openWhatsApp(msg);
   previewModal.style.display = "none";
   isSubmitting = false;
 }
 
-/* ---------- SLIDESHOW (unchanged) ---------- */
+/* ---------- Floating WhatsApp button click -> opens chat with short message ---------- */
+whatsappFloat.addEventListener('click', (e)=>{
+  e.preventDefault();
+  // create a quick prefilled message that includes name & number if available
+  const nm = nameI.value.trim() || 'New customer';
+  const mb = mobileI.value.trim() || '';
+  const msg = `Hello, I want to book tickets.\nName: ${nm}\nMobile: ${mb}\nPlease assist.`;
+  openWhatsApp(msg);
+});
+
+/* ---------- SLIDESHOW ---------- */
 let slideIndex = 1;
 function showSlides(){
   let slides = document.getElementsByClassName("mySlides");
@@ -499,12 +561,6 @@ function showSlides(){
   setTimeout(showSlides,3000);
 }
 showSlides();
-
-/* ---------- CHECK WINNER (kept placeholders) ---------- */
-function updateDateTime(){ /* kept */ }
-function updateCountdown(){ /* kept */ }
-updateDateTime(); updateCountdown();
-setInterval(()=>{ updateDateTime(); updateCountdown(); },1000);
 
 /* ---------- FEEDBACK TRACK: improved smoothness + speed + mobile fix ---------- */
 const track = document.getElementById('feedbackTrack');
@@ -542,40 +598,29 @@ function updateTimestamps(){
   document.querySelectorAll('.timestamp').forEach(ts => ts.textContent = randomTimestamp());
 }
 
-/* Setup seamless scroll: duplicate content and set animation dynamically.
-   Key improvements:
-   - increased pxPerSec for faster scroll on mobile/desktop
-   - computed duration based on total width
-   - respects prefers-reduced-motion
-*/
+/* Setup seamless scroll: duplicate content and set animation dynamically. */
 function setupScrolling(){
   if(!track) return;
-  if(track.dataset.cloned === 'true') return; // already done
+  if(track.dataset.cloned === 'true') return;
 
   const children = Array.from(track.children);
   if(children.length === 0) return;
 
-  // measure total width of original cards (including margin-right)
   let total = 0;
   children.forEach(card=>{
     const style = getComputedStyle(card);
     const mr = parseFloat(style.marginRight) || 12;
-    // offsetWidth is reliable after paint
     total += card.offsetWidth + mr;
   });
 
-  // duplicate innerHTML for seamless loop
   const originalHTML = track.innerHTML;
   track.innerHTML = originalHTML + originalHTML;
   track.dataset.cloned = 'true';
 
-  // pxPerSec controls perceived speed (higher -> faster). tuned for mobile+desktop.
-  const pxPerSec = 220; // increased for faster smooth scroll
-  let duration = Math.max(8, Math.round(total / pxPerSec)); // seconds
-  // clamp duration to reasonable range
+  const pxPerSec = 220;
+  let duration = Math.max(8, Math.round(total / pxPerSec));
   duration = Math.min(Math.max(duration, 8), 50);
 
-  // create keyframes dynamically to translate by -total px
   const styleTag = document.createElement('style');
   styleTag.id = 'feedback-scroll-style';
   styleTag.innerHTML = `
@@ -586,11 +631,9 @@ function setupScrolling(){
   `;
   document.head.appendChild(styleTag);
 
-  // apply animation
   track.style.animation = `feedbackScroll ${duration}s linear infinite`;
   track.style.willChange = 'transform';
 
-  // respect reduced-motion
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
   if(mq.matches){
     track.style.animationPlayState = 'paused';
@@ -598,11 +641,18 @@ function setupScrolling(){
   }
 }
 
-// initialize feedback track
 setupScrolling();
 updateTimestamps();
 setInterval(updateTimestamps, 300000);
 
+/* ---------- UTILS ---------- */
+function escapeHtml(text){
+  if(!text) return '';
+  return text.replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; });
+}
+
+/* ---------- Initialize UI ---------- */
+refresh();
 </script>
 
 </body>
