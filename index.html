@@ -47,7 +47,7 @@ body{
 /* Language selector top container */
 .langbar{
   max-width:var(--maxw);
-  margin:10px auto 0 auto;
+  margin:4px auto 0 auto;
   padding:8px;
   background:var(--topbar-bg);
   border-radius:10px;
@@ -233,7 +233,7 @@ body{
 .container{
   width:100%;
   max-width:420px;
-  margin:18px auto;
+  margin:4px auto;
   background:#fff;
   border-radius:14px;
   box-shadow:0 6px 20px rgba(0,0,0,0.08);
@@ -252,7 +252,7 @@ body{
 }
 
 /* keep livePop below image and not overlapping */
-.livePopWrap{ padding:10px 14px; background:transparent; display:flex; justify-content:center; }
+.livePopWrap{ padding:4px 14px; background:transparent; display:flex; justify-content:center; }
 .livePop{
   display:inline-block;
   padding:8px 14px;
@@ -354,12 +354,14 @@ button.primary:disabled{ opacity:.5; cursor:not-allowed; }
   display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(180deg,#25D366,#128C7E);
+  background:transparent;
   box-shadow:0 8px 24px rgba(0,0,0,0.18);
   cursor:pointer;
   text-decoration:none;
+  padding:0;
+  overflow:hidden;
 }
-.whatsapp-float svg{ width:26px; height:26px; display:block; }
+.whatsapp-float img{ width:100%; height:100%; object-fit:contain; display:block; }
 
 /* responsive tweaks */
 @media (max-width:640px){
@@ -394,8 +396,8 @@ button.primary:disabled{ opacity:.5; cursor:not-allowed; }
     <div class="langbar" role="region" aria-label="Language selector">
   <label for="langSelect" data-i18n="select_language_label">Select your language:</label>
   <select id="langSelect" aria-label="Select language">
-    <option value="en">English</option>
-    <option value="hi" selected>हिन्दी</option>
+    <option value="en" selected>English</option>
+    <option value="hi">हिन्दी</option>
     <option value="ml">മലയാളം (Malayalam)</option>
     <option value="ta">தமிழ் (Tamil)</option>
     <option value="kn">ಕನ್ನಡ (Kannada)</option>
@@ -643,11 +645,7 @@ button.primary:disabled{ opacity:.5; cursor:not-allowed; }
 
 <!-- Floating WhatsApp button (side icon) -->
 <a id="whatsappFloat" class="whatsapp-float" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
-  <!-- WhatsApp SVG -->
-  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <path d="M20.52 3.48A11.88 11.88 0 0 0 12 .75C6.21.75 1.5 5.46 1.5 11.25c0 1.99.53 3.92 1.54 5.62L1 23l6.42-2.02A11.5 11.5 0 0 0 12 22.75c5.79 0 10.5-4.71 10.5-10.5 0-1.9-.53-3.7-1.98-5.77z" fill="#fff" opacity=".08"/>
-    <path d="M16.47 14.35c-.26-.13-1.53-.75-1.77-.83-.24-.09-.42-.13-.6.13-.17.26-.67.83-.82 1-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.08-1.28-.77-.65-1.29-1.45-1.44-1.71-.15-.26-.02-.4.11-.53.11-.11.24-.3.36-.45.12-.15.16-.26.26-.43.09-.17.04-.32-.02-.45-.06-.12-.6-1.45-.82-1.99-.22-.52-.45-.45-.62-.46l-.53-.01c-.18 0-.45.06-.69.32-.24.25-.92.9-.92 2.2 0 1.29.94 2.54 1.07 2.72.13.17 1.84 3 4.46 4.1 3.11 1.29 3.11.86 3.67.81.56-.05 1.53-.63 1.75-1.24.22-.61.22-1.13.15-1.24-.07-.12-.26-.17-.52-.3z" fill="#fff"/>
-  </svg>
+  <img src="https://kerelalottery.ct.ws/wp-content/uploads/2026/02/whatsapp.jpg" alt="WhatsApp" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
 </a>
 
 <!-- SCRIPTS -->
@@ -1436,7 +1434,7 @@ function populateTestimonials(lang){
   container.innerHTML = '';
   const templates = (TRANSLATIONS[lang] && TRANSLATIONS[lang].testimonial_templates) ? TRANSLATIONS[lang].testimonial_templates : TRANSLATIONS['en'].testimonial_templates;
   const locale = LOCALE_MAP[lang] || 'en-IN';
-  const COUNT = 20;
+  const COUNT = 5;
   for(let i=0;i<COUNT;i++){
     const person = PEOPLE[i % PEOPLE.length];
     const amount = AMOUNTS[i % AMOUNTS.length];
@@ -1491,9 +1489,9 @@ function setLanguage(lang){
   document.documentElement.lang = lang || 'en';
 }
 
-/* On load, set default language (selector default already set to hi) */
+/* On load, set default language (selector default already set to en) */
 document.addEventListener('DOMContentLoaded', function(){
-  const initialLang = langSelect.value || 'hi';
+  const initialLang = langSelect.value || 'en';
   setLanguage(initialLang);
 });
 
