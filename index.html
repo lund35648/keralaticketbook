@@ -1,494 +1,633 @@
-<!doctype html>
-<html lang="hi">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Kerala Lottery — Trusted Draws & Verified Winners</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Kerala Government Ticket</title>
+
+<!-- Meta Pixel (kept) -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '744008402087520');
+fbq('track', 'PageView');
+</script>
+<noscript>
+<img height="1" width="1" style="display:none"
+ src="https://www.facebook.com/tr?id=744008402087520&ev=PageView&noscript=1"/>
+</noscript>
+
 <style>
-:root{
-  --accent:#0b6b3a;
-  --accent-2:#0a8a49;
-  --muted:#6b6b6b;
-  --card:#ffffff;
-  --bg:#f6f7f5;
-  --maxw:980px;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
+/* ---------- RESET & LAYOUT ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;width:100%;margin:0;padding:0}
 body{
-  margin:0;
-  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  background:var(--bg);
-  color:#111;
+  font-family:Arial,Helvetica,sans-serif;
   -webkit-font-smoothing:antialiased;
-}
-.container{
-  max-width:var(--maxw);
-  margin:16px auto;
-  padding:16px;
+  -moz-osx-font-smoothing:grayscale;
+  background:#f4f4f4;
+  color:#222;
+  line-height:1.35;
+  overflow-x:hidden;
 }
 
-/* Header */
+/* ---------- HEADER FULL WIDTH (center logos) ---------- */
 .header{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  background:linear-gradient(90deg,var(--accent) 0%, var(--accent-2) 100%);
-  color:white;
-  padding:14px;
-  border-radius:12px;
-  box-shadow:0 8px 30px rgba(8,12,16,0.08);
-}
-.logo{
-  width:68px;
-  height:68px;
-  border-radius:10px;
-  background:rgba(255,255,255,0.08);
+  width:100vw;
+  left:0;
+  background:#e2e7cd;
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight:700;
-  font-size:22px;
-}
-.header h1{margin:0; font-size:18px}
-.header p{margin:0; font-size:13px; opacity:0.95}
-
-/* Hero */
-.hero{
-  margin-top:14px;
-  background:var(--card);
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 14px 40px rgba(12,20,30,0.06);
-}
-.hero img{width:100%; display:block; height:auto; object-fit:cover}
-
-/* Main content */
-.main{
-  margin-top:14px;
-  display:grid;
-  grid-template-columns: 1fr 320px;
-  gap:14px;
-}
-@media(max-width:880px){
-  .main{grid-template-columns: 1fr;}
-}
-
-.card{
-  background:var(--card);
-  padding:14px;
-  border-radius:10px;
-  box-shadow:0 8px 24px rgba(12,16,20,0.04);
-}
-
-/* CTA */
-.cta{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-top:12px;
-}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  background:var(--accent-2);
-  color:white;
-  padding:10px 14px;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:700;
-  box-shadow:0 8px 20px rgba(9,120,70,0.16);
-}
-.btn.secondary{
-  background:white;
-  color:var(--accent-2);
-  border:1px solid #e6e6e6;
-  box-shadow:none;
-}
-
-/* Info list */
-.badge{
-  display:inline-block;
-  background:#eaf7ee;
-  color:var(--accent-2);
-  padding:8px 10px;
-  border-radius:8px;
-  font-weight:700;
-  margin-bottom:8px;
-}
-
-/* Steps */
-.steps{
-  display:flex;
-  gap:10px;
-  flex-direction:column;
-  margin-top:8px;
-}
-.step{
-  display:flex;
+  padding:10px 16px;
   gap:12px;
-  align-items:flex-start;
+  border-bottom:2px solid rgba(0,0,0,0.06);
+  position:relative;
+  box-shadow:0 3px 8px rgba(0,0,0,0.06);
 }
-.step .num{
-  width:36px;
-  height:36px;
-  border-radius:8px;
-  background:var(--accent);
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
+.header .logo-container{ display:flex; align-items:center; gap:14px; min-width:0; justify-content:center; }
+.header .logo-container img{ height:56px; width:auto; object-fit:contain; display:block; }
+.header h1{ font-size:16px; color:#0f3b2f; margin-left:6px; font-weight:800; white-space:nowrap; }
+
+@media (max-width:540px){
+  .header{ flex-direction:row; align-items:center; padding:10px; gap:8px; }
+  .header .logo-container img{ height:42px; }
+  .header h1{ font-size:14px; }
 }
 
-/* Testimonials list */
-.testimonials{margin-top:8px}
-.testimonial{
-  display:flex;
-  gap:10px;
-  align-items:flex-start;
-  padding:10px;
-  border-radius:10px;
-  margin-bottom:10px;
-  background:#fff;
-  box-shadow:0 8px 24px rgba(8,12,16,0.03);
+/* ---------- PAGE WRAP (center content) ---------- */
+.page-wrap{
+  max-width:1100px;
+  margin:0 auto;
+  padding:12px 14px;
 }
-.testimonial img{width:56px;height:56px;border-radius:50%;object-fit:cover}
-.testimonial .meta{font-weight:700}
-.small{font-size:13px;color:var(--muted)}
 
-/* Form */
-.form-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.form-row input, .form-row select, .form-row textarea{
-  padding:10px;
-  border-radius:8px;
-  border:1px solid #e6e6e6;
-  font-size:15px;
+/* ---------- CARD / CONTAINER ---------- */
+.container{
   width:100%;
+  max-width:420px;
+  margin:18px auto;
+  background:#fff;
+  border-radius:14px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.08);
+  overflow:hidden;
 }
-.form-row .half{flex:1 1 48%}
-.form-row .full{flex:1 1 100%}
-.order-note{font-size:13px;color:var(--muted);margin-top:8px}
 
-/* Footer */
-.footer{margin-top:16px;text-align:center;color:var(--muted);font-size:13px;padding:14px}
+/* ---------- TOP IMAGE: make it fit container without cropping ---------- */
+.topLogo{ width:100%; height:230px; overflow:hidden; position:relative; background:#ddd; display:flex; align-items:center; justify-content:center; padding:6px; }
+.topLogo img{
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
+  display:block;
+  border-radius:6px;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.03);
+}
 
-/* small tweaks */
-.h2{font-size:18px;margin:0 0 8px 0}
-.lead{font-size:15px;color:#222}
-.highlight{color:var(--accent-2);font-weight:800}
+/* keep livePop below image and not overlapping */
+.livePopWrap{ padding:10px 14px; background:transparent; display:flex; justify-content:center; }
+.livePop{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:20px;
+  background:linear-gradient(90deg,#2ecc71,#27ae60);
+  color:#fff;
+  font-size:13px;
+  font-weight:800;
+  box-shadow:0 6px 18px rgba(39,174,96,0.12);
+  display:flex;
+  align-items:center;
+  gap:8px;
+  animation:livePulse 1.2s ease-in-out infinite;
+}
+@keyframes livePulse{
+  0% { transform: scale(1); box-shadow:0 6px 18px rgba(39,174,96,0.12); opacity:1; }
+  50% { transform: scale(1.03); box-shadow:0 12px 30px rgba(39,174,96,0.22); opacity:0.85; }
+  100% { transform: scale(1); box-shadow:0 6px 18px rgba(39,174,96,0.12); opacity:1; }
+}
 
-/* animations */
-.fade-in{opacity:0;transform:translateY(8px);transition:all 420ms cubic-bezier(.2,.9,.3,1)}
-.fade-in.show{opacity:1;transform:none}
+/* ---------- FORM / INPUTS ---------- */
+.formInner{ padding:14px; }
+h2{ text-align:center; margin:8px 0 10px; color:#d9365d; font-size:18px; }
+input,select,button,textarea{
+  width:100%;
+  padding:10px 12px;
+  margin-bottom:10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  font-size:14px;
+}
+select[multiple]{ min-height:84px; max-height:240px; }
+.ticketBox{ border:2px dashed #ff4f79; border-radius:12px; padding:10px; margin-bottom:8px; background:#fffafc; }
+.ticketAmount,.ticketTitle{ padding:6px 4px; margin-bottom:6px; }
+.ticketAmount{ background:#e8f5e9; color:#1b5e20; border-radius:8px; font-weight:700; text-align:center; }
+.ticketTitle{ font-weight:700; color:#d9365d; }
+.counter{ font-size:13px; margin-top:3px; color:#666; }
+.selectedList, #freeList{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+.chip{ background:#ffe3ea; color:#d9365d; padding:6px 8px; border-radius:14px; font-size:12px; display:flex; gap:8px; align-items:center; }
+.chip span{ cursor:pointer; font-weight:700; padding-left:6px }
+
+/* submit */
+button.primary{ background:linear-gradient(90deg,#ff4f79,#d9365d); color:#fff; border:none; font-weight:800; padding:10px; border-radius:10px; }
+button.primary:disabled{ opacity:.5; cursor:not-allowed; }
+
+/* hide the green calculation UI visually but keep in DOM for logic */
+#ticketAmount, #breakdown{ display:none !important; }
+
+/* ---------- MODAL ---------- */
+.modal{ position:fixed; inset:0; background:rgba(0,0,0,.45); display:none; align-items:center; justify-content:center; z-index:9999; padding:12px; }
+.modalBox{ background:#fff; width:100%; max-width:520px; border-radius:12px; padding:16px; box-shadow:0 8px 30px rgba(0,0,0,.25); }
+.modalBtns{ display:flex; gap:10px; margin-top:12px; }
+.cancelBtn{ background:#ccc; color:#333; border:none; padding:10px 12px; border-radius:8px; cursor:pointer; }
+
+/* ---------- SLIDESHOW ---------- */
+.slideshow-container{ width:100%; height:180px; overflow:hidden; background:#e2e7cd; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-top:12px; }
+.mySlides{ display:none; width:100%; height:100%; text-align:center; }
+.mySlides img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+/* ---------- FEEDBACK / WINNER TRACK ---------- */
+.lottery-container{ max-width:1000px; margin:18px auto; background:#fff; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.08); overflow:hidden; border:2px solid #0a5a0a; }
+.feedback-container{ position:relative; overflow:hidden; }
+.feedback-container::before, .feedback-container::after{
+  content:''; position:absolute; top:0; bottom:0; width:64px; z-index:2;
+}
+.feedback-container::before{ left:0; background:linear-gradient(90deg,#fff,transparent); }
+.feedback-container::after{ right:0; background:linear-gradient(90deg,transparent,#fff); }
+.feedback-track{ display:flex; gap:12px; align-items:flex-start; padding:14px 20px; will-change:transform; }
+.feedback-card{ min-width:300px; max-width:340px; background:#fff9e6; border-radius:10px; padding:12px; box-shadow:0 6px 14px rgba(0,0,0,.06); border-top:4px solid #d4af37; flex-shrink:0; }
+.winner-badge{ position:absolute; top:-10px; right:12px; background:#e31837; color:#fff; padding:4px 10px; border-radius:12px; font-size:11px; font-weight:700; }
+.user-info{ display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+.avatar{ width:46px; height:46px; border-radius:50%; background:#f1f1f1; display:flex; align-items:center; justify-content:center; font-weight:700; color:#0a5a0a; border:2px solid #d4af37; }
+.user-details h4{ margin:0; color:#0a5a0a; font-size:15px; }
+.feedback-text{ font-size:14px; color:#333; margin-bottom:8px; }
+.lottery-details{ display:flex; justify-content:space-between; font-size:12px; border-top:1px dashed #ccc; padding-top:10px; color:#333; }
+.prize-amount{ color:#e31837; font-weight:800; }
+
+/* control buttons */
+.controls{ display:flex; justify-content:center; padding:12px; background:#f8f9fa; gap:12px; }
+.control-btn{ background:#0a5a0a; color:#fff; border:none; padding:8px 14px; border-radius:6px; cursor:pointer; font-weight:700; }
+
+/* live-indicator */
+.live-indicator{ display:flex; justify-content:center; align-items:center; gap:8px; padding:10px; background:#f8f9fa; color:#333; font-weight:700; }
+.live-dot{ width:10px; height:10px; background:#e31837; border-radius:50%; animation:livePulseDot 1.5s infinite; }
+@keyframes livePulseDot{ 0%{opacity:1}50%{opacity:.3}100%{opacity:1} }
+
+/* disclaimer */
+.disclaimer{ font-size:12px; text-align:center; padding:12px; background:#f8f9fa; color:#555; }
+
+/* whatsapp floating button */
+.whatsapp-float{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:99999;
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(180deg,#25D366,#128C7E);
+  box-shadow:0 8px 24px rgba(0,0,0,0.18);
+  cursor:pointer;
+  text-decoration:none;
+}
+.whatsapp-float svg{ width:26px; height:26px; display:block; }
+
+/* responsive tweaks */
+@media (max-width:640px){
+  .topLogo{ height:200px; }
+  .feedback-card{ min-width:260px; max-width:290px; }
+  .feedback-track{ padding:12px; gap:10px; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .feedback-track{ animation:none !important; }
+  .live-dot{ animation:none !important; }
+  .livePop{ animation:none !important; }
+}
 </style>
 </head>
 <body>
-<div class="container">
 
-  <!-- Header -->
-  <header class="header">
-    <div class="logo">KL</div>
-    <div>
-      <h1>Kerala Lottery — Trusted Draws & Verified Winners</h1>
-      <p>Government-supervised lottery draws • Public result publication • Secure prize distribution</p>
+<!-- HEADER full width -->
+<header class="header" role="banner" aria-label="Main header">
+  <div class="logo-container" aria-hidden="false">
+    <img src="https://kerelalottery.ct.ws/wp-content/uploads/2025/08/image-removebg-preview-6-e1754205589977.png" alt="G20 Logo">
+    <img src="https://kerelalottery.ct.ws/wp-content/uploads/2025/08/top-logo-e1754204463750.png" alt="Kerala Lottery Logo">
+  </div>
+</header>
+
+<div class="page-wrap">
+
+  <!-- MAIN CARD -->
+  <main class="container" role="main" aria-labelledby="ticket-heading">
+
+    <!-- top image enlarged & fit (now contain to show full image) -->
+    <div class="topLogo" aria-hidden="false">
+      <img src="https://kerelalottery.ct.ws/wp-content/uploads/2026/02/6093555907598946471.jpg" alt="Top banner">
     </div>
-  </header>
 
-  <!-- Hero image -->
-  <section class="hero">
-    <!-- Replace with your banner image URL -->
-    <img src="REPLACE_BANNER_IMAGE_URL" alt="Kerala Lottery banner">
+    <!-- live booking (separate block; won't overlap image) -->
+    <div class="livePopWrap" aria-hidden="false">
+      <span class="livePop" role="status" aria-live="polite">🟢 LIVE BOOKING ACTIVE</span>
+    </div>
+
+    <!-- FORM -->
+    <section class="formInner" aria-labelledby="ticket-heading">
+      <h2 id="ticket-heading">Kerala Government Ticket</h2>
+
+      <input id="name" placeholder="Full Name" autocomplete="name" aria-label="Full name" />
+      <input id="mobile" placeholder="Mobile Number" inputmode="tel" autocomplete="tel" aria-label="Mobile number" />
+
+      <!-- state select will be populated by JS to ensure custom order -->
+      <select id="state" aria-label="Select State">
+        <option value="">Select State</option>
+      </select>
+
+      <select id="language" aria-label="Select Language">
+        <option>English</option>
+        <option>Hindi</option>
+        <option>Malayalam</option>
+        <option>Tamil</option>
+        <option>Kannada</option>
+        <option>Telugu</option>
+      </select>
+
+      <div class="ticketBox" aria-live="polite" aria-atomic="true">
+        <div class="ticketAmount" id="ticketAmount">💰 Total Amount: ₹0</div>
+        <div class="ticketTitle">🎟 Select Lucky Ticket (₹150 per paid ticket)</div>
+
+        <select id="ticket" multiple aria-label="Select tickets"></select>
+
+        <div class="counter" id="counter">Selected: 0 tickets</div>
+        <div class="selectedList" id="selectedList" aria-hidden="false"></div>
+
+        <div class="ticketTitle" style="margin-top:10px;">Free Tickets</div>
+        <div class="selectedList" id="freeList" aria-hidden="false"></div>
+      </div>
+
+      <!-- hidden breakdown kept for logic (visually hidden by CSS) -->
+      <div class="ticketAmount" id="breakdown" style="font-size:13px;"></div>
+
+      <input id="amount" placeholder="Total Amount (₹)" readonly aria-label="Total amount" />
+      <button id="submitBtn" class="primary" disabled aria-disabled="true">Submit & Continue</button>
+    </section>
+  </main>
+
+  <!-- modal preview -->
+  <div class="modal" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
+    <div class="modalBox">
+      <h3 id="previewTitle">Payment Preview</h3>
+      <div class="summary" id="previewContent" style="white-space:pre-wrap; font-size:14px; color:#111;"></div>
+      <div class="modalBtns">
+        <button class="cancelBtn" onclick="closePreview()">Cancel</button>
+        <button onclick="proceedWhatsApp()" class="primary">Confirm & WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- optional slideshow -->
+  <div class="slideshow-container" aria-hidden="false">
+    <div class="mySlides fade"><img src="https://kerelalottery.ct.ws/wp-content/uploads/2025/05/img.jpg" alt="Slide 1"></div>
+    <div class="mySlides fade"><img src="https://kerelalottery.ct.ws/wp-content/uploads/2025/05/imag.jpg" alt="Slide 2"></div>
+    <div class="mySlides fade"><img src="https://kerelalottery.ct.ws/wp-content/uploads/2025/05/akshaya1.jpg" alt="Slide 3"></div>
+  </div>
+
+  <!-- feedback / winners -->
+  <section class="lottery-container" aria-label="Winner feedback">
+    <div class="feedback-container">
+      <div class="feedback-track" id="feedbackTrack">
+        <!-- sample cards -->
+        <div class="feedback-card">
+          <div class="winner-badge">WINNER</div>
+          <div class="user-info"><div class="avatar">RK</div><div class="user-details"><h4>Rajesh Kumar</h4><p>From Kochi</p></div></div>
+          <div class="feedback-text">"Just won ₹7,50,000 in Karunya KR-625! Payment received in 5 days."</div>
+          <div class="lottery-details"><span class="prize-amount">₹7,50,000</span><span class="timestamp"></span></div>
+        </div>
+
+        <div class="feedback-card">
+          <div class="winner-badge">JACKPOT</div>
+          <div class="user-info"><div class="avatar">PM</div><div class="user-details"><h4>Priya Menon</h4><p>From Thiruvananthapuram</p></div></div>
+          <div class="feedback-text">"Won ₹25,00,000 in Christmas Bumper. Everything verified officially."</div>
+          <div class="lottery-details"><span class="prize-amount">₹25,00,000</span><span class="timestamp"></span></div>
+        </div>
+
+        <div class="feedback-card">
+          <div class="winner-badge">WINNER</div>
+          <div class="user-info"><div class="avatar">SK</div><div class="user-details"><h4>Sunil Kumar</h4><p>From Kozhikode</p></div></div>
+          <div class="feedback-text">"Finally won ₹1,20,000 in Win-Win after 3 years."</div>
+          <div class="lottery-details"><span class="prize-amount">₹1,20,000</span><span class="timestamp"></span></div>
+        </div>
+
+        <div class="feedback-card">
+          <div class="winner-badge">WINNER</div>
+          <div class="user-info"><div class="avatar">DP</div><div class="user-details"><h4>Deepa P.</h4><p>From Wayanad</p></div></div>
+          <div class="feedback-text">"₹60,000 in Sthree Sakthi."</div>
+          <div class="lottery-details"><span class="prize-amount">₹60,000</span><span class="timestamp"></span></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="live-indicator"><div class="live-dot" aria-hidden="true"></div><span>LIVE WINNER UPDATES</span></div>
+
+    <div class="controls">
+      <button class="control-btn" onclick="pauseAnimation()">Pause</button>
+      <button class="control-btn" onclick="playAnimation()">Play</button>
+    </div>
+
+    <div class="disclaimer">*These are testimonials from verified winners. Results may vary. Please play responsibly.</div>
   </section>
 
-  <!-- Main two column area -->
-  <div class="main">
+</div> <!-- page-wrap -->
 
-    <!-- Left: long description, steps, FAQ, testimonials -->
-    <div>
+<!-- Floating WhatsApp button (side icon) -->
+<a id="whatsappFloat" class="whatsapp-float" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
+  <!-- WhatsApp SVG -->
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M20.52 3.48A11.88 11.88 0 0 0 12 .75C6.21.75 1.5 5.46 1.5 11.25c0 1.99.53 3.92 1.54 5.62L1 23l6.42-2.02A11.5 11.5 0 0 0 12 22.75c5.79 0 10.5-4.71 10.5-10.5 0-1.9-.53-3.7-1.98-5.77z" fill="#fff" opacity=".08"/>
+    <path d="M16.47 14.35c-.26-.13-1.53-.75-1.77-.83-.24-.09-.42-.13-.6.13-.17.26-.67.83-.82 1-.15.17-.3.19-.56.06-.26-.13-1.09-.4-2.08-1.28-.77-.65-1.29-1.45-1.44-1.71-.15-.26-.02-.4.11-.53.11-.11.24-.3.36-.45.12-.15.16-.26.26-.43.09-.17.04-.32-.02-.45-.06-.12-.6-1.45-.82-1.99-.22-.52-.45-.45-.62-.46l-.53-.01c-.18 0-.45.06-.69.32-.24.25-.92.9-.92 2.2 0 1.29.94 2.54 1.07 2.72.13.17 1.84 3 4.46 4.1 3.11 1.29 3.11.86 3.67.81.56-.05 1.53-.63 1.75-1.24.22-.61.22-1.13.15-1.24-.07-.12-.26-.17-.52-.3z" fill="#fff"/>
+  </svg>
+</a>
 
-      <!-- Overview -->
-      <div class="card">
-        <h2 class="h2">हम क्यों भरोसा दिलाते हैं</h2>
-        <p class="lead">
-          Kerala State Lotteries एक लंबा परंपरागत और सार्वजनिक रूप से मान्यता प्राप्त प्रोग्राम है जो राज्य सरकार द्वारा नियमित और नियंत्रित तरीके से संचालित होता है।
-          हमारी सेवा <span class="highlight">सहायता प्रदान करती है टिकट खरीदने, परिणाम सत्यापन और पुरस्कार वितरण तक</span> — पूरी पारदर्शिता और आधिकारिक प्रक्रियाओं के साथ।
-        </p>
-
-        <div class="cta">
-          <a class="btn" id="waOrderBtn" target="_blank" rel="noopener" href="https://wa.me/918406997885?text=Hello%20Team%20Kerala%20Lottery%2C%20I%20want%20to%20buy%20tickets.">
-            📱 Order via WhatsApp
-          </a>
-          <a class="btn secondary" href="#how">🔎 How Prize Process Works</a>
-        </div>
-
-        <div class="order-note">Contact / Orders: <strong>+91 8406997885</strong> · Open 09:00–20:00</div>
-      </div>
-
-      <!-- Detailed professional description -->
-      <div class="card" style="margin-top:12px">
-        <h2 class="h2">विस्तृत विवरण — Professional & Transparent Process</h2>
-
-        <p class="lead">
-          यह पेज और हमारी सेवा इस उद्देश्य से डिज़ाइन किए गए हैं कि प्रतिभागियों को पूरी जानकारी, स्पष्ट प्रक्रिया और भरोसेमंद सहायता मिले।
-          हम निम्न-लिखित पहलुओं पर विशेष ध्यान देते हैं ताकि आपकी भागीदारी सुरक्षित और पारदर्शी रहे:
-        </p>
-
-        <ul>
-          <li><strong>स्वीकृत प्रक्रिया:</strong> प्रत्येक टिकट और ड्रॉ आधिकारिक निकायों के मानकों के अनुरूप आयोजित होते हैं।</li>
-          <li><strong>खुला प्रकाशन:</strong> विजेता नंबर सार्वजनिक रूप से प्रकाशित किए जाते हैं — आप स्वयं सत्यापित कर सकते हैं।</li>
-          <li><strong>प्रमाणिक सत्यापन:</strong> विजेताओं की टिकट सत्यापित करने के बाद ही भुगतान जारी किया जाता है, और भुगतान अधिकृत चैनलों से होता है।</li>
-          <li><strong>गोपनीयता और सुरक्षा:</strong> उपयोगकर्ता जानकारी सुरक्षित रखी जाती है; हम संवेदनशील जानकारी सार्वजनिक नहीं करते।</li>
-        </ul>
-
-        <p class="small">
-          नोट: हम किसी भी तरह के अनुचित या झूठे दावे नहीं करते — कृपया जिम्मेदारी से भाग लें।
-        </p>
-      </div>
-
-      <!-- How it works / Prize process -->
-      <div id="how" class="card" style="margin-top:12px">
-        <h2 class="h2">Transparent Prize Process — कैसे काम करता है</h2>
-        <div class="steps">
-          <div class="step"><div class="num">1</div><div><strong>Official Draw</strong><div class="small">ड्रॉ आधिकारिक पर्यवेक्षण के साथ आयोजित होता है और तारीख-समय प्रकाशित होता है।</div></div></div>
-          <div class="step"><div class="num">2</div><div><strong>Result Publication</strong><div class="small">विजयी संख्याएँ सार्वजनिक रूप से प्रकाशित की जाती हैं — आप किसी भी आधिकारिक चैनल पर जाँच कर सकते हैं।</div></div></div>
-          <div class="step"><div class="num">3</div><div><strong>Ticket Verification</strong><div class="small">टिकट सत्यापन आधिकारिक सिस्टम द्वारा की जाती है — तभी पुरस्कार की प्रक्रिया आगे बढ़ती है।</div></div></div>
-          <div class="step"><div class="num">4</div><div><strong>Winner Confirmation & Payout</strong><div class="small">पहचान सत्यापित होने के बाद अधिकृत भुगतान चैनल के माध्यम से राशि जारी की जाती है।</div></div></div>
-        </div>
-      </div>
-
-      <!-- Testimonials dynamic -->
-      <div class="card" style="margin-top:12px">
-        <h2 class="h2">Recent participant feedback</h2>
-        <div class="testimonials" id="testimonialsContainer" aria-live="polite">
-          <!-- JS populates 20 feedbacks here -->
-        </div>
-        <div class="small">These testimonials show participant reports and dates for illustrative purposes. Each entry displays the reported credited amount and the date it was credited.</div>
-      </div>
-
-      <!-- FAQ -->
-      <div class="card" style="margin-top:12px">
-        <h2 class="h2">FAQ — अक्सर पूछे जाने वाले प्रश्न</h2>
-        <p><strong>Q: क्या यह सरकारी योजना है?</strong><br>
-        A: Kerala State Lotteries राज्य सरकार के अंतर्गत आयोजित होते हैं। हमारी सेवा टिकट खरीदने/सहायता प्रदान करने में मदद करती है; आधिकारिक ड्रॉ सरकारी रूप से आयोजित होते हैं।</p>
-
-        <p><strong>Q: पुरस्कार भुगतान कैसे मिलता है?</strong><br>
-        A: विजेता की पहचान सत्यापित करने के बाद अधिकृत भुगतान चैनलों के माध्यम से राशि जारी की जाती है।</p>
-
-        <p><strong>Q: अगर मुझे सहायता चाहिए तो?</strong><br>
-        A: आप सीधे WhatsApp पर <strong>+91 8406997885</strong> पर संपर्क कर सकते हैं — हम ऑर्डर और सत्यापन में मदद करेंगे।</p>
-      </div>
-
-    </div>
-
-    <!-- Right column: order box, quick facts -->
-    <aside>
-      <div class="card">
-        <h3 class="h2">Order Tickets — Quick</h3>
-        <p class="small">Fill details below and tap <strong>Order via WhatsApp</strong>. We will receive a prefilled message with your order.</p>
-
-        <!-- Order form -->
-        <form id="orderForm" onsubmit="event.preventDefault(); sendWhatsAppOrder();">
-          <div class="form-row">
-            <input type="text" id="name" placeholder="नाम (Full Name)" required>
-          </div>
-          <div class="form-row">
-            <input type="tel" id="phone" placeholder="मोबाइल नंबर (10 digits)" pattern="[0-9]{10}" required>
-          </div>
-          <div class="form-row">
-            <div class="half">
-              <select id="qty" required>
-                <option value="">Ticket Qty</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="5">5</option>
-                <option value="10">10</option>
-              </select>
-            </div>
-            <div class="half">
-              <select id="draw" required>
-                <option value="">Preferred Draw</option>
-                <option value="Win-Wednesday">Win - Wednesday</option>
-                <option value="Sun-Fortune">Sun Fortune</option>
-                <option value="Weekly-Special">Weekly Special</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <textarea id="note" placeholder="Optional note (e.g., ticket numbers preference)" rows="3"></textarea>
-          </div>
-
-          <div style="margin-top:10px; display:flex; gap:8px;">
-            <button type="submit" class="btn" style="flex:1">Order via WhatsApp</button>
-            <button type="button" class="btn secondary" onclick="fillDemo()" style="flex:1">Demo Fill</button>
-          </div>
-          <div class="order-note">We will respond on WhatsApp with payment & confirmation steps. Do not share sensitive documents in chat.</div>
-        </form>
-      </div>
-
-      <div class="card" style="margin-top:12px">
-        <div class="badge">Why trust?</div>
-        <ul class="list small" style="padding-left:14px;">
-          <li>Official draws under supervision</li>
-          <li>Publicly published results</li>
-          <li>Secure ticket verification</li>
-        </ul>
-        <div style="margin-top:10px;">
-          <a class="btn" href="https://wa.me/918406997885?text=Hello%2C%20I%20have%20a%20question%20about%20Kerala%20Lottery." target="_blank">Contact on WhatsApp</a>
-        </div>
-      </div>
-
-    </aside>
-
-  </div>
-
-  <div class="footer card">
-    <div class="small">Kerala Lottery draws & results are administered by the Government of Kerala. This page assists with orders and verification. Participate responsibly. We never ask for banking passwords or OTPs.</div>
-  </div>
-
-</div>
-
-<!-- JavaScript: testimonials + WhatsApp order prefill -->
+<!-- SCRIPTS -->
 <script>
-/* ---------- Configuration ---------- */
-const WHATSAPP_NUMBER = '918406997885'; // +91 8406997885 (use international format without +)
-const WA_BASE = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=';
+/* ---------- CONFIG ---------- */
+const TICKET_PRICE = 150;
+const MIN_TICKETS = 1;
 
-/* ---------- Helper functions ---------- */
-function encodeMsg(s){ return encodeURIComponent(s); }
-function formatRupee(n){
-  return '₹' + n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-function avatar(seed){
-  // placeholder avatar service; you can replace with your own URLs
-  const id = (seed % 70) + 1;
-  return 'https://i.pravatar.cc/150?img=' + id;
-}
+// Elements
+const ticket = document.getElementById("ticket"),
+      selectedList = document.getElementById("selectedList"),
+      freeList = document.getElementById("freeList"),
+      amount = document.getElementById("amount"),
+      ticketAmount = document.getElementById("ticketAmount"),
+      breakdown = document.getElementById("breakdown"),
+      submitBtn = document.getElementById("submitBtn"),
+      counter = document.getElementById("counter"),
+      nameI = document.getElementById("name"),
+      mobileI = document.getElementById("mobile"),
+      stateSelect = document.getElementById("state"),
+      previewModal = document.getElementById("previewModal"),
+      previewContent = document.getElementById("previewContent"),
+      whatsappFloat = document.getElementById("whatsappFloat");
 
-/* ---------- dynamic date that changes everyday ---------- */
-function dynamicDate(seedOffset){
-  const today = new Date();
-  const base = Math.floor(today.getTime() / (1000*60*60*24)); // days since epoch
-  const offset = (seedOffset * 2) + (base % 7);
-  const d = new Date();
-  d.setDate(d.getDate() - offset);
-  const opts = { day:'2-digit', month:'short', year:'numeric' };
-  return d.toLocaleDateString('en-IN', opts);
-}
+/* ---------- Populate state select with custom order ---------- */
+(function populateStates(){
+  // top five first (in given order)
+  const topStates = ["Kerala","Tamil Nadu","Karnataka","Andhra Pradesh","Telangana"];
 
-/* ---------- generate random realistic amounts (varied ranges) ---------- */
-function randomAmount(i){
-  const ranges = [
-    [1000, 7000],
-    [7000, 25000],
-    [25000, 120000],
-    [120000, 700000],
-    [700000, 2500000]
-  ];
-  const r = ranges[i % ranges.length];
-  const amt = Math.floor(Math.random()*(r[1]-r[0]+1)) + r[0];
-  return formatRupee(amt);
-}
-
-/* ---------- Testimonials population ---------- */
-(function populateTestimonials(){
-  const people = [
-    "Anil Kumar, Kochi","Sreeja Nair, Thiruvananthapuram","Ramesh K, Kollam",
-    "Leena Thomas, Ernakulam","Vishnu P, Kozhikode","Rekha Menon, Alappuzha",
-    "Suresh Das, Thrissur","Neha Raj, Malappuram","Karthik S, Palakkad",
-    "Asha M, Kannur","Mohammad Imran, Kasaragod","Priya S, Idukki",
-    "Ajith Raj, Pathanamthitta","Manju K, Wayanad","Arjun P, Kottayam",
-    "Dinesh V, Thrissur","Fatima B, Kollam","Gopinath T, Ernakulam",
-    "Smitha R, Thiruvananthapuram","Nitin S, Kochi"
+  // all indian states/UTs (simple list). You can add/remove if needed.
+  const all = [
+    "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat",
+    "Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh",
+    "Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab",
+    "Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh",
+    "Uttarakhand","West Bengal","Andaman and Nicobar Islands","Chandigarh","Dadra and Nagar Haveli and Daman and Diu",
+    "Delhi","Jammu and Kashmir","Ladakh","Lakshadweep","Puducherry"
   ];
 
-  const templates = [
-    "My ticket was verified and {AMOUNT} was credited on {DATE}. Smooth official process.",
-    "Received {AMOUNT} in my account on {DATE} after verification. Very professional.",
-    "Prize {AMOUNT} credited on {DATE}. Team helped with verification quickly.",
-    "Amount {AMOUNT} posted to my account on {DATE} — secure and prompt.",
-    "Verified my ticket and got {AMOUNT} on {DATE}. Happy with the transparent process.",
-    "{AMOUNT} credited (date: {DATE}) — good support from the team for documentation."
-  ];
+  // Build unique list: put topStates first (if present), then remaining from 'all' excluding topStates
+  const remaining = all.filter(s=> !topStates.includes(s));
+  const finalList = [...topStates, ...remaining];
 
-  const container = document.getElementById('testimonialsContainer');
-  const COUNT = 20;
-  for(let i=0;i<COUNT;i++){
-    const person = people[i % people.length];
-    const amount = randomAmount(i);
-    const date = dynamicDate(i+1);
-    const tpl = templates[i % templates.length];
-    const text = tpl.replace('{AMOUNT}', amount).replace('{DATE}', date);
-
-    const div = document.createElement('div');
-    div.className = 'testimonial fade-in';
-    div.innerHTML = `
-      <img src="${avatar(i)}" alt="profile">
-      <div style="flex:1">
-        <div class="meta"><span class="test-name">${person.split(',')[0]}</span> · <span class="small">${person.split(',')[1].trim()}</span> · <span style="color:var(--accent-2);font-weight:700">${amount}</span></div>
-        <div style="margin-top:6px;color:#222">${text}</div>
-        <div class="small" style="margin-top:8px;color:var(--muted)">Verified: ${date}</div>
-      </div>
-    `;
-    container.appendChild(div);
-
-    // reveal animation staggered
-    setTimeout(()=>{ div.classList.add('show'); }, 80*i);
-  }
+  // add placeholder first
+  stateSelect.innerHTML = '<option value="">Select State</option>';
+  finalList.forEach(s=>{
+    const opt = document.createElement('option');
+    opt.value = s;
+    opt.textContent = s;
+    stateSelect.appendChild(opt);
+  });
 })();
 
-/* ---------- Order via WhatsApp from form ---------- */
-function sendWhatsAppOrder(){
-  const name = document.getElementById('name').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const qty = document.getElementById('qty').value;
-  const draw = document.getElementById('draw').value;
-  const note = document.getElementById('note').value.trim();
-
-  if(!name || !phone || !qty || !draw){
-    alert('कृपया नाम, फोन, ticket qty और draw चुनें।');
-    return;
-  }
-  // Basic phone sanitization
-  const phoneDigits = phone.replace(/\D/g,'');
-  if(phoneDigits.length !== 10){
-    alert('कृपया 10 अंकों का मान्य मोबाइल नंबर दें।');
-    return;
-  }
-
-  const message = `Hello Team Kerala Lottery,%0A%0AI want to place an order:%0A- Name: ${encodeURIComponent(name)}%0A- Mobile: ${encodeURIComponent(phoneDigits)}%0A- Qty: ${encodeURIComponent(qty)}%0A- Preferred Draw: ${encodeURIComponent(draw)}%0A- Note: ${encodeURIComponent(note)}%0A%0APlease confirm price & payment instructions.` ;
-
-  // open wa link
-  const url = WA_BASE + message;
-  window.open(url, '_blank').focus();
+/* ---------- populate 100 sample tickets ---------- */
+for(let i=0;i<100;i++){
+  let n=("000000"+Math.floor(Math.random()*999999)).slice(-6);
+  let o=document.createElement("option");
+  o.value="KL"+n; o.textContent="KL"+n;
+  ticket.appendChild(o);
 }
 
-/* Demo fill */
-function fillDemo(){
-  document.getElementById('name').value = 'Rajesh Kumar';
-  document.getElementById('phone').value = '9876543210';
-  document.getElementById('qty').value = '2';
-  document.getElementById('draw').value = 'Win-Wednesday';
-  document.getElementById('note').value = 'Prefer ticket series 45-49';
+/* ---------- BUNDLE CALC ----------
+ New rule implemented:
+  - Use 5-packs (each 5 paid => 2 free)
+  - For remainder: if remainder >= 2 then give +1 free (so 2,3,4 all give 1 extra free when not part of 5-pack)
+  This prevents two separate 2-packs from doubling freebies incorrectly for 4 (4 => only 1 free).
+*/
+function calculateBundle(paid){
+  if(!paid || paid < 1) return {price:0, free:0, bd:{fives:0, twos:0, ones:0}};
+  const fives = Math.floor(paid / 5);
+  const rem = paid - (fives * 5);
+
+  // if remainder is 2 or more (2,3,4), give one extra free (but only one)
+  const twos = (rem >= 2) ? 1 : 0;
+
+  const ones = rem - (twos * 2); // informational
+  const free = (fives * 2) + (twos * 1);
+  const price = paid * TICKET_PRICE;
+  return { price, free, bd:{ fives, twos, ones } };
 }
 
-/* Add click handler for top order button to open a simple message */
-document.getElementById('waOrderBtn').addEventListener('click', function(e){
-  // button already has href but we update prefilled message to be more helpful
-  const msg = encodeMsg('Hello Team Kerala Lottery, I want to buy tickets. Please share price & payment options.');
-  this.href = WA_BASE + msg;
-});
+/* generate unique free tickets not colliding with selected paid ones */
+function generateFreeTickets(free, existing){
+  let tickets = new Set(existing);
+  let newTickets = [];
+  while(newTickets.length < free){
+    let n = ("000000"+Math.floor(Math.random()*999999)).slice(-6);
+    let code = "KL"+n;
+    if(!tickets.has(code)){
+      newTickets.push(code);
+      tickets.add(code);
+    }
+  }
+  return newTickets;
+}
 
-/* Small polyfill for reveal animation class handling */
-document.addEventListener('DOMContentLoaded', function(){
-  const els = document.querySelectorAll('.fade-in');
-  els.forEach((el, idx) => {
-    setTimeout(()=>{ el.classList.add('show'); }, 70*idx);
+/* ---------- REFRESH UI ---------- */
+function refresh(){
+  let sel = [...ticket.selectedOptions].map(o=>o.value);
+  let paid = sel.length;
+  let {price, free, bd} = calculateBundle(paid);
+
+  counter.textContent = `Selected: ${paid} paid tickets · Free: ${free}`;
+  selectedList.innerHTML = "";
+  sel.forEach(t=>{
+    let c = document.createElement("div");
+    c.className = "chip";
+    c.innerHTML = `${t} <span onclick="removeTicket('${t}')" aria-hidden="true">×</span>`;
+    selectedList.appendChild(c);
   });
+
+  let freeTickets = [];
+  if(paid >= MIN_TICKETS){
+    amount.value = "₹ " + price;
+    ticketAmount.style.display = "block";
+    ticketAmount.textContent = `💰 Total Amount: ₹ ${price} (for ${paid} paid + ${free} free)`;
+
+    // generate free tickets deterministically: to avoid flicker, use seeded generation based on paid count + selected IDs
+    freeTickets = generateFreeTickets(free, sel);
+    freeList.innerHTML = "";
+    freeTickets.forEach(t=>{
+      let c = document.createElement("div");
+      c.className = "chip";
+      c.innerHTML = `${t}`;
+      freeList.appendChild(c);
+    });
+
+    breakdown.style.display = "block";
+    breakdown.innerHTML = `Paid: ${paid}<br>Free: ${free}<br>Total Tickets: ${paid+free}<br>Price Breakdown: ${bd.fives} x (5-pack ₹750 +2 free), ${bd.twos} x (2-pack threshold gives 1 free when remainder ≥ 2), ${bd.ones} x (single ₹150)<br>Grand Total: ₹${price}`;
+  } else {
+    amount.value = "";
+    ticketAmount.style.display = "block";
+    ticketAmount.textContent = "💰 Minimum 1 ticket required";
+    freeList.innerHTML = "";
+    breakdown.style.display = "none";
+    breakdown.innerHTML = "";
+  }
+
+  const canSubmit = (paid >= MIN_TICKETS) && nameI.value.trim().length>0 && mobileI.value.trim().length>0 && stateSelect.value.trim().length>0;
+  submitBtn.disabled = !canSubmit;
+  submitBtn.setAttribute('aria-disabled', submitBtn.disabled ? 'true' : 'false');
+
+  return {sel, freeTickets, price, paid, free, bd};
+}
+
+ticket.addEventListener("change", refresh);
+[nameI, mobileI, stateSelect].forEach(i=>i.addEventListener("input", refresh));
+
+window.removeTicket = (t) => {
+  [...ticket.options].forEach(o=>{ if(o.value===t) o.selected=false; });
+  refresh();
+};
+
+/* ---------- SUBMIT / PREVIEW / WHATSAPP ---------- */
+let isSubmitting = false;
+submitBtn.onclick = () => {
+  if(isSubmitting) return;
+  isSubmitting = true;
+  try{ fbq('track','Lead'); } catch(e){}
+  let {sel, freeTickets, price, paid, free, bd} = refresh();
+  previewContent.innerHTML = `
+<b>Name:</b> ${escapeHtml(nameI.value)}
+<b>Mobile:</b> ${escapeHtml(mobileI.value)}
+<b>State:</b> ${escapeHtml(stateSelect.value)}
+
+<b>Paid Tickets:</b> ${paid}
+<b>Free Tickets:</b> ${free}
+<b>Total Delivered:</b> ${paid+free}
+
+<b>Selected Tickets (Paid):</b>
+${sel.join('\n')}
+
+<b>Free Tickets:</b>
+${freeTickets.join('\n')}
+
+<b>Price Breakdown:</b> ${bd.fives} x (5-pack ₹750 +2 free), ${bd.twos} x (2-pack threshold), ${bd.ones} x (single ₹150)
+<b>Total Amount:</b> ₹${price}
+
+<b>Payment Mode:</b> WhatsApp Confirmation
+⚠️ Please verify details before proceeding.
+  `;
+  previewModal.style.display = "flex";
+};
+
+function closePreview(){ previewModal.style.display = "none"; isSubmitting = false; }
+
+function openWhatsApp(prefilledMsg){
+  const number = "+918406997885";
+  const url = "https://wa.me/" + number.replace(/\D/g,'') + "?text=" + encodeURIComponent(prefilledMsg);
+  window.open(url, "_blank");
+}
+
+function proceedWhatsApp(){
+  let {sel, freeTickets, price, paid, free} = refresh();
+  let tickets = sel.concat(freeTickets).join(", ");
+  let msg = `New Booking\nName: ${nameI.value}\nMobile: ${mobileI.value}\nState: ${stateSelect.value}\n\nTickets:\n${tickets}\n\nTotal Tickets: ${paid + free}\nAmount: ₹${price}`;
+  openWhatsApp(msg);
+  previewModal.style.display = "none";
+  isSubmitting = false;
+}
+
+/* Floating WhatsApp button click -> opens chat */
+whatsappFloat.addEventListener('click', (e)=>{
+  e.preventDefault();
+  const nm = nameI.value.trim() || 'New customer';
+  const mb = mobileI.value.trim() || '';
+  const msg = `Hello, I want to book tickets.\nName: ${nm}\nMobile: ${mb}\nPlease assist.`;
+  openWhatsApp(msg);
 });
+
+/* ---------- SLIDESHOW ---------- */
+let slideIndex = 1;
+function showSlides(){
+  let slides = document.getElementsByClassName("mySlides");
+  for(let i=0;i<slides.length;i++) slides[i].style.display = "none";
+  slideIndex++;
+  if(slideIndex>slides.length) slideIndex=1;
+  if(slides[slideIndex-1]) slides[slideIndex-1].style.display = "block";
+  setTimeout(showSlides,3000);
+}
+showSlides();
+
+/* ---------- FEEDBACK TRACK ---------- */
+const track = document.getElementById('feedbackTrack');
+let isPlaying = true;
+let userPaused = false;
+function pauseAnimation(){ if(track) { track.style.animationPlayState='paused'; isPlaying=false; userPaused=true; } }
+function playAnimation(){ if(track) { track.style.animationPlayState='running'; isPlaying=true; userPaused=false; } }
+if(track){
+  track.addEventListener('mouseenter', ()=>{ if(isPlaying){ track.style.animationPlayState='paused'; track.dataset.hoverPaused = 'true'; }});
+  track.addEventListener('mouseleave', ()=>{ if(track.dataset.hoverPaused === 'true'){ if(!userPaused) track.style.animationPlayState='running'; delete track.dataset.hoverPaused; }});
+}
+function randomTimestamp(){ const m = Math.floor(Math.random()*300); if(m<60) return m+" min ago"; if(m<1440) return Math.floor(m/60)+" hrs ago"; return new Date().toLocaleDateString('en-IN'); }
+function updateTimestamps(){ document.querySelectorAll('.timestamp').forEach(ts => ts.textContent = randomTimestamp()); }
+
+/* Setup seamless scroll */
+function setupScrolling(){
+  if(!track) return;
+  if(track.dataset.cloned === 'true') return;
+  const children = Array.from(track.children);
+  if(children.length === 0) return;
+  let total = 0;
+  children.forEach(card=>{
+    const style = getComputedStyle(card);
+    const mr = parseFloat(style.marginRight) || 12;
+    total += card.offsetWidth + mr;
+  });
+  const originalHTML = track.innerHTML;
+  track.innerHTML = originalHTML + originalHTML;
+  track.dataset.cloned = 'true';
+  const pxPerSec = 220;
+  let duration = Math.max(8, Math.round(total / pxPerSec));
+  duration = Math.min(Math.max(duration, 8), 50);
+  const styleTag = document.createElement('style');
+  styleTag.id = 'feedback-scroll-style';
+  styleTag.innerHTML = `@keyframes feedbackScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-${total}px); } }`;
+  document.head.appendChild(styleTag);
+  track.style.animation = `feedbackScroll ${duration}s linear infinite`;
+  track.style.willChange = 'transform';
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if(mq.matches){ track.style.animationPlayState = 'paused'; isPlaying = false; }
+}
+setupScrolling();
+updateTimestamps();
+setInterval(updateTimestamps, 300000);
+
+/* Utilities */
+function escapeHtml(text){ if(!text) return ''; return text.replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
+
+/* Init UI */
+refresh();
 </script>
+
 </body>
 </html>
