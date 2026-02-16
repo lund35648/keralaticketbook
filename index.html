@@ -47,7 +47,7 @@ body{
 /* Language selector top container */
 .langbar{
   max-width:var(--maxw);
-  margin:2px auto 0 auto;
+  margin:0 auto;
   padding:8px;
   background:var(--topbar-bg);
   border-radius:10px;
@@ -56,6 +56,8 @@ body{
   gap:10px;
   box-shadow:0 6px 18px rgba(10,20,30,0.04);
   padding-left:14px;
+  position:relative;
+  z-index:2;
 }
 .langbar label{font-size:14px;color:#333;font-weight:600;}
 .langbar select{
@@ -233,15 +235,15 @@ body{
 .container{
   width:100%;
   max-width:420px;
-  margin:2px auto;
+  margin:0 auto;
   background:#fff;
   border-radius:14px;
   box-shadow:0 6px 20px rgba(0,0,0,0.08);
-  overflow:hidden;
+  overflow:visible;
 }
 
 /* ---------- TOP IMAGE: make it fit container without cropping ---------- */
-.topLogo{ width:100%; height:230px; overflow:hidden; position:relative; background:#fff; display:flex; align-items:center; justify-content:center; padding:2px; }
+.topLogo{ width:100%; height:230px; overflow:hidden; position:relative; background:#fff; display:flex; align-items:center; justify-content:center; padding:2px; margin-top:-20px; z-index:1; }
 .topLogo img{
   max-width:100%;
   max-height:100%;
@@ -252,7 +254,7 @@ body{
 }
 
 /* keep livePop below image and not overlapping */
-.livePopWrap{ padding:2px 14px; background:transparent; display:flex; justify-content:center; }
+.livePopWrap{ padding:2px 14px; margin-top:-10px; background:transparent; display:flex; justify-content:center; position:relative; z-index:2; }
 .livePop{
   display:inline-block;
   padding:8px 14px;
