@@ -367,8 +367,8 @@ button.primary:disabled{ opacity:.5; cursor:not-allowed; }
 /* ---------- CONFIG ---------- */
 // Updated pricing & bundle logic per request:
 // 1 paid ticket = ₹150
-// 2 paid tickets = ₹300 -> +1 free
-// 5 paid tickets = ₹750 -> +2 free
+// 2 paid tickets = ₹300 -> +1 free (only when remainder exactly 2)
+// 5 paid tickets = ₹750 -> +2 free (per 5-pack)
 const TICKET_PRICE = 150;
 const MIN_TICKETS = 1; // allow single ticket purchase
 
@@ -396,23 +396,36 @@ for(let i=0;i<100;i++){
   ticket.appendChild(o);
 }
 
-/* ---------- BUNDLE CALC ---------- */
-/*
- Packing strategy:
-  - Use as many 5-packs as possible (each paid 5 gives +2 free)
-  - Then use as many 2-packs as possible (each paid 2 gives +1 free)
-  - Remaining singles give no free tickets
- Price updated: price = paid * ₹150 (equivalent to 1->150,2->300,5->750)
+/* ---------- BUNDLE CALC ----------
+ New rule (only these packs give freebies):
+  - single: 1 paid = ₹150, free = 0
+  - two-pack: exactly 2 paid = ₹300, free = 1 (only when remainder exactly 2)
+  - five-pack: for each 5 paid = ₹750, free = 2
+ For totals >5: compute number of 5-packs, then check remainder; only if remainder === 2 give +1 free.
+ This prevents two 2-packs (e.g., 4 paid) from producing freebies.
 */
 function calculateBundle(paid){
-  if(!paid || paid < 1) return {price:0, free:0, bd:{fives:0, twos:0, ones:0}};
-  let fives = Math.floor(paid / 5);
-  let rem = paid % 5;
-  let twos = Math.floor(rem / 2);
-  let ones = rem % 2;
-  let free = fives * 2 + twos * 1; // free tickets from bundles
-  let price = paid * TICKET_PRICE;
-  return {price, free, bd:{fives, twos, ones}};
+  if(!paid || paid < 1) return {price:0, free:0, bd:{fives:0,twos:0,ones:0}};
+
+  // number of full 5-packs
+  const fives = Math.floor(paid / 5);
+
+  // remaining paid tickets after removing 5-packs
+  const rem = paid - (fives * 5);
+
+  // only allow a single 2-pack free if remainder is exactly 2
+  const twos = (rem === 2) ? 1 : 0;
+
+  // remaining singles (informational)
+  const ones = rem - (twos * 2);
+
+  // free tickets: 2 per 5-pack, plus 1 if there is exactly one 2-pack remainder
+  const free = (fives * 2) + (twos * 1);
+
+  // price is simply paid * unit price (₹150 each)
+  const price = paid * TICKET_PRICE;
+
+  return { price, free, bd:{ fives, twos, ones } };
 }
 
 /* generate unique free tickets not colliding with selected paid ones */
