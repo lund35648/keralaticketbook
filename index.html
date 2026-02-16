@@ -80,7 +80,7 @@ body{
 }
 
 /* ---------- TOP IMAGE: make it fit container without cropping ---------- */
-.topLogo{ width:100%; height:230px; overflow:hidden; position:relative; background:#fff; display:flex; align-items:center; justify-content:center; padding:6px; }
+.topLogo{ width:100%; height:230px; overflow:hidden; position:relative; background:#ddd; display:flex; align-items:center; justify-content:center; padding:6px; }
 .topLogo img{
   max-width:100%;
   max-height:100%;
@@ -247,13 +247,9 @@ button.primary:disabled{ opacity:.5; cursor:not-allowed; }
       <input id="name" placeholder="Full Name" autocomplete="name" aria-label="Full name" />
       <input id="mobile" placeholder="Mobile Number" inputmode="tel" autocomplete="tel" aria-label="Mobile number" />
 
+      <!-- state select will be populated by JS to ensure custom order -->
       <select id="state" aria-label="Select State">
         <option value="">Select State</option>
-        <option>Kerala</option>
-        <option>Tamil Nadu</option>
-        <option>Karnataka</option>
-        <option>Andhra Pradesh</option>
-        <option>Telangana</option>
       </select>
 
       <select id="language" aria-label="Select Language">
@@ -365,12 +361,8 @@ button.primary:disabled{ opacity:.5; cursor:not-allowed; }
 <!-- SCRIPTS -->
 <script>
 /* ---------- CONFIG ---------- */
-// Updated pricing & bundle logic per request:
-// 1 paid ticket = ₹150
-// 2 paid tickets = ₹300 -> +1 free (only when remainder exactly 2)
-// 5 paid tickets = ₹750 -> +2 free (per 5-pack)
 const TICKET_PRICE = 150;
-const MIN_TICKETS = 1; // allow single ticket purchase
+const MIN_TICKETS = 1;
 
 // Elements
 const ticket = document.getElementById("ticket"),
@@ -383,12 +375,41 @@ const ticket = document.getElementById("ticket"),
       counter = document.getElementById("counter"),
       nameI = document.getElementById("name"),
       mobileI = document.getElementById("mobile"),
-      state = document.getElementById("state"),
+      stateSelect = document.getElementById("state"),
       previewModal = document.getElementById("previewModal"),
       previewContent = document.getElementById("previewContent"),
       whatsappFloat = document.getElementById("whatsappFloat");
 
-// populate 100 sample tickets
+/* ---------- Populate state select with custom order ---------- */
+(function populateStates(){
+  // top five first (in given order)
+  const topStates = ["Kerala","Tamil Nadu","Karnataka","Andhra Pradesh","Telangana"];
+
+  // all indian states/UTs (simple list). You can add/remove if needed.
+  const all = [
+    "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat",
+    "Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh",
+    "Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab",
+    "Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh",
+    "Uttarakhand","West Bengal","Andaman and Nicobar Islands","Chandigarh","Dadra and Nagar Haveli and Daman and Diu",
+    "Delhi","Jammu and Kashmir","Ladakh","Lakshadweep","Puducherry"
+  ];
+
+  // Build unique list: put topStates first (if present), then remaining from 'all' excluding topStates
+  const remaining = all.filter(s=> !topStates.includes(s));
+  const finalList = [...topStates, ...remaining];
+
+  // add placeholder first
+  stateSelect.innerHTML = '<option value="">Select State</option>';
+  finalList.forEach(s=>{
+    const opt = document.createElement('option');
+    opt.value = s;
+    opt.textContent = s;
+    stateSelect.appendChild(opt);
+  });
+})();
+
+/* ---------- populate 100 sample tickets ---------- */
 for(let i=0;i<100;i++){
   let n=("000000"+Math.floor(Math.random()*999999)).slice(-6);
   let o=document.createElement("option");
@@ -397,34 +418,22 @@ for(let i=0;i<100;i++){
 }
 
 /* ---------- BUNDLE CALC ----------
- New rule (only these packs give freebies):
-  - single: 1 paid = ₹150, free = 0
-  - two-pack: exactly 2 paid = ₹300, free = 1 (only when remainder exactly 2)
-  - five-pack: for each 5 paid = ₹750, free = 2
- For totals >5: compute number of 5-packs, then check remainder; only if remainder === 2 give +1 free.
- This prevents two 2-packs (e.g., 4 paid) from producing freebies.
+ New rule implemented:
+  - Use 5-packs (each 5 paid => 2 free)
+  - For remainder: if remainder >= 2 then give +1 free (so 2,3,4 all give 1 extra free when not part of 5-pack)
+  This prevents two separate 2-packs from doubling freebies incorrectly for 4 (4 => only 1 free).
 */
 function calculateBundle(paid){
-  if(!paid || paid < 1) return {price:0, free:0, bd:{fives:0,twos:0,ones:0}};
-
-  // number of full 5-packs
+  if(!paid || paid < 1) return {price:0, free:0, bd:{fives:0, twos:0, ones:0}};
   const fives = Math.floor(paid / 5);
-
-  // remaining paid tickets after removing 5-packs
   const rem = paid - (fives * 5);
 
-  // only allow a single 2-pack free if remainder is exactly 2
-  const twos = (rem === 2) ? 1 : 0;
+  // if remainder is 2 or more (2,3,4), give one extra free (but only one)
+  const twos = (rem >= 2) ? 1 : 0;
 
-  // remaining singles (informational)
-  const ones = rem - (twos * 2);
-
-  // free tickets: 2 per 5-pack, plus 1 if there is exactly one 2-pack remainder
+  const ones = rem - (twos * 2); // informational
   const free = (fives * 2) + (twos * 1);
-
-  // price is simply paid * unit price (₹150 each)
   const price = paid * TICKET_PRICE;
-
   return { price, free, bd:{ fives, twos, ones } };
 }
 
@@ -464,7 +473,7 @@ function refresh(){
     ticketAmount.style.display = "block";
     ticketAmount.textContent = `💰 Total Amount: ₹ ${price} (for ${paid} paid + ${free} free)`;
 
-    // generate free tickets based on bundle calculation
+    // generate free tickets deterministically: to avoid flicker, use seeded generation based on paid count + selected IDs
     freeTickets = generateFreeTickets(free, sel);
     freeList.innerHTML = "";
     freeTickets.forEach(t=>{
@@ -475,7 +484,7 @@ function refresh(){
     });
 
     breakdown.style.display = "block";
-    breakdown.innerHTML = `Paid: ${paid}<br>Free: ${free}<br>Total Tickets: ${paid+free}<br>Price Breakdown: ${bd.fives} x (5-pack ₹750 +2 free), ${bd.twos} x (2-pack ₹300 +1 free), ${bd.ones} x (single ₹150)<br>Grand Total: ₹${price}`;
+    breakdown.innerHTML = `Paid: ${paid}<br>Free: ${free}<br>Total Tickets: ${paid+free}<br>Price Breakdown: ${bd.fives} x (5-pack ₹750 +2 free), ${bd.twos} x (2-pack threshold gives 1 free when remainder ≥ 2), ${bd.ones} x (single ₹150)<br>Grand Total: ₹${price}`;
   } else {
     amount.value = "";
     ticketAmount.style.display = "block";
@@ -485,17 +494,15 @@ function refresh(){
     breakdown.innerHTML = "";
   }
 
-  // enable submit only if required fields present and at least MIN_TICKETS paid
-  const canSubmit = (paid >= MIN_TICKETS) && nameI.value.trim().length>0 && mobileI.value.trim().length>0 && state.value.trim().length>0;
+  const canSubmit = (paid >= MIN_TICKETS) && nameI.value.trim().length>0 && mobileI.value.trim().length>0 && stateSelect.value.trim().length>0;
   submitBtn.disabled = !canSubmit;
   submitBtn.setAttribute('aria-disabled', submitBtn.disabled ? 'true' : 'false');
 
   return {sel, freeTickets, price, paid, free, bd};
 }
 
-/* listeners */
 ticket.addEventListener("change", refresh);
-[nameI, mobileI, state].forEach(i=>i.addEventListener("input", refresh));
+[nameI, mobileI, stateSelect].forEach(i=>i.addEventListener("input", refresh));
 
 window.removeTicket = (t) => {
   [...ticket.options].forEach(o=>{ if(o.value===t) o.selected=false; });
@@ -512,7 +519,7 @@ submitBtn.onclick = () => {
   previewContent.innerHTML = `
 <b>Name:</b> ${escapeHtml(nameI.value)}
 <b>Mobile:</b> ${escapeHtml(mobileI.value)}
-<b>State:</b> ${escapeHtml(state.value)}
+<b>State:</b> ${escapeHtml(stateSelect.value)}
 
 <b>Paid Tickets:</b> ${paid}
 <b>Free Tickets:</b> ${free}
@@ -524,7 +531,7 @@ ${sel.join('\n')}
 <b>Free Tickets:</b>
 ${freeTickets.join('\n')}
 
-<b>Price Breakdown:</b> ${bd.fives} x (5-pack ₹750 +2 free), ${bd.twos} x (2-pack ₹300 +1 free), ${bd.ones} x (single ₹150)
+<b>Price Breakdown:</b> ${bd.fives} x (5-pack ₹750 +2 free), ${bd.twos} x (2-pack threshold), ${bd.ones} x (single ₹150)
 <b>Total Amount:</b> ₹${price}
 
 <b>Payment Mode:</b> WhatsApp Confirmation
@@ -535,28 +542,24 @@ ${freeTickets.join('\n')}
 
 function closePreview(){ previewModal.style.display = "none"; isSubmitting = false; }
 
-/* open whatsapp with prefilled message — called from modal confirm or floating button */
 function openWhatsApp(prefilledMsg){
-  // target number (change if you want a different number)
   const number = "+918406997885";
   const url = "https://wa.me/" + number.replace(/\D/g,'') + "?text=" + encodeURIComponent(prefilledMsg);
   window.open(url, "_blank");
 }
 
-/* called on confirm in modal */
 function proceedWhatsApp(){
   let {sel, freeTickets, price, paid, free} = refresh();
   let tickets = sel.concat(freeTickets).join(", ");
-  let msg = `New Booking\nName: ${nameI.value}\nMobile: ${mobileI.value}\nState: ${state.value}\n\nTickets:\n${tickets}\n\nTotal Tickets: ${paid + free}\nAmount: ₹${price}`;
+  let msg = `New Booking\nName: ${nameI.value}\nMobile: ${mobileI.value}\nState: ${stateSelect.value}\n\nTickets:\n${tickets}\n\nTotal Tickets: ${paid + free}\nAmount: ₹${price}`;
   openWhatsApp(msg);
   previewModal.style.display = "none";
   isSubmitting = false;
 }
 
-/* ---------- Floating WhatsApp button click -> opens chat with short message ---------- */
+/* Floating WhatsApp button click -> opens chat */
 whatsappFloat.addEventListener('click', (e)=>{
   e.preventDefault();
-  // create a quick prefilled message that includes name & number if available
   const nm = nameI.value.trim() || 'New customer';
   const mb = mobileI.value.trim() || '';
   const msg = `Hello, I want to book tickets.\nName: ${nm}\nMobile: ${mb}\nPlease assist.`;
@@ -575,96 +578,54 @@ function showSlides(){
 }
 showSlides();
 
-/* ---------- FEEDBACK TRACK: improved smoothness + speed + mobile fix ---------- */
+/* ---------- FEEDBACK TRACK ---------- */
 const track = document.getElementById('feedbackTrack');
 let isPlaying = true;
 let userPaused = false;
-
-function pauseAnimation(){
-  if(track) { track.style.animationPlayState='paused'; isPlaying=false; userPaused=true; }
-}
-function playAnimation(){
-  if(track) { track.style.animationPlayState='running'; isPlaying=true; userPaused=false; }
-}
-
-/* hover behavior */
+function pauseAnimation(){ if(track) { track.style.animationPlayState='paused'; isPlaying=false; userPaused=true; } }
+function playAnimation(){ if(track) { track.style.animationPlayState='running'; isPlaying=true; userPaused=false; } }
 if(track){
-  track.addEventListener('mouseenter', ()=>{
-    if(isPlaying){ track.style.animationPlayState='paused'; track.dataset.hoverPaused = 'true'; }
-  });
-  track.addEventListener('mouseleave', ()=>{
-    if(track.dataset.hoverPaused === 'true'){
-      if(!userPaused) track.style.animationPlayState='running';
-      delete track.dataset.hoverPaused;
-    }
-  });
+  track.addEventListener('mouseenter', ()=>{ if(isPlaying){ track.style.animationPlayState='paused'; track.dataset.hoverPaused = 'true'; }});
+  track.addEventListener('mouseleave', ()=>{ if(track.dataset.hoverPaused === 'true'){ if(!userPaused) track.style.animationPlayState='running'; delete track.dataset.hoverPaused; }});
 }
+function randomTimestamp(){ const m = Math.floor(Math.random()*300); if(m<60) return m+" min ago"; if(m<1440) return Math.floor(m/60)+" hrs ago"; return new Date().toLocaleDateString('en-IN'); }
+function updateTimestamps(){ document.querySelectorAll('.timestamp').forEach(ts => ts.textContent = randomTimestamp()); }
 
-/* timestamps */
-function randomTimestamp(){
-  const m = Math.floor(Math.random()*300);
-  if(m<60) return m+" min ago";
-  if(m<1440) return Math.floor(m/60)+" hrs ago";
-  return new Date().toLocaleDateString('en-IN');
-}
-function updateTimestamps(){
-  document.querySelectorAll('.timestamp').forEach(ts => ts.textContent = randomTimestamp());
-}
-
-/* Setup seamless scroll: duplicate content and set animation dynamically. */
+/* Setup seamless scroll */
 function setupScrolling(){
   if(!track) return;
   if(track.dataset.cloned === 'true') return;
-
   const children = Array.from(track.children);
   if(children.length === 0) return;
-
   let total = 0;
   children.forEach(card=>{
     const style = getComputedStyle(card);
     const mr = parseFloat(style.marginRight) || 12;
     total += card.offsetWidth + mr;
   });
-
   const originalHTML = track.innerHTML;
   track.innerHTML = originalHTML + originalHTML;
   track.dataset.cloned = 'true';
-
   const pxPerSec = 220;
   let duration = Math.max(8, Math.round(total / pxPerSec));
   duration = Math.min(Math.max(duration, 8), 50);
-
   const styleTag = document.createElement('style');
   styleTag.id = 'feedback-scroll-style';
-  styleTag.innerHTML = `
-    @keyframes feedbackScroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-${total}px); }
-    }
-  `;
+  styleTag.innerHTML = `@keyframes feedbackScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-${total}px); } }`;
   document.head.appendChild(styleTag);
-
   track.style.animation = `feedbackScroll ${duration}s linear infinite`;
   track.style.willChange = 'transform';
-
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if(mq.matches){
-    track.style.animationPlayState = 'paused';
-    isPlaying = false;
-  }
+  if(mq.matches){ track.style.animationPlayState = 'paused'; isPlaying = false; }
 }
-
 setupScrolling();
 updateTimestamps();
 setInterval(updateTimestamps, 300000);
 
-/* ---------- UTILS ---------- */
-function escapeHtml(text){
-  if(!text) return '';
-  return text.replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; });
-}
+/* Utilities */
+function escapeHtml(text){ if(!text) return ''; return text.replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
 
-/* ---------- Initialize UI ---------- */
+/* Init UI */
 refresh();
 </script>
 
