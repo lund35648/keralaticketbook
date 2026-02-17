@@ -1,1540 +1,424 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Kerala Government Ticket</title>
-
-<!-- Meta Pixel (kept) -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '744008402087520');
-fbq('track', 'PageView');
-</script>
-<noscript>
-<img height="1" width="1" style="display:none"
- src="https://www.facebook.com/tr?id=744008402087520&ev=PageView&noscript=1"/>
-</noscript>
-
 <style>
-:root{
-  --accent:#0b6b3a;
-  --accent-2:#0a8a49;
-  --muted:#6b6b6b;
-  --card:#ffffff;
-  --bg:#f6f7f5;
-  --maxw:980px;
-  --topbar-bg: #fff;
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0;
-  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-  background:var(--bg);
-  color:#111;
-  -webkit-font-smoothing:antialiased;
-  -webkit-text-size-adjust:100%;
-}
+:root{--accent:#ff4f79;--accent-dark:#d9365d;--bg:#fff3f7;--card:#fff;}
+body{margin:0;background:var(--bg);font-family:Arial,sans-serif;display:flex;justify-content:center;padding:8px;}
+.container{width:100%;max-width:400px;background:var(--card);padding:14px;border-radius:14px;box-shadow:0 4px 8px rgba(0,0,0,.14);}
+.topLogo img{width:130px;display:block;margin:0 auto 4px;}
+.livePop{display:inline-block;padding:6px 14px;border-radius:20px;background:linear-gradient(90deg,#2ecc71,#27ae60);color:#fff;font-size:12px;font-weight:bold;animation:pulse 1.2s infinite;}
+@keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
+.timerBar{background:#e8f5e9;color:#1b5e20;padding:6px;border-radius:8px;font-size:12px;text-align:center;font-weight:bold;margin-bottom:6px;}
+h2{text-align:center;margin:6px 0;color:#d9365d;font-size:18px;}
+input,select,button{width:100%;padding:9px;margin-bottom:8px;border-radius:8px;border:1px solid #ddd;font-size:13px;}
+.ticketBox{border:2px dashed #ff4f79;border-radius:12px;padding:10px;margin-bottom:8px;}
+.ticketAmount{background:#e8f5e9;color:#1b5e20;padding:6px;border-radius:8px;text-align:center;font-weight:bold;margin-bottom:6px;font-size:13px;}
+.ticketTitle{font-weight:bold;color:#d9365d;margin-bottom:4px;font-size:13px;}
+select[multiple]{height:55px;}
+.counter{font-size:11px;margin-top:3px;}
+.selectedList{display:flex;flex-wrap:wrap;gap:5px;margin-top:5px;}
+.chip{background:#ffe3ea;color:#d9365d;padding:3px 7px;border-radius:10px;font-size:11px;display:flex;align-items:center;gap:5px;}
+.chip span{cursor:pointer;font-weight:bold;}
+button{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#fff;border:none;font-weight:bold;cursor:pointer;font-size:14px;}
+button:disabled{opacity:.5;cursor:not-allowed;}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;}
+.modalBox{background:#fff;width:92%;max-width:360px;border-radius:14px;padding:16px;}
+.modalBox h3{text-align:center;color:#d9365d;margin:0 0 10px;}
+.summary{font-size:13px;line-height:1.6;}
+.modalBtns{display:flex;gap:10px;margin-top:12px;}
+.modalBtns button{flex:1;}
+.cancelBtn{background:#ccc;color:#333;}
 
-/* Language selector top container */
-.langbar{
-  max-width:var(--maxw);
-  margin:0 auto;
-  padding:8px;
-  background:var(--topbar-bg);
-  border-radius:10px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  box-shadow:0 6px 18px rgba(10,20,30,0.04);
-  padding-left:14px;
-  position:relative;
-  z-index:2;
-}
-.langbar label{font-size:14px;color:#333;font-weight:600;}
-.langbar select{
-  padding:8px 10px;border-radius:8px;border:1px solid #e6e6e6;font-size:14px;
-}
-
-/* page container */
-.container{
-  max-width:var(--maxw);
-  margin:12px auto;
-  padding:12px;
-}
-
-/* Header */
-.header{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  background:linear-gradient(90deg,var(--accent) 0%, var(--accent-2) 100%);
-  color:white;
-  padding:12px;
-  border-radius:12px;
-  box-shadow:0 8px 30px rgba(8,12,16,0.08);
-  margin-top:12px;
-}
-.logo{
-  width:64px;
-  height:64px;
-  border-radius:10px;
-  background:rgba(255,255,255,0.08);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-weight:700;
-  font-size:22px;
-}
-.brandline{font-size:14px; margin:0}
-.header h1{margin:0; font-size:17px}
-.header p{margin:0; font-size:12px; opacity:0.95}
-
-/* Hero */
-.hero{
-  margin-top:12px;
-  background:var(--card);
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 14px 40px rgba(12,20,30,0.06);
-}
-.hero img{width:100%; display:block; height:auto; object-fit:cover}
-
-/* Secondary banner */
-.small-banner{
-  margin-top:10px;
-  border-radius:10px;
-  overflow:hidden;
-}
-
-/* Main content */
-.main{
-  margin-top:12px;
-  display:grid;
-  grid-template-columns: 1fr 320px;
-  gap:12px;
-}
-@media(max-width:880px){
-  .main{grid-template-columns: 1fr;}
-}
-
-/* Cards */
-.card{
-  background:var(--card);
-  padding:12px;
-  border-radius:10px;
-  box-shadow:0 8px 24px rgba(12,16,20,0.04);
-}
-
-/* CTA */
-.cta{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  margin-top:10px;
-}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  background:var(--accent-2);
-  color:white;
-  padding:10px 12px;
-  border-radius:10px;
-  text-decoration:none;
-  font-weight:700;
-  box-shadow:0 8px 20px rgba(9,120,70,0.16);
-  font-size:14px;
-}
-.btn.secondary{
-  background:white;
-  color:var(--accent-2);
-  border:1px solid #e6e6e6;
-  box-shadow:none;
-}
-
-/* Steps */
-.steps{display:flex;gap:10px;flex-direction:column;margin-top:8px}
-.step{display:flex;gap:10px;align-items:flex-start}
-.step .num{width:36px;height:36px;border-radius:8px;background:var(--accent);color:white;display:flex;align-items:center;justify-content:center;font-weight:700}
-
-/* Testimonials */
-.testimonials{margin-top:8px}
-.testimonial{display:flex;gap:10px;align-items:flex-start;padding:10px;border-radius:10px;margin-bottom:10px;background:#fff;box-shadow:0 8px 24px rgba(8,12,16,0.03)}
-.testimonial img{width:56px;height:56px;border-radius:50%;object-fit:cover;background:#eee}
-.testimonial .meta{font-weight:700}
-.small{font-size:13px;color:var(--muted)}
-
-/* Footer */
-.footer{margin-top:12px;text-align:center;color:var(--muted);font-size:13px;padding:12px}
-
-/* animations */
-.fade-in{opacity:0;transform:translateY(8px);transition:all 420ms cubic-bezier(.2,.9,.3,1)}
-.fade-in.show{opacity:1;transform:none}
-
-/* Accessibility / small screens */
-@media(max-width:480px){
-  .header h1{font-size:16px}
-  .logo{width:56px;height:56px;font-size:20px}
-  .langbar{padding:8px}
-}
-</style><style>
-/* ---------- RESET & LAYOUT ---------- */
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;width:100%;margin:0;padding:0}
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
-  background:#f4f4f4;
-  color:#222;
-  line-height:1.35;
-  overflow-x:hidden;
-}
-
-/* ---------- HEADER FULL WIDTH (center logos) ---------- */
-.header{
-  width:100vw;
-  left:0;
-  background:#e2e7cd;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:10px 16px;
-  gap:12px;
-  border-bottom:2px solid rgba(0,0,0,0.06);
-  position:relative;
-  box-shadow:0 3px 8px rgba(0,0,0,0.06);
-}
-.header .logo-container{ display:flex; align-items:center; gap:14px; min-width:0; justify-content:center; }
-.header .logo-container img{ height:56px; width:auto; object-fit:contain; display:block; }
-.header h1{ font-size:16px; color:#0f3b2f; margin-left:6px; font-weight:800; white-space:nowrap; }
-
-@media (max-width:540px){
-  .header{ flex-direction:row; align-items:center; padding:10px; gap:8px; }
-  .header .logo-container img{ height:42px; }
-  .header h1{ font-size:14px; }
-}
-
-/* ---------- PAGE WRAP (center content) ---------- */
-.page-wrap{
-  max-width:1100px;
-  margin:0 auto;
-  padding:12px 14px;
-}
-
-/* ---------- CARD / CONTAINER ---------- */
-.container{
-  width:100%;
-  max-width:420px;
-  margin:0 auto;
-  background:#fff;
-  border-radius:14px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.08);
-  overflow:visible;
-}
-
-/* ---------- TOP IMAGE: make it fit container without cropping ---------- */
-.topLogo{ width:100%; height:230px; overflow:hidden; position:relative; background:#fff; display:flex; align-items:center; justify-content:center; padding:2px; margin-top:-40px; z-index:1; }
-.topLogo img{
-  max-width:100%;
-  max-height:100%;
-  object-fit:contain;
-  display:block;
-  border-radius:6px;
-  box-shadow: inset 0 0 40px rgba(0,0,0,0.03);
-}
-
-/* keep livePop below image and not overlapping */
-.livePopWrap{ padding:2px 14px; margin-top:-30px; background:transparent; display:flex; justify-content:center; position:relative; z-index:2; }
-.livePop{
-  display:inline-block;
-  padding:8px 14px;
-  border-radius:20px;
-  background:linear-gradient(90deg,#2ecc71,#27ae60);
-  color:#fff;
-  font-size:13px;
-  font-weight:800;
-  box-shadow:0 6px 18px rgba(39,174,96,0.12);
-  display:flex;
-  align-items:center;
-  gap:8px;
-  animation:livePulse 1.2s ease-in-out infinite;
-}
-@keyframes livePulse{
-  0% { transform: scale(1); box-shadow:0 6px 18px rgba(39,174,96,0.12); opacity:1; }
-  50% { transform: scale(1.03); box-shadow:0 12px 30px rgba(39,174,96,0.22); opacity:0.85; }
-  100% { transform: scale(1); box-shadow:0 6px 18px rgba(39,174,96,0.12); opacity:1; }
-}
-
-/* ---------- FORM / INPUTS ---------- */
-.formInner{ padding:14px; }
-h2{ text-align:center; margin:8px 0 10px; color:#d9365d; font-size:18px; }
-input,select,button,textarea{
-  width:100%;
-  padding:10px 12px;
-  margin-bottom:10px;
-  border-radius:8px;
-  border:1px solid #ddd;
-  font-size:14px;
-}
-select[multiple]{ min-height:84px; max-height:240px; }
-.ticketBox{ border:2px dashed #ff4f79; border-radius:12px; padding:10px; margin-bottom:8px; background:#fffafc; }
-.ticketAmount,.ticketTitle{ padding:6px 4px; margin-bottom:6px; }
-.ticketAmount{ background:#e8f5e9; color:#1b5e20; border-radius:8px; font-weight:700; text-align:center; }
-.ticketTitle{ font-weight:700; color:#d9365d; }
-.counter{ font-size:13px; margin-top:3px; color:#666; }
-.selectedList, #freeList{ display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
-.chip{ background:#ffe3ea; color:#d9365d; padding:6px 8px; border-radius:14px; font-size:12px; display:flex; gap:8px; align-items:center; }
-.chip span{ cursor:pointer; font-weight:700; padding-left:6px }
-
-/* submit */
-button.primary{ background:linear-gradient(90deg,#ff4f79,#d9365d); color:#fff; border:none; font-weight:800; padding:10px; border-radius:10px; }
-button.primary:disabled{ opacity:.5; cursor:not-allowed; }
-
-/* hide the green calculation UI visually but keep in DOM for logic */
-#ticketAmount, #breakdown{ display:none !important; }
-
-/* ---------- MODAL ---------- */
-.modal{ position:fixed; inset:0; background:rgba(0,0,0,.45); display:none; align-items:center; justify-content:center; z-index:9999; padding:12px; }
-.modalBox{ background:#fff; width:100%; max-width:520px; border-radius:12px; padding:16px; box-shadow:0 8px 30px rgba(0,0,0,.25); }
-.modalBtns{ display:flex; gap:10px; margin-top:12px; }
-.cancelBtn{ background:#ccc; color:#333; border:none; padding:10px 12px; border-radius:8px; cursor:pointer; }
-
-/* ---------- SLIDESHOW ---------- */
-.slideshow-container{ width:100%; height:180px; overflow:hidden; background:#e2e7cd; border-radius:8px; display:flex; align-items:center; justify-content:center; margin-top:12px; }
-.mySlides{ display:none; width:100%; height:100%; text-align:center; }
-.mySlides img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-/* ---------- FEEDBACK / WINNER TRACK ---------- */
-.lottery-container{ max-width:1000px; margin:18px auto; background:#fff; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.08); overflow:hidden; border:2px solid #0a5a0a; }
-.feedback-container{ position:relative; overflow:hidden; }
-.feedback-container::before, .feedback-container::after{
-  content:''; position:absolute; top:0; bottom:0; width:64px; z-index:2;
-}
-.feedback-container::before{ left:0; background:linear-gradient(90deg,#fff,transparent); }
-.feedback-container::after{ right:0; background:linear-gradient(90deg,transparent,#fff); }
-.feedback-track{ display:flex; gap:12px; align-items:flex-start; padding:14px 20px; will-change:transform; }
-.feedback-card{ min-width:300px; max-width:340px; background:#fff9e6; border-radius:10px; padding:12px; box-shadow:0 6px 14px rgba(0,0,0,.06); border-top:4px solid #d4af37; flex-shrink:0; }
-.winner-badge{ position:absolute; top:-10px; right:12px; background:#e31837; color:#fff; padding:4px 10px; border-radius:12px; font-size:11px; font-weight:700; }
-.user-info{ display:flex; align-items:center; gap:12px; margin-bottom:8px; }
-.avatar{ width:46px; height:46px; border-radius:50%; background:#f1f1f1; display:flex; align-items:center; justify-content:center; font-weight:700; color:#0a5a0a; border:2px solid #d4af37; }
-.user-details h4{ margin:0; color:#0a5a0a; font-size:15px; }
-.feedback-text{ font-size:14px; color:#333; margin-bottom:8px; }
-.lottery-details{ display:flex; justify-content:space-between; font-size:12px; border-top:1px dashed #ccc; padding-top:10px; color:#333; }
-.prize-amount{ color:#e31837; font-weight:800; }
-
-/* control buttons */
-.controls{ display:flex; justify-content:center; padding:12px; background:#f8f9fa; gap:12px; }
-.control-btn{ background:#0a5a0a; color:#fff; border:none; padding:8px 14px; border-radius:6px; cursor:pointer; font-weight:700; }
-
-/* live-indicator */
-.live-indicator{ display:flex; justify-content:center; align-items:center; gap:8px; padding:10px; background:#f8f9fa; color:#333; font-weight:700; }
-.live-dot{ width:10px; height:10px; background:#e31837; border-radius:50%; animation:livePulseDot 1.5s infinite; }
-@keyframes livePulseDot{ 0%{opacity:1}50%{opacity:.3}100%{opacity:1} }
-
-/* disclaimer */
-.disclaimer{ font-size:12px; text-align:center; padding:12px; background:#f8f9fa; color:#555; }
-
-/* whatsapp floating button */
-.whatsapp-float{
+/* Bottom popup (new) */
+.notif-wrapper{
   position:fixed;
-  right:18px;
+  left:16px;
   bottom:18px;
-  z-index:99999;
-  width:56px;
-  height:56px;
-  border-radius:50%;
+  z-index:9999;
   display:flex;
+  flex-direction:column;
+  gap:8px;
+  pointer-events:none;
+  max-width:320px;
+}
+.notif{
+  pointer-events:auto;
+  background:linear-gradient(90deg, rgba(255,79,121,0.06), rgba(217,54,93,0.02));
+  border:1px solid rgba(217,54,93,0.12);
+  color:#333;
+  padding:10px 12px;
+  border-radius:12px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+  display:flex;
+  gap:10px;
   align-items:center;
-  justify-content:center;
-  background:none;
-  box-shadow:none;
-  cursor:pointer;
-  text-decoration:none;
-  padding:0;
-  overflow:visible;
-  border:none;
+  transform:translateY(14px);
+  opacity:0;
+  animation:slideIn 420ms ease forwards;
+  font-size:13px;
+  min-width:220px;
+  backdrop-filter: blur(4px);
 }
-.whatsapp-float img{ width:100%; height:100%; object-fit:contain; display:block; background:none; border:none; }
+.notif.hide { animation:slideOut 360ms ease forwards; }
+@keyframes slideIn{ from{opacity:0; transform:translateY(14px) translateX(-6px) scale(.98);} to{opacity:1; transform:translateY(0) translateX(0) scale(1);} }
+@keyframes slideOut{ from{opacity:1; transform:translateY(0);} to{opacity:0; transform:translateY(18px) scale(.98);} }
 
-/* responsive tweaks */
-@media (max-width:640px){
-  .topLogo{ height:200px; }
-  .feedback-card{ min-width:260px; max-width:290px; }
-  .feedback-track{ padding:12px; gap:10px; }
+.notif .avatar{
+  width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;flex-shrink:0;
 }
+.notif .body{flex:1;line-height:1.1;}
+.notif .body .who{font-weight:700;font-size:13px;color:#d9365d;}
+.notif .body .mobile{font-size:12px;color:#555;margin-top:2px;}
+.notif .body .state{font-size:12px;color:#333;margin-top:2px;font-weight:600;}
+.notif .body .msg{margin-top:6px;font-size:13px;color:#333;}
+.notif .closeBtn{margin-left:8px;border:none;background:transparent;color:#666;font-size:16px;cursor:pointer;padding:6px;border-radius:8px;}
+.notif .closeBtn:focus{outline:2px solid rgba(0,0,0,.06);}
 
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .feedback-track{ animation:none !important; }
-  .live-dot{ animation:none !important; }
-  .livePop{ animation:none !important; }
+/* floating whatsapp button on right (uses provided image) */
+.wa-float{
+  position:fixed;
+  right:16px;
+  bottom:18px;
+  z-index:10001;
+  width:56px;height:56px;border-radius:50%;box-shadow:0 8px 20px rgba(0,0,0,0.18);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.wa-float img{width:100%;height:100%;object-fit:cover;display:block;}
+
+/* small responsive tweak */
+@media (max-width:420px){
+  .notif-wrapper{left:8px;right:8px;max-width:calc(100% - 16px);}
+  .wa-float{right:12px;bottom:12px;width:48px;height:48px;}
 }
 </style>
 </head>
+
 <body>
-
-<!-- HEADER full width -->
-<header class="header" role="banner" aria-label="Main header">
-  <div class="logo-container" aria-hidden="false">
-    <img src="https://kerelalottery.ct.ws/wp-content/uploads/2025/08/image-removebg-preview-6-e1754205589977.png" alt="G20 Logo">
-    <img src="https://kerelalottery.ct.ws/wp-content/uploads/2025/08/top-logo-e1754204463750.png" alt="Kerala Lottery Logo">
-  </div>
-</header>
-
-
-<div class="page-wrap">
-
-  <!-- MAIN CARD -->
-  <main class="container" role="main" aria-labelledby="ticket-heading">
-    <div class="langbar" role="region" aria-label="Language selector">
-  <label for="langSelect" data-i18n="select_language_label">Select your language:</label>
-  <select id="langSelect" aria-label="Select language">
-    <option value="en" selected>English</option>
-    <option value="hi">हिन्दी</option>
-    <option value="ml">മലയാളം (Malayalam)</option>
-    <option value="ta">தமிழ் (Tamil)</option>
-    <option value="kn">ಕನ್ನಡ (Kannada)</option>
-    <option value="te">తెలుగు (Telugu)</option>
-    <option value="bn">বাংলা (Bengali)</option>
-    <option value="or">ଓଡ଼ିଆ (Odia)</option>
-  </select>
-</div>
-
-    <!-- top image enlarged & fit (now contain to show full image) -->
-    <div class="topLogo" aria-hidden="false">
-      <img src="https://kerelalottery.ct.ws/wp-content/uploads/2026/02/6095807707412631434-3.jpg" alt="Top banner">
-    </div>
-
-    <!-- live booking (separate block; won't overlap image) -->
-    <div class="livePopWrap" aria-hidden="false">
-      <span class="livePop" role="status" aria-live="polite">🟢 LIVE BOOKING ACTIVE</span>
-    </div>
-
-    <!-- FORM -->
-    <section class="formInner" aria-labelledby="ticket-heading">
-      <h2 id="ticket-heading">Kerala Government Ticket</h2>
-
-      <input id="name" placeholder="Full Name" autocomplete="name" aria-label="Full name" />
-      <input id="mobile" placeholder="Mobile Number" inputmode="tel" autocomplete="tel" aria-label="Mobile number" />
-
-      <!-- state select will be populated by JS to ensure custom order -->
-      <select id="state" aria-label="Select State">
-        <option value="">Select State</option>
-      </select>
-
-      <select id="language" aria-label="Select Language">
-        <option>English</option>
-        <option>Hindi</option>
-        <option>Malayalam</option>
-        <option>Tamil</option>
-        <option>Kannada</option>
-        <option>Telugu</option>
-      </select>
-
-      <div class="ticketBox" aria-live="polite" aria-atomic="true">
-        <div class="ticketAmount" id="ticketAmount">💰 Total Amount: ₹0</div>
-        <div class="ticketTitle">🎟 Select Lucky Ticket (₹150 per paid ticket)</div>
-
-        <select id="ticket" multiple aria-label="Select tickets"></select>
-
-        <div class="counter" id="counter">Selected: 0 tickets</div>
-        <div class="selectedList" id="selectedList" aria-hidden="false"></div>
-
-        <div class="ticketTitle" style="margin-top:10px;">Free Tickets</div>
-        <div class="selectedList" id="freeList" aria-hidden="false"></div>
-      </div>
-
-      <!-- hidden breakdown kept for logic (visually hidden by CSS) -->
-      <div class="ticketAmount" id="breakdown" style="font-size:13px;"></div>
-
-      <input id="amount" placeholder="Total Amount (₹)" readonly aria-label="Total amount" />
-      <button id="submitBtn" class="primary" disabled aria-disabled="true">Submit & Continue</button>
-    </section>
-  </main>
-
-  <!-- modal preview -->
-  <div class="modal" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="previewTitle">
-    <div class="modalBox">
-      <h3 id="previewTitle">Payment Preview</h3>
-      <div class="summary" id="previewContent" style="white-space:pre-wrap; font-size:14px; color:#111;"></div>
-      <div class="modalBtns">
-        <button class="cancelBtn" onclick="closePreview()">Cancel</button>
-        <button onclick="proceedWhatsApp()" class="primary">Confirm & WhatsApp</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- optional slideshow -->
-  <div class="slideshow-container" aria-hidden="false">
-    <div class="mySlides fade"><img src="https://kerelalottery.ct.ws/wp-content/uploads/2025/05/img.jpg" alt="Slide 1"></div>
-    <div class="mySlides fade"><img src="https://kerelalottery.ct.ws/wp-content/uploads/2025/05/imag.jpg" alt="Slide 2"></div>
-    <div class="mySlides fade"><img src="https://kerelalottery.ct.ws/wp-content/uploads/2025/05/akshaya1.jpg" alt="Slide 3"></div>
-  </div>
-
-
-
-
-
 <div class="container">
 
-  <!-- Hero: user-provided banner images -->
-  <section class="hero" aria-label="Banner">
-    <img src="https://kerelalottery.ct.ws/wp-content/uploads/2026/02/6095807707412631403.jpg" alt="" data-i18n-alt="hero_alt">
-  </section>
+<div class="topLogo">
+<img src="https://i.postimg.cc/XvXzF7RJ/IMG-20251225-WA0003.jpg" alt="logo">
+</div>
 
-  
+<div style="text-align:center;margin-bottom:6px;">
+<span class="livePop">🟢 LIVE BOOKING ACTIVE</span>
+</div>
 
-  <!-- Main content -->
-  <div class="main" role="main">
+<div class="timerBar" id="timer">⏳ Booking closes in 30:00</div>
 
-    <!-- Left column -->
-    <div>
+<h2>Kerala Government Ticket</h2>
 
-      <!-- Overview -->
-      <div class="card" aria-labelledby="overviewTitle">
-        <h2 id="overviewTitle" class="h2" data-i18n="overview_title">Participate with Confidence — Official Kerala Lottery</h2>
-        <p class="lead" data-i18n="overview_lead">
-          Kerala State Lotteries लंबे समय से सार्वजनिक और नियंत्रित कार्यक्रम हैं, जिनमें ड्रॉ सरकारी निर्देशों के अनुरूप आयोजित होते हैं। यह पेज मदद करता है टिकट खरीदने, परिणाम जाँचने और पुरस्कार जारी करने की प्रक्रिया को समझने में — पूरी पारदर्शिता के साथ।
-        </p>
+<input id="name" placeholder="Full Name">
+<input id="mobile" placeholder="Mobile Number">
 
-        <div class="cta" role="navigation" aria-label="Contact">
-          <a class="btn" id="waContactBtnTop" target="_blank" rel="noopener" data-i18n="contact_button">📱 Contact on WhatsApp</a>
-          <a class="btn secondary" href="#how" data-i18n="prize_process_button">🔎 Prize Process</a>
-        </div>
+<select id="state">
+  <option value="">Select State</option>
+  <option>Kerala</option>
+  <option>Tamil Nadu</option>
+  <option>Karnataka</option>
+  <option>Andhra Pradesh</option>
+  <option>Telangana</option>
+</select>
 
-        <div class="order-note" style="margin-top:8px"><strong data-i18n="contact_text_label">Contact / Queries:</strong> <span id="contactNumber"></span></div>
-      </div>
+<select id="language">
+<option>English</option>
+<option>Hindi</option>
+<option>Malayalam</option>
+<option>Tamil</option>
+<option>Kannada</option>
+<option>Telugu</option>
+</select>
 
-      <!-- Details -->
-      <div class="card" style="margin-top:10px">
-        <h2 class="h2" data-i18n="details_title">विस्तृत विवरण — Professional & Transparent Process</h2>
+<div class="ticketBox">
+<div class="ticketAmount" id="ticketAmount">💰 Total Amount: ₹0</div>
+<div class="ticketTitle">🎟 Select Lucky Ticket (₹40 per ticket)</div>
+<select id="ticket" multiple></select>
+<div class="counter" id="counter">Selected: 0 tickets</div>
+<div class="selectedList" id="selectedList"></div>
+</div>
 
-        <p class="lead" data-i18n="details_lead">
-          हमारा उद्देश्य प्रतिभागियों को भरोसेमंद जानकारी और स्पष्ट प्रक्रिया देना है। नीचे दिए गए बिंदु हमेशा लागू होते हैं:
-        </p>
-
-        <ul>
-          <li data-i18n="points_1"><strong>सरकारी मानदण्ड:</strong> ड्रॉ आधिकारिक नियमों के अनुसार होते हैं।</li>
-          <li data-i18n="points_2"><strong>परिणाम सार्वजनिक हैं:</strong> विजेता संखाएँ आधिकारिक चैनलों पर प्रकाशित होती हैं।</li>
-          <li data-i18n="points_3"><strong>सत्यापन के बाद भुगतान:</strong> टिकट सत्यापन के पश्चात ही भुगतान अधिकृत चैनलों से जारी होता है।</li>
-          <li data-i18n="points_4"><strong>गोपनीयता:</strong> हम बैंक OTP/पासवर्ड कभी नहीं मांगते।</li>
-        </ul>
-      </div>
-
-      <!-- How it works -->
-      <div id="how" class="card" style="margin-top:10px">
-        <h2 class="h2" data-i18n="how_title">Transparent Prize Process — कैसे काम करता है</h2>
-        <div class="steps">
-          <div class="step"><div class="num">1</div><div><strong data-i18n="step1_title">Official Draw</strong><div class="small" data-i18n="step1_text">ड्रॉ आधिकारिक पर्यवेक्षण के साथ आयोजित होता है और रिकॉर्ड रखा जाता है।</div></div></div>
-          <div class="step"><div class="num">2</div><div><strong data-i18n="step2_title">Result Publication</strong><div class="small" data-i18n="step2_text">विजयी संखाएँ सार्वजनिक रूप से प्रकाशित की जाती हैं; आप स्वयं सत्यापित कर सकते हैं।</div></div></div>
-          <div class="step"><div class="num">3</div><div><strong data-i18n="step3_title">Ticket Verification</strong><div class="small" data-i18n="step3_text">टिकट आधिकारिक सिस्टम द्वारा सत्यापित किया जाता है — तभी आगे भुगतान होता है।</div></div></div>
-          <div class="step"><div class="num">4</div><div><strong data-i18n="step4_title">Winner Payout</strong><div class="small" data-i18n="step4_text">पहचान सत्यापित होने के बाद भुगतान अधिकृत चैनलों से जारी किया जाता है।</div></div></div>
-        </div>
-      </div>
-
-      <!-- Testimonials -->
-      <div class="card" style="margin-top:10px">
-        <h2 class="h2" data-i18n="testimonials_title">Recent participant feedback</h2>
-        <div class="testimonials" id="testimonialsContainer" aria-live="polite">
-          <!-- JS will populate blank-avatar testimonials -->
-        </div>
-        <div class="small" data-i18n="testimonials_note">नीचे दिखी राशियाँ प्रतिभागियों की रिपोर्ट हैं; तारीखें ब्राउज़र-साइड हर दिन बदलती रहेंगी ताकि डायनामिक दिखे।</div>
-      </div>
-
-      <!-- FAQ -->
-      <div class="card" style="margin-top:10px">
-        <h2 class="h2" data-i18n="faq_title">FAQ — अक्सर पूछे जाने वाले प्रश्न</h2>
-        <p><strong data-i18n="faq_q1">Q: क्या यह सरकारी योजना है?</strong><br>
-        <span data-i18n="faq_a1">A: Kerala State Lotteries राज्य द्वारा संचालित होते हैं; इस पेज पर दी जाने वाली सहायता टिकट खरीदने और सत्यापन में सहायक है — आधिकारिक ड्रॉ सरकार की प्रक्रिया के अनुरूप होते हैं।</span></p>
-
-        <p><strong data-i18n="faq_q2">Q: भुगतान कैसे प्राप्त होता है?</strong><br>
-        <span data-i18n="faq_a2">A: विजेता की पहचान सत्यापित होने पर भुगतान अधिकृत चैनलों के माध्यम से किया जाता है।</span></p>
-
-        <p><strong data-i18n="faq_q3">Q: सहायता कैसे लें?</strong><br>
-        <span data-i18n="faq_a3">A: WhatsApp पर <strong id="faqWhatsAppNumber"></strong> पर संपर्क करें — हम परिणाम सत्यापन और आगे की प्रक्रिया में मदद करते हैं।</span></p>
-      </div>
-
-    </div>
-
-    <!-- Right column -->
-    <aside class="aside-compact">
-      <div class="card">
-        <div class="badge" data-i18n="trust_badge">Why trust?</div>
-        <ul class="list small" style="padding-left:14px;">
-          <li data-i18n="trust_1">Official draws under supervision</li>
-          <li data-i18n="trust_2">Publicly published results</li>
-          <li data-i18n="trust_3">Secure ticket verification</li>
-        </ul>
-        <div style="margin-top:10px;">
-          <a class="btn" id="waContactBtn" target="_blank" rel="noopener" data-i18n="contact_button_2">Contact on WhatsApp</a>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:10px">
-        <h3 class="h2" data-i18n="notes_title">Participation Notes</h3>
-        <p class="small" data-i18n="notes_text">We assist with orders & verification. We never ask for OTPs or bank passwords. Participate responsibly.</p>
-      </div>
-    </aside>
-
-  </div>
-
-  <!-- Footer -->
-  <div class="footer card">
-    <div class="small" data-i18n="footer_text">Kerala Lottery draws & results are administered by the Government of Kerala. This page provides assistance for participation and verification. Contact {WHATSAPP_NUMBER} for queries.</div>
-  </div>
+<input id="amount" placeholder="Total Amount (₹)" readonly>
+<button id="submitBtn" disabled>Submit & Continue</button>
 
 </div>
 
+<!-- Bottom notification wrapper -->
+<div class="notif-wrapper" id="notifWrapper" aria-live="polite"></div>
 
+<!-- Floating WhatsApp (uses provided image) -->
+<div class="wa-float" id="waFloat" title="Chat on WhatsApp">
+  <img src="https://kerelalottery.ct.ws/wp-content/uploads/2026/02/whatsapp.jpg" alt="whatsapp">
+</div>
 
-
-  <!-- feedback / winners -->
-  <section class="lottery-container" aria-label="Winner feedback">
-    <div class="feedback-container">
-      <div class="feedback-track" id="feedbackTrack">
-        <!-- sample cards -->
-        <div class="feedback-card">
-          <div class="winner-badge">WINNER</div>
-          <div class="user-info"><div class="avatar">RK</div><div class="user-details"><h4>Rajesh Kumar</h4><p>From Kochi</p></div></div>
-          <div class="feedback-text">"Just won ₹7,50,000 in Karunya KR-625! Payment received in 5 days."</div>
-          <div class="lottery-details"><span class="prize-amount">₹7,50,000</span><span class="timestamp"></span></div>
-        </div>
-
-        <div class="feedback-card">
-          <div class="winner-badge">JACKPOT</div>
-          <div class="user-info"><div class="avatar">PM</div><div class="user-details"><h4>Priya Menon</h4><p>From Thiruvananthapuram</p></div></div>
-          <div class="feedback-text">"Won ₹25,00,000 in Christmas Bumper. Everything verified officially."</div>
-          <div class="lottery-details"><span class="prize-amount">₹25,00,000</span><span class="timestamp"></span></div>
-        </div>
-
-        <div class="feedback-card">
-          <div class="winner-badge">WINNER</div>
-          <div class="user-info"><div class="avatar">SK</div><div class="user-details"><h4>Sunil Kumar</h4><p>From Kozhikode</p></div></div>
-          <div class="feedback-text">"Finally won ₹1,20,000 in Win-Win after 3 years."</div>
-          <div class="lottery-details"><span class="prize-amount">₹1,20,000</span><span class="timestamp"></span></div>
-        </div>
-
-        <div class="feedback-card">
-          <div class="winner-badge">WINNER</div>
-          <div class="user-info"><div class="avatar">DP</div><div class="user-details"><h4>Deepa P.</h4><p>From Wayanad</p></div></div>
-          <div class="feedback-text">"₹60,000 in Sthree Sakthi."</div>
-          <div class="lottery-details"><span class="prize-amount">₹60,000</span><span class="timestamp"></span></div>
-        </div>
-
-      </div>
+<div class="modal" id="previewModal">
+  <div class="modalBox">
+    <h3>Payment Preview</h3>
+    <div class="summary" id="previewContent"></div>
+    <div class="modalBtns">
+      <button class="cancelBtn" onclick="closePreview()">Cancel</button>
+      <button onclick="proceedWhatsApp()">Confirm & WhatsApp</button>
     </div>
+  </div>
+</div>
 
-    <div class="live-indicator"><div class="live-dot" aria-hidden="true"></div><span>LIVE WINNER UPDATES</span></div>
-
-    <div class="controls">
-      <button class="control-btn" onclick="pauseAnimation()">Pause</button>
-      <button class="control-btn" onclick="playAnimation()">Play</button>
-    </div>
-
-    <div class="disclaimer">*These are testimonials from verified winners. Results may vary. Please play responsibly.</div>
-  </section>
-
-</div> <!-- page-wrap -->
-
-<!-- Floating WhatsApp button (side icon) -->
-<a id="whatsappFloat" class="whatsapp-float" href="#" target="_blank" rel="noopener" aria-label="Chat on WhatsApp" title="Chat on WhatsApp">
-  <img src="https://kerelalottery.ct.ws/wp-content/uploads/2026/02/whatsapp.jpg" alt="WhatsApp" style="width:100%;height:100%;object-fit:contain;border-radius:50%;">
-</a>
-
-<!-- SCRIPTS -->
 <script>
-/* ---------- CONFIG ---------- */
-const TICKET_PRICE = 150;
-const MIN_TICKETS = 1;
-const WHATSAPP_NUMBER = "+918981573173"; // Global WhatsApp number constant
+/* ---------- CONFIG: change number here and it updates both places ---------- */
+const WHATSAPP_NUMBER = "+919576398992"; // -> change here to update everywhere
+const WHATSAPP_IMG_URL = "https://kerelalottery.ct.ws/wp-content/uploads/2026/02/whatsapp.jpg";
 
-// Elements
-const ticket = document.getElementById("ticket"),
-      selectedList = document.getElementById("selectedList"),
-      freeList = document.getElementById("freeList"),
-      amount = document.getElementById("amount"),
-      ticketAmount = document.getElementById("ticketAmount"),
-      breakdown = document.getElementById("breakdown"),
-      submitBtn = document.getElementById("submitBtn"),
-      counter = document.getElementById("counter"),
-      nameI = document.getElementById("name"),
-      mobileI = document.getElementById("mobile"),
-      stateSelect = document.getElementById("state"),
-      previewModal = document.getElementById("previewModal"),
-      previewContent = document.getElementById("previewContent"),
-      whatsappFloat = document.getElementById("whatsappFloat");
+/* ---------- existing script (timer + tickets) ---------- */
+let time=1800;
+setInterval(()=>{
+ let m=Math.floor(time/60),s=time%60;
+ document.getElementById("timer").textContent=`⏳ Booking closes in ${m}:${s.toString().padStart(2,"0")}`;
+ if(time>0) time--;
+},1000);
 
-/* ---------- Populate state select with custom order ---------- */
-(function populateStates(){
-  // top five first (in given order)
-  const topStates = ["Kerala","Tamil Nadu","Karnataka","Andhra Pradesh","Telangana"];
+const TICKET_PRICE=40,MIN_TICKETS=3;
+const ticket=document.getElementById("ticket"),
+selectedList=document.getElementById("selectedList"),
+amount=document.getElementById("amount"),
+ticketAmount=document.getElementById("ticketAmount"),
+submitBtn=document.getElementById("submitBtn"),
+counter=document.getElementById("counter"),
+language=document.getElementById("language"),
+stateSelect=document.getElementById("state"),
+nameI=document.getElementById("name"),
+mobileI=document.getElementById("mobile"),
+previewModal=document.getElementById("previewModal"),
+previewContent=document.getElementById("previewContent");
 
-  // all indian states/UTs (simple list). You can add/remove if needed.
-  const all = [
-    "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh","Goa","Gujarat",
-    "Haryana","Himachal Pradesh","Jharkhand","Karnataka","Kerala","Madhya Pradesh",
-    "Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab",
-    "Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh",
-    "Uttarakhand","West Bengal","Andaman and Nicobar Islands","Chandigarh","Dadra and Nagar Haveli and Daman and Diu",
-    "Delhi","Jammu and Kashmir","Ladakh","Lakshadweep","Puducherry"
-  ];
-
-  // Build unique list: put topStates first (if present), then remaining from 'all' excluding topStates
-  const remaining = all.filter(s=> !topStates.includes(s));
-  const finalList = [...topStates, ...remaining];
-
-  // add placeholder first
-  stateSelect.innerHTML = '<option value="">Select State</option>';
-  finalList.forEach(s=>{
-    const opt = document.createElement('option');
-    opt.value = s;
-    opt.textContent = s;
-    stateSelect.appendChild(opt);
-  });
-})();
-
-/* ---------- populate 100 sample tickets ---------- */
-for(let i=0;i<100;i++){
-  let n=("000000"+Math.floor(Math.random()*999999)).slice(-6);
-  let o=document.createElement("option");
-  o.value="KL"+n; o.textContent="KL"+n;
-  ticket.appendChild(o);
+for(let i=0;i<3000;i++){
+ let n=("000000"+Math.floor(Math.random()*999999)).slice(-6);
+ let o=document.createElement("option");
+ o.value="KL"+n;o.textContent="KL"+n;
+ ticket.appendChild(o);
 }
 
-/* ---------- BUNDLE CALC ----------
- New rule implemented:
-  - Use 5-packs (each 5 paid => 2 free)
-  - For remainder: if remainder >= 2 then give +1 free (so 2,3,4 all give 1 extra free when not part of 5-pack)
-  This prevents two separate 2-packs from doubling freebies incorrectly for 4 (4 => only 1 free).
-*/
-function calculateBundle(paid){
-  if(!paid || paid < 1) return {price:0, free:0, bd:{fives:0, twos:0, ones:0}};
-  const fives = Math.floor(paid / 5);
-  const rem = paid - (fives * 5);
-
-  // if remainder is 2 or more (2,3,4), give one extra free (but only one)
-  const twos = (rem >= 2) ? 1 : 0;
-
-  const ones = rem - (twos * 2); // informational
-  const free = (fives * 2) + (twos * 1);
-  const price = paid * TICKET_PRICE;
-  return { price, free, bd:{ fives, twos, ones } };
-}
-
-/* generate unique free tickets not colliding with selected paid ones */
-function generateFreeTickets(free, existing){
-  let tickets = new Set(existing);
-  let newTickets = [];
-  while(newTickets.length < free){
-    let n = ("000000"+Math.floor(Math.random()*999999)).slice(-6);
-    let code = "KL"+n;
-    if(!tickets.has(code)){
-      newTickets.push(code);
-      tickets.add(code);
-    }
+/* Add remaining states under the existing top ones (avoid duplicates) */
+const moreStates = [
+  "Maharashtra","Gujarat","Rajasthan","Punjab","Haryana","Bihar","Uttar Pradesh",
+  "Madhya Pradesh","Chhattisgarh","Odisha","West Bengal","Assam",
+  "Arunachal Pradesh","Manipur","Meghalaya","Mizoram","Nagaland","Sikkim","Tripura",
+  "Jammu & Kashmir","Ladakh","Delhi","Goa","Puducherry","Andaman & Nicobar",
+  "Dadra and Nagar Haveli and Daman & Diu","Lakshadweep"
+];
+// append only if not present
+const existVals = [...stateSelect.options].map(o=>o.textContent.trim());
+moreStates.forEach(s=>{
+  if(!existVals.includes(s)){
+    let o=document.createElement("option");
+    o.textContent=s;
+    stateSelect.appendChild(o);
   }
-  return newTickets;
-}
+});
 
-/* ---------- REFRESH UI ---------- */
 function refresh(){
-  let sel = [...ticket.selectedOptions].map(o=>o.value);
-  let paid = sel.length;
-  let {price, free, bd} = calculateBundle(paid);
-
-  counter.textContent = `Selected: ${paid} paid tickets · Free: ${free}`;
-  selectedList.innerHTML = "";
-  sel.forEach(t=>{
-    let c = document.createElement("div");
-    c.className = "chip";
-    c.innerHTML = `${t} <span onclick="removeTicket('${t}')" aria-hidden="true">×</span>`;
-    selectedList.appendChild(c);
-  });
-
-  let freeTickets = [];
-  if(paid >= MIN_TICKETS){
-    amount.value = "₹ " + price;
-    ticketAmount.style.display = "block";
-    ticketAmount.textContent = `💰 Total Amount: ₹ ${price} (for ${paid} paid + ${free} free)`;
-
-    // generate free tickets deterministically: to avoid flicker, use seeded generation based on paid count + selected IDs
-    freeTickets = generateFreeTickets(free, sel);
-    freeList.innerHTML = "";
-    freeTickets.forEach(t=>{
-      let c = document.createElement("div");
-      c.className = "chip";
-      c.innerHTML = `${t}`;
-      freeList.appendChild(c);
-    });
-
-    breakdown.style.display = "block";
-    breakdown.innerHTML = `Paid: ${paid}<br>Free: ${free}<br>Total Tickets: ${paid+free}<br>Price Breakdown: ${bd.fives} x (5-pack ₹750 +2 free), ${bd.twos} x (2-pack threshold gives 1 free when remainder ≥ 2), ${bd.ones} x (single ₹150)<br>Grand Total: ₹${price}`;
-  } else {
-    amount.value = "";
-    ticketAmount.style.display = "block";
-    ticketAmount.textContent = "💰 Minimum 1 ticket required";
-    freeList.innerHTML = "";
-    breakdown.style.display = "none";
-    breakdown.innerHTML = "";
-  }
-
-  const canSubmit = (paid >= MIN_TICKETS) && nameI.value.trim().length>0 && mobileI.value.trim().length>0 && stateSelect.value.trim().length>0;
-  submitBtn.disabled = !canSubmit;
-  submitBtn.setAttribute('aria-disabled', submitBtn.disabled ? 'true' : 'false');
-
-  return {sel, freeTickets, price, paid, free, bd};
+ let sel=[...ticket.selectedOptions].map(o=>o.value);
+ counter.textContent=`Selected: ${sel.length} tickets`;
+ selectedList.innerHTML="";
+ sel.forEach(t=>{
+   let c=document.createElement("div");
+   c.className="chip";
+   c.innerHTML=`${t} <span onclick="removeTicket('${t}')">×</span>`;
+   selectedList.appendChild(c);
+ });
+ if(sel.length>=MIN_TICKETS){
+   let total=sel.length*TICKET_PRICE;
+   amount.value="₹ "+total;
+   ticketAmount.textContent="💰 Total Amount: ₹ "+total;
+ }else{
+   amount.value="";
+   ticketAmount.textContent="💰 Minimum 3 tickets required";
+ }
+ submitBtn.disabled=!(sel.length>=3 && nameI.value && mobileI.value && stateSelect.value);
 }
 
-ticket.addEventListener("change", refresh);
-[nameI, mobileI, stateSelect].forEach(i=>i.addEventListener("input", refresh));
+ticket.addEventListener("change",refresh);
+[nameI,mobileI,stateSelect].forEach(i=>i.addEventListener("input",refresh));
 
-window.removeTicket = (t) => {
-  [...ticket.options].forEach(o=>{ if(o.value===t) o.selected=false; });
-  refresh();
+window.removeTicket=(t)=>{
+ [...ticket.options].forEach(o=>{if(o.value===t) o.selected=false;});
+ refresh();
 };
 
-/* ---------- SUBMIT / PREVIEW / WHATSAPP ---------- */
-let isSubmitting = false;
-submitBtn.onclick = () => {
-  if(isSubmitting) return;
-  isSubmitting = true;
-  try{ fbq('track','Lead'); } catch(e){}
-  let {sel, freeTickets, price, paid, free, bd} = refresh();
-  previewContent.innerHTML = `
-<b>Name:</b> ${escapeHtml(nameI.value)}
-<b>Mobile:</b> ${escapeHtml(mobileI.value)}
-<b>State:</b> ${escapeHtml(stateSelect.value)}
-
-<b>Paid Tickets:</b> ${paid}
-<b>Free Tickets:</b> ${free}
-<b>Total Delivered:</b> ${paid+free}
-
-<b>Selected Tickets (Paid):</b>
-${sel.join('\n')}
-
-<b>Free Tickets:</b>
-${freeTickets.join('\n')}
-
-<b>Price Breakdown:</b> ${bd.fives} x (5-pack ₹750 +2 free), ${bd.twos} x (2-pack threshold), ${bd.ones} x (single ₹150)
-<b>Total Amount:</b> ₹${price}
-
-<b>Payment Mode:</b> WhatsApp Confirmation
+submitBtn.onclick=()=>{
+ let sel=[...ticket.selectedOptions].map(o=>o.value).join(", ");
+ previewContent.innerHTML=`
+<b>Name:</b> ${nameI.value}<br>
+<b>Mobile:</b> ${mobileI.value}<br>
+<b>State:</b> ${stateSelect.value}<br><br>
+<b>Tickets Selected:</b><br>${sel}<br><br>
+<b>Total Tickets:</b> ${ticket.selectedOptions.length}<br>
+<b>Price per Ticket:</b> ₹40<br>
+<b>Total Amount:</b> ${amount.value}<br><br>
+<b>Payment Mode:</b> WhatsApp Confirmation<br>
 ⚠️ Please verify details before proceeding.
-  `;
-  previewModal.style.display = "flex";
+ `;
+ previewModal.style.display="flex";
 };
 
-function closePreview(){ previewModal.style.display = "none"; isSubmitting = false; }
-
-function openWhatsApp(prefilledMsg){
-  const number = WHATSAPP_NUMBER;
-  const url = "https://wa.me/" + number.replace(/\D/g,'') + "?text=" + encodeURIComponent(prefilledMsg);
-  window.open(url, "_blank");
-}
+function closePreview(){previewModal.style.display="none";}
 
 function proceedWhatsApp(){
-  let {sel, freeTickets, price, paid, free} = refresh();
-  let tickets = sel.concat(freeTickets).join(", ");
-  let msg = `New Booking\nName: ${nameI.value}\nMobile: ${mobileI.value}\nState: ${stateSelect.value}\n\nTickets:\n${tickets}\n\nTotal Tickets: ${paid + free}\nAmount: ₹${price}`;
-  openWhatsApp(msg);
-  previewModal.style.display = "none";
-  isSubmitting = false;
+ let tickets=[...ticket.selectedOptions].map(o=>o.value).join(", ");
+ let msg=`New Booking
+Name: ${nameI.value}
+Mobile: ${mobileI.value}
+State: ${stateSelect.value}
+
+Tickets:
+${tickets}
+
+Total Tickets: ${ticket.selectedOptions.length}
+Amount: ${amount.value}
+Language: ${language.value}`;
+ // sanitize number for wa.me
+ const numClean = WHATSAPP_NUMBER.replace(/\D/g,'');
+ window.open("https://wa.me/"+numClean+"?text="+encodeURIComponent(msg),"_blank");
+ previewModal.style.display="none";
 }
 
-/* Floating WhatsApp button click -> opens chat */
-whatsappFloat.addEventListener('click', (e)=>{
-  e.preventDefault();
-  const nm = nameI.value.trim() || 'New customer';
-  const mb = mobileI.value.trim() || '';
-  const msg = `Hello, I want to book tickets.`;
-  openWhatsApp(msg);
+/* ---------- NEW: bottom rotating popup notifications (with states & bias to south) ---------- */
+
+/* South-leaning names (bigger list) */
+const southNames = [
+  "arun","vignesh","karthik","praveen","srinivas","ajith","rajesh","kumar","santhosh","venkat",
+  "arjun","rajeshwar","manoj","mukesh","hari","dinesh","satish","girish","rahul","naveen",
+  "sudheer","ganesh","mohan","madhu","anu","prasanna","balaji","sujith","amar","sreekanth"
+];
+/* a few non-south to keep it realistic */
+const otherNames = ["ankit","deepak","sumit","atul","sandeep","raj","aman","sourav","amit","ravi"];
+/* combine with heavier weight for south */
+const allNamesWeighted = [...southNames, ...southNames, ...southNames, ...otherNames]; // south x3 weight
+
+/* Messages/templates (use {T}) */
+const templates = [
+  "Just booked {T}",
+  "WIN ₹5 Lakh on {T}",
+  "BOOKED {T}",
+  "Lucky! {T} - Congrats",
+  "Hurry, grabbed {T}",
+  "{T} confirmed!",
+  "KL{T} — Booked now",
+  "Booked for family: {T}",
+  "Don't miss {T}",
+  "Winner alert: {T}"
+];
+
+/* All states list (used for random notification state; bias toward south) */
+const southStates = ["Kerala","Tamil Nadu","Karnataka","Andhra Pradesh","Telangana","Puducherry","Goa"];
+const otherStates = ["Maharashtra","Gujarat","Rajasthan","Punjab","Haryana","Bihar","Uttar Pradesh",
+  "Madhya Pradesh","Chhattisgarh","Odisha","West Bengal","Assam",
+  "Arunachal Pradesh","Manipur","Meghalaya","Mizoram","Nagaland","Sikkim","Tripura",
+  "Jammu & Kashmir","Ladakh","Delhi","Andaman & Nicobar","Dadra and Nagar Haveli and Daman & Diu","Lakshadweep"];
+const allStatesWeighted = [...southStates, ...southStates, ...southStates, ...otherStates];
+
+/* util: random ticket */
+function randTicket(){
+  return (Math.floor(Math.random()*900000)+100000); // 100000..999999
+}
+
+/* util: masked mobile generator — returns +91 XXxxxx1234 style */
+function randMobileMasked(){
+  const first = [9,8,7][Math.floor(Math.random()*3)];
+  const next = Math.floor(Math.random()*10);
+  let last4 = ("" + (Math.floor(Math.random()*9000)+1000));
+  const firstTwo = "" + first + next;
+  return "+91 " + firstTwo + "xxxx" + last4;
+}
+
+/* show a notification element for a short time */
+const notifWrapper = document.getElementById("notifWrapper");
+
+function showOneNotif(opts = {}, displayMs = 5000){
+  const n = document.createElement("div");
+  n.className = "notif";
+
+  const avatar = document.createElement("div");
+  avatar.className = "avatar";
+  avatar.textContent = opts.initials || (opts.name ? opts.name[0].toUpperCase() : "S");
+
+  const body = document.createElement("div");
+  body.className = "body";
+  body.innerHTML = `<div class="who">${opts.name}</div>
+                    <div class="mobile">${opts.mobile}</div>
+                    <div class="state">${opts.state}</div>
+                    <div class="msg">${opts.message}</div>`;
+
+  const close = document.createElement("button");
+  close.className = "closeBtn";
+  close.setAttribute("aria-label","close");
+  close.innerHTML = "✕";
+  close.onclick = () => {
+    n.classList.add("hide");
+    setTimeout(()=>{ n.remove(); }, 420);
+  };
+
+  n.appendChild(avatar);
+  n.appendChild(body);
+  n.appendChild(close);
+
+  notifWrapper.appendChild(n);
+
+  setTimeout(()=>{
+    n.classList.add("hide");
+    setTimeout(()=>{ n.remove(); }, 420);
+  }, displayMs);
+}
+
+/* Scheduler: every 3.5s show a new one, each notif stays ~5.2s */
+let cycleIntervalMs = 3500;
+function startNotifCycle(){
+  generateAndShow();
+  window._notifTimer = setInterval(() => {
+    generateAndShow();
+  }, cycleIntervalMs);
+}
+
+/* Generate random notification data and show */
+function generateAndShow(){
+  const name = allNamesWeighted[Math.floor(Math.random()*allNamesWeighted.length)];
+  const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+  const ticket = "KL" + randTicket();
+  const tpl = templates[Math.floor(Math.random()*templates.length)];
+  const message = tpl.includes("{T}") ? tpl.replace("{T}", ticket) : tpl + " " + ticket;
+  const mobile = randMobileMasked();
+  const state = allStatesWeighted[Math.floor(Math.random()*allStatesWeighted.length)];
+  showOneNotif({ name: displayName, mobile, message, state }, 5200);
+}
+
+/* Start cycle when page loaded */
+document.addEventListener("DOMContentLoaded", ()=>{
+  // ensure floating wa image uses configured URL (in case changed)
+  const waFloat = document.getElementById("waFloat");
+  waFloat.querySelector("img").src = WHATSAPP_IMG_URL;
+
+  startNotifCycle();
 });
 
-/* ---------- SLIDESHOW ---------- */
-let slideIndex = 1;
-function showSlides(){
-  let slides = document.getElementsByClassName("mySlides");
-  for(let i=0;i<slides.length;i++) slides[i].style.display = "none";
-  slideIndex++;
-  if(slideIndex>slides.length) slideIndex=1;
-  if(slides[slideIndex-1]) slides[slideIndex-1].style.display = "block";
-  setTimeout(showSlides,3000);
-}
-showSlides();
-
-/* ---------- FEEDBACK TRACK ---------- */
-const track = document.getElementById('feedbackTrack');
-let isPlaying = true;
-let userPaused = false;
-function pauseAnimation(){ if(track) { track.style.animationPlayState='paused'; isPlaying=false; userPaused=true; } }
-function playAnimation(){ if(track) { track.style.animationPlayState='running'; isPlaying=true; userPaused=false; } }
-if(track){
-  track.addEventListener('mouseenter', ()=>{ if(isPlaying){ track.style.animationPlayState='paused'; track.dataset.hoverPaused = 'true'; }});
-  track.addEventListener('mouseleave', ()=>{ if(track.dataset.hoverPaused === 'true'){ if(!userPaused) track.style.animationPlayState='running'; delete track.dataset.hoverPaused; }});
-}
-function randomTimestamp(){ const m = Math.floor(Math.random()*300); if(m<60) return m+" min ago"; if(m<1440) return Math.floor(m/60)+" hrs ago"; return new Date().toLocaleDateString('en-IN'); }
-function updateTimestamps(){ document.querySelectorAll('.timestamp').forEach(ts => ts.textContent = randomTimestamp()); }
-
-/* Setup seamless scroll */
-function setupScrolling(){
-  if(!track) return;
-  if(track.dataset.cloned === 'true') return;
-  const children = Array.from(track.children);
-  if(children.length === 0) return;
-  let total = 0;
-  children.forEach(card=>{
-    const style = getComputedStyle(card);
-    const mr = parseFloat(style.marginRight) || 12;
-    total += card.offsetWidth + mr;
-  });
-  const originalHTML = track.innerHTML;
-  track.innerHTML = originalHTML + originalHTML;
-  track.dataset.cloned = 'true';
-  const pxPerSec = 220;
-  let duration = Math.max(8, Math.round(total / pxPerSec));
-  duration = Math.min(Math.max(duration, 8), 50);
-  const styleTag = document.createElement('style');
-  styleTag.id = 'feedback-scroll-style';
-  styleTag.innerHTML = `@keyframes feedbackScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-${total}px); } }`;
-  document.head.appendChild(styleTag);
-  track.style.animation = `feedbackScroll ${duration}s linear infinite`;
-  track.style.willChange = 'transform';
-  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-  if(mq.matches){ track.style.animationPlayState = 'paused'; isPlaying = false; }
-}
-setupScrolling();
-updateTimestamps();
-setInterval(updateTimestamps, 300000);
-
-/* Utilities */
-function escapeHtml(text){ if(!text) return ''; return text.replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
-
-/* Init UI */
-refresh();
-
-// Initialize WhatsApp number display
-(function initWhatsAppNumber(){
-  const formattedNumber = formatWhatsAppNumber();
-  const contactNumberEl = document.getElementById('contactNumber');
-  if(contactNumberEl) contactNumberEl.textContent = formattedNumber;
-  const faqWhatsAppNumberEl = document.getElementById('faqWhatsAppNumber');
-  if(faqWhatsAppNumberEl) faqWhatsAppNumberEl.textContent = formattedNumber;
-})();
-</script>
-
- 
- 
- <script>
-/* ===============================
-   Blank avatar (SVG data URI)
-   =============================== */
-const BLANK_AVATAR = `data:image/svg+xml;utf8,` + encodeURIComponent(
-  `<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160">
-     <rect width="100%" height="100%" fill="#e9ecef"/>
-     <circle cx="80" cy="58" r="32" fill="#dee2e6"/>
-     <rect x="30" y="100" width="100" height="38" rx="8" fill="#dee2e6"/>
-   </svg>`);
-
-/* ===============================
-   Languages & translations
-   Keys must match data-i18n attributes in DOM.
-   NOTE: These are best-effort translations — you can update text per language if you prefer.
-   =============================== */
-const TRANSLATIONS = {
-  en: {
-    select_language_label: "Select your language:",
-    header_title: "Kerala Lottery — Trusted Draws & Verified Winners",
-    brandline: "Government-supervised draws • Public results • Secure prize distribution",
-    hero_alt: "Kerala Lottery banner — winners and announcements",
-    banner_alt: "Kerala Lottery secondary banner",
-    overview_title: "Participate with Confidence — Official Kerala Lottery",
-    overview_lead: "Kerala State Lotteries are long-established public programs administered under state regulations. This page helps you understand ticket purchase, result verification and prize distribution with full transparency.",
-    contact_button: "📱 Contact on WhatsApp",
-    prize_process_button: "🔎 Prize Process",
-    contact_text_label: "Contact / Queries:",
-    details_title: "Detailed — Professional & Transparent Process",
-    details_lead: "We aim to provide participants with trustworthy information and clear procedures. The points below always apply:",
-    points_1: "Official compliance: Draws follow official rules.",
-    points_2: "Results are public: Winning numbers are published on official channels.",
-    points_3: "Payout after verification: Payments are issued via authorized channels after ticket verification.",
-    points_4: "Privacy: We never ask for bank OTPs/passwords.",
-    how_title: "Transparent Prize Process — How it works",
-    step1_title: "Official Draw",
-    step1_text: "Draws are conducted under official supervision and recorded.",
-    step2_title: "Result Publication",
-    step2_text: "Winning numbers are published publicly and can be verified.",
-    step3_title: "Ticket Verification",
-    step3_text: "Tickets are verified through authorized systems before payout.",
-    step4_title: "Winner Payout",
-    step4_text: "After identity confirmation, payouts are issued through authorized channels.",
-    testimonials_title: "Recent participant feedback",
-    testimonials_note: "Below amounts are participant reports; dates update daily on the browser.",
-    faq_title: "FAQ — Frequently Asked Questions",
-    faq_q1: "Q: Is this a government scheme?",
-    faq_a1: "A: Kerala State Lotteries are administered by the state; this page assists with purchase and verification — official draws follow government procedures.",
-    faq_q2: "Q: How are payouts received?",
-    faq_a2: "A: Payments are issued through authorized channels after winner verification.",
-    faq_q3: "Q: How to get help?",
-    faq_a3: "A: Contact WhatsApp {WHATSAPP_NUMBER} for assistance with verification and next steps.",
-    trust_badge: "Why trust?",
-    trust_1: "Official draws under supervision",
-    trust_2: "Publicly published results",
-    trust_3: "Secure ticket verification",
-    contact_button_2: "Contact on WhatsApp",
-    notes_title: "Participation Notes",
-    notes_text: "We assist with orders & verification. We never ask for OTPs or bank passwords. Participate responsibly.",
-    footer_text: "Kerala Lottery draws & results are administered by the Government of Kerala. This page provides assistance for participation and verification. Contact {WHATSAPP_NUMBER} for queries.",
-    // testimonial templates (use {AMOUNT} and {DATE})
-    testimonial_templates: [
-      "Ticket verified and {AMOUNT} was credited to my account on {DATE}. Smooth official process.",
-      "I received {AMOUNT} on {DATE} after verification. Team guided me through documentation.",
-      "{AMOUNT} credited (date: {DATE}). Very transparent process and prompt payout.",
-      "Verified prize {AMOUNT} posted on {DATE}. Support was professional and quick.",
-      "Got {AMOUNT} on {DATE} — thankful for the secure verification."
-    ],
-    contact_prefill: "Hello Team Kerala Lottery, I have a question about participation and verification. Please assist."
-  },
-
-  hi: {
-    select_language_label: "अपनी भाषा चुनें:",
-    header_title: "Kerala Lottery — भरोसेमंद ड्रॉ और सत्यापित विजेता",
-    brandline: "सरकारी पर्यवेक्षण वाले ड्रॉ • सार्वजनिक परिणाम • सुरक्षित भुगतान",
-    hero_alt: "Kerala Lottery बैनर — विजयी और घोषणा",
-    banner_alt: "Kerala Lottery सेकंडरी बैनर",
-    overview_title: "आत्म-विश्वास के साथ भाग लें — Official Kerala Lottery",
-    overview_lead: "Kerala State Lotteries लंबे समय से सार्वजनिक और नियंत्रित कार्यक्रम हैं। यह पेज टिकट खरीदने, परिणाम जाँचने और पुरस्कार वितरण को समझने में मदद करता है — पूर्ण पारदर्शिता के साथ।",
-    contact_button: "📱 व्हाट्सएप पर संपर्क करें",
-    prize_process_button: "🔎 पुरस्कार प्रक्रिया",
-    contact_text_label: "संपर्क / प्रश्न:",
-    details_title: "विस्तृत — पेशेवर व पारदर्शी प्रक्रिया",
-    details_lead: "हम प्रतिभागियों को भरोसेमंद जानकारी और स्पष्ट प्रक्रियाएँ देने का लक्ष्य रखते हैं। नीचे दिए बिंदु लागू होते हैं:",
-    points_1: "सरकारी मानदंड: ड्रॉ आधिकारिक नियमों के अनुसार होते हैं।",
-    points_2: "परिणाम सार्वजनिक: विजेता संखाएँ आधिकारिक चैनलों पर प्रकाशित होती हैं।",
-    points_3: "सत्यापन के बाद भुगतान: टिकट सत्यापन के बाद भुगतान जारी किया जाता है।",
-    points_4: "गोपनीयता: हम बैंक OTP/पासवर्ड कभी नहीं मांगते।",
-    how_title: "पारदर्शी पुरस्कार प्रक्रिया — कैसे काम करता है",
-    step1_title: "आधिकारिक ड्रॉ",
-    step1_text: "ड्रॉ आधिकारिक पर्यवेक्षण में आयोजित होते हैं और रिकॉर्ड होते हैं।",
-    step2_title: "परिणाम प्रकाशन",
-    step2_text: "विजयी संखाएँ सार्वजनिक रूप से प्रकाशित की जाती हैं और सत्यापित की जा सकती हैं।",
-    step3_title: "टिकट सत्यापन",
-    step3_text: "भुगतान से पहले टिकट अधिकृत सिस्टम से सत्यापित होते हैं।",
-    step4_title: "विजेता भुगतान",
-    step4_text: "पहचान सत्यापित होने पर भुगतान जारी किया जाता है।",
-    testimonials_title: "हालिया प्रतिभागी प्रतिक्रिया",
-    testimonials_note: "नीचे दी गई राशियाँ प्रतिभागियों की रिपोर्ट हैं; तारीखें ब्राउज़र पर रोज़ अपडेट होती हैं।",
-    faq_title: "सवाल — अक्सर पूछे जाते हैं",
-    faq_q1: "Q: क्या यह सरकारी योजना है?",
-    faq_a1: "A: Kerala State Lotteries राज्य द्वारा संचालित होते हैं; यह पेज खरीद और सत्यापन में सहायता करता है।",
-    faq_q2: "Q: भुगतान कैसे मिलता है?",
-    faq_a2: "A: विजेता सत्यापन के बाद अधिकृत चैनलों से भुगतान होता है।",
-    faq_q3: "Q: मदद कैसे लें?",
-    faq_a3: "A: WhatsApp पर {WHATSAPP_NUMBER} पर संपर्क करें — हम सत्यापन और अगले कदमों में मदद करेंगे।",
-    trust_badge: "क्यों भरोसा करें?",
-    trust_1: "सरकारी पर्यवेक्षण वाले ड्रॉ",
-    trust_2: "सार्वजनिक रूप से प्रकाशित परिणाम",
-    trust_3: "सुरक्षित टिकट सत्यापन",
-    contact_button_2: "WhatsApp पर संपर्क करें",
-    notes_title: "भागीदारी नोट्स",
-    notes_text: "हम ऑर्डर और सत्यापन में मदद करते हैं। हम कभी भी OTP या बैंक पासवर्ड नहीं मांगते। जिम्मेदारी से भाग लें।",
-    footer_text: "Kerala Lottery ड्रॉ एवं परिणाम Government of Kerala द्वारा प्रशासित हैं। सहायता के लिए {WHATSAPP_NUMBER} से संपर्क करें।",
-    testimonial_templates: [
-      "टिकट सत्यापित हुआ और {AMOUNT} मेरे खाते में {DATE} को जमा हुआ। प्रक्रिया सुचारू और आधिकारिक थी।",
-      "सत्यापन के बाद मुझे {DATE} पर {AMOUNT} मिला। टीम ने दस्तावेज़ों में मदद की।",
-      "{DATE} को {AMOUNT} जमा हुआ — पारदर्शी प्रक्रिया और तेज भुगतान।",
-      "{DATE} पर {AMOUNT} पोस्ट हुआ। समर्थन पेशेवर और तेज़ था।",
-      "{DATE} को मुझे {AMOUNT} मिला — सुरक्षित सत्यापन के लिए धन्यवाद।"
-    ],
-    contact_prefill: "Hello Team Kerala Lottery, मुझे भागीदारी और सत्यापन के बारे में मदद चाहिए। कृपया सहायता करें।"
-  },
-
-  ml: {
-    select_language_label: "നിങ്ങളുടെ ഭാഷ തിരഞ്ഞെടുക്കുക:",
-    header_title: "കേരള ലോട്ടറി — വിശ്വസനീയമായ ഡ്രോയും സ്ഥിരീകരിച്ച ജയികളുമ്",
-    brandline: "സർക്കാർ മേൽനോട്ടത്തിലുള്ള ഡ്രോക്കൾ • പൊതുവിലുണ്ടാകുന്ന შედეგങ്ങൾ • സുരക്ഷിത പേഔട്ട്",
-    hero_alt: "Kerala Lottery ബാനർ — വിജയികളും പ്രഖ്യാപനങ്ങളും",
-    banner_alt: "Kerala Lottery രണ്ടാം ബാനർ",
-    overview_title: "ആത്മവിശ്വാസത്തോടെ പങ്കെടുക്കൂ — ഔദ്യോഗിക കേരള ലോട്ടറി",
-    overview_lead: "Kerala State Lotteries ലംബകാലം മുതൽ ജനപ്രിയവും നിയന്ത്രിതവും ആയ പരിപാടികളാണ്. ടിക്കറ്റ് വാങ്ങൽ, ഫല പരിശോധന, സമ്മാന വിതരണം എന്നിവയെക്കുറിച്ച് ഈ പേജ് വ്യക്തമായി വിവരിക്കുന്നു.",
-    contact_button: "📱 WhatsApp വഴി ബന്ധപ്പെടൂ",
-    prize_process_button: "🔎 സമ്മാന പ്രക്രിയ",
-    contact_text_label: "ബന്ധപ്പെടുക / ചോദ്യങ്ങൾ:",
-    details_title: "വിവരങ്ങൾ — പ്രൊഫഷണൽ & പരദർശക പ്രക്രിയ",
-    details_lead: "ഉപഭോക്താക്കൾക്ക് വിശ്വസനീയമായ വിവരങ്ങളും വ്യക്തമായ പ്രക്രിയകളും നൽകുക എന്നതാണ് ലക്ഷ്യം. താഴെയുള്ള കാര്യങ്ങൾ പ്രയോഗിക്കുക:",
-    points_1: "അധികൃത അനുസരണം: ഡ്രോകൾ ഔദ്യോഗിക നിയമങ്ങൾ പാലിക്കുന്നു.",
-    points_2: "ഫലങ്ങൾ പൊതുവായി പ്രസിദ്ധീകരിക്കുന്നു: വിജയ നമ്പറുകൾ ഔദ്യോഗിക ചാനലുകളിൽ പ്രസിദ്ധീകരിക്കുന്നു.",
-    points_3: "പരിശോധനയ്ക്ക് ശേഷം പെയ്മെന്റ്: ടിക്കറ്റ് പരിശോധിച്ചതിനു ശേഷം പണമടക്കം അനുവദിച്ചു.",
-    points_4: "സ്വകാര്യത: ബാങ്ക് OTP/പാസ്‌വേഡ് ഞങ്ങൾ ഒരിക്കലും ചോദിക്കില്ല.",
-    how_title: "പാരദർശക സമ്മാന പ്രക്രിയ — എങ്ങനെ പ്രവർത്തിക്കുന്നു",
-    step1_title: "ഔദ്യോഗിക ഡ്രോ",
-    step1_text: "ഡ്രോകൾ ഔദ്യോഗിക മേൽനോട്ടത്തിൽ നടത്തപ്പെടുന്നു.",
-    step2_title: "ഫലം പ്രസിദ്ധീകരണം",
-    step2_text: "വിജയ നമ്പറുകൾ പൊതുവിൽ പ്രസിദ്ധീകരിക്കപ്പെടുന്നു.",
-    step3_title: "ടിക്കറ്റ് പരിശോധന",
-    step3_text: "ടിക്കറ്റുകൾ അടച്ചുപൂട്ടല്‍ നടപടികളിലൂടെ പരിശോധിക്കപ്പെടും.",
-    step4_title: "വിജേതാവിന് പെയ്മെന്റ്",
-    step4_text: "ആയതു സ്ഥിരീകരിച്ച ശേഷം പണം അനുവദിക്കും.",
-    testimonials_title: "തലമുറയുടെ അഭിപ്രായങ്ങൾ",
-    testimonials_note: "താഴെ കാണുന്ന തുകകൾ പങ്കെടുക്കുന്നവരുടെ റിപ്പോർട്ടുകൾ ആണ്; തീയതികൾ ബ്രൗസറിൽ ദൈനംദിനം അപ്‌ഡേറ്റ് ചെയ്യും.",
-    faq_title: "FAQ — ആവിർഭവിക്കുന്ന ചോദ്യങ്ങൾ",
-    faq_q1: "Q: ഇത് സർക്കാർ സ്കീമാണോ?",
-    faq_a1: "A: Kerala State Lotteries സംസ്ഥാന സർക്കാരിന്റെ കീഴിലാണ്; ഈ പേജ് വാങ്ങലിലും പരിശോധനയിലും സഹായിക്കുന്നു.",
-    faq_q2: "Q: പണം എങ്ങനെ കിട്ടും?",
-    faq_a2: "A: വിജയിയെ സ്ഥിരീകരിച്ച ശേഷം അധികൃത ചാനലുകൾ വഴി പണമടച്ചു നൽകും.",
-    faq_q3: "Q: എങ്ങനെ സഹായം ലഭിക്കും?",
-    faq_a3: "A: WhatsApp-ൽ {WHATSAPP_NUMBER}-ൽ ബന്ധപ്പെടുക.",
-    trust_badge: "എതിനെ വിശ്വസിക്കാം?",
-    trust_1: "അധികൃത മേൽനോട്ടത്തിലുള്ള ഡ്രോകൾ",
-    trust_2: "പബ്ലിക് ഫലം",
-    trust_3: "സുരക്ഷിത ടിക്കറ്റ് പരിശോധന",
-    contact_button_2: "WhatsApp ബന്ധപ്പെടുക",
-    notes_title: "പങ്കെടുക്കൽ കുറിപ്പുകൾ",
-    notes_text: "ഞങ്ങൾ ഓർഡറും പരിശോധനയും സഹായിക്കുന്നു. OTPകൾ/ബാങ്ക് പാസ്‌വേഡ് ഞങ്ങൾ ചോദിക്ക മ്മ.",
-    footer_text: "Kerala Lottery ഫലങ്ങളും ഡ്രോകളും Government of Kerala ന്റെ കീഴിലാണ്. സഹായത്തിനായി {WHATSAPP_NUMBER} ബന്ധപ്പെടുക.",
-    testimonial_templates: [
-      "ടിക്കറ്റ് സ്ഥിരീകരിച്ച് {DATE}-ന് എന്റെ അക്കൗണ്ടിലേക്ക് {AMOUNT} ക്രെഡിറ്റ് ചെയ്തു. പ്രക്രിയ oficiales ആയി സുതാര്യമായി നടന്നു.",
-      "{DATE}-ന് ഞാൻ {AMOUNT} ലഭിച്ചു. ദസ്താവേസിൽ ടീം സഹായിച്ചു.",
-      "{DATE}-ന് {AMOUNT} ക്രെഡിറ്റ് ചെയിതു — വേഗംയും പരദർശതയുമുള്ള പ്രക്രിയ.",
-      "{DATE}-ന് {AMOUNT} പോസ്റ്റ് ചെയ്യപ്പെട്ടു. സഹായം പ്രൊഫഷണൽ ആയിരുന്നു.",
-      "{DATE}-ന് എനിക്ക് {AMOUNT} ലഭിച്ചു — സുരക്ഷിത പരിശോധനയ്ക്ക് നന്ദി."
-    ],
-    contact_prefill: "Hello Team Kerala Lottery, I need help with participation and verification. Please assist."
-  },
-
-  // Tamil (best-effort)
-  ta: {
-    select_language_label: "உங்கள் மொழியைத் தேர்ந்தெடுக்கவும்:",
-    header_title: "Kerala Lottery — நம்பகமான விருந்துகள் மற்றும் உறுதி செய்யப்பட்ட வெற்றியாளர்கள்",
-    brandline: "அரசு மேற்பார்வையில் நடக்கும் டிராக்கள் • பொது வெளியீடுகள் • பாதுகாப்பான பரிசு விநியோகம்",
-    hero_alt: "Kerala Lottery படர் — வெற்றியாளர்கள் மற்றும் அறிவிப்புகள்",
-    banner_alt: "Kerala Lottery இரண்டாம் படர்",
-    overview_title: "நம்பிக்கையுடன் பங்கேற்கவும் — அதிகாரபூர்வ Kerala Lottery",
-    overview_lead: "Kerala State Lotteries என்பது நீண்ட காலமாகப் பொதுமக்களால் அறியப்பட்ட மற்றும் கட்டுப்படுத்தப்பட்ட நிகழ்ச்சிகளாகும். இந்த பக்கம் டிக்கெட் வாங்குதல், முடிவுகளின் பரிசோதனை மற்றும் பரிசு விநியோகத்தை தெளிவாக விளக்குகிறது.",
-    contact_button: "📱 WhatsApp மூலம் தொடர்பு",
-    prize_process_button: "🔎 பரிசு செயல்முறை",
-    contact_text_label: "தொடர்பு / கேள்விகள்:",
-    details_title: "விவரம் — தொழில்முறை மற்றும் வெளிப்படையான செயல்முறை",
-    details_lead: "பங்கேற்கும் அனைவருக்கும் நம்பகமான தகவல்கள் மற்றும் தெளிவான செயல்முறைகள் வழங்குவது எங்கள் இலக்காகும். கீழ்காணும் அம்சங்கள் பின்பற்றப்படுகின்றன:",
-    points_1: "அதிகாரபூர்வ உடன்பாடு: டிராக்கள் அதிகாரப்பூர்வ விதிமுறைகளை பின்பற்றும்.",
-    points_2: "முடிவுகள் பொது வெளியீடு: வெற்றி எண்கள் அதிகாரபூர்வ சேனல்களில் வெளியிடப்படுகின்றன.",
-    points_3: "பரிசு பரிசீலனைக்கு பிறகு: டிக்கெட் சரிபார்ப்பு செய்யப்பட்ட பின்பு மட்டுமே கட்டணங்கள் வழங்கப்படுகின்றன.",
-    points_4: "தனியுரிமை: நாங்கள் OTP / பாஸ்வேர்ட்களை கேட்க மாட்டோம்.",
-    how_title: "வெளிப்படையான பரிசு செயல்முறை — எப்படி செயல்படுகிறது",
-    step1_title: "அதிகாரபூர்வ டிரா",
-    step1_text: "டிராக்கள் அதிகாரபூர்வ மேற்பார்வையில் நடத்தப்படுகின்றன.",
-    step2_title: "முடிவு வெளியீடு",
-    step2_text: "வெற்றி எண்கள் பொது வெளியீடாக வெளியிடப்படுகின்றன.",
-    step3_title: "டிக்கெட் சரிபார்ப்பு",
-    step3_text: "கட்டணத்திற்கு முன் டிக்கெட்டுகள் அதிகாரப்பூர்வ அமைப்பால் சரிபார்க்கப்படும்.",
-    step4_title: "வெற்றி பரிசு",
-    step4_text: "அடையாளம் உறுதிபடுத்தப்பட்ட பின்பு பரிசுகள் வழங்கப்படும்.",
-    testimonials_title: "சமீபத்திய பயனர் கருத்துக்கள்",
-    testimonials_note: "கீழே உள்ள தொகைகள் பயனர்களின் அறிக்கைகளாகும்; தேதிகள் ஒவ்வொரு நாளும் உலாவியில் புதுப்பிக்கப்படும்.",
-    faq_title: "அடிக்கடி கேட்கப்படும் கேள்விகள்",
-    faq_q1: "Q: இது ஒரு அரசாங்க திட்டமா?",
-    faq_a1: "A: Kerala State Lotteries மாநில அரசு மூலம் நிர்வகிக்கப்படுகிறது; இந்த பக்கம் கொள்முதல் மற்றும் சரிபார்ப்பில் உதவுகிறது.",
-    faq_q2: "Q: பணம் எப்படி பெறப்படும்?",
-    faq_a2: "A: வெற்றியாளரை சரிபார்த்த பிறகு நியமிக்கப்பட்ட சேனல்களின் மூலம் பணம் வழங்கப்படும்.",
-    faq_q3: "Q: உதவி எவ்வாறு பெறுவது?",
-    faq_a3: "A: WhatsApp மூலம் {WHATSAPP_NUMBER}-இல் தொடர்பு கொள்ளுங்கள்.",
-    trust_badge: "ஏன் நம்புவது?",
-    trust_1: "அதிகாரப்பூர்வ மேற்பார்வை உடன் டிராக்கள்",
-    trust_2: "பொதுவாக வெளியிடப்படும் முடிவுகள்",
-    trust_3: "பாதுகாப்பான டிக்கெட் சரிபார்ப்பு",
-    contact_button_2: "WhatsApp தொடர்பு",
-    notes_title: "பங்கேற்பு குறிப்புகள்",
-    notes_text: "நாம் ஆர்டர்கள் மற்றும் சரிபார்ப்பில் உதவுகிறோம். OTP அல்லது வங்கி பாஸ்வேர்ட்களை கேட்கமாட்டோம்.",
-    footer_text: "Kerala Lottery-இன் டிராக்களும் முடிவுகளும் Government of Kerala-க்கு உட்பட்டவை. உதவிக்காக {WHATSAPP_NUMBER}-ஐத் தொடர்பு கொள்ளவும்.",
-    testimonial_templates: [
-      "{DATE} அன்று எனது கணக்கிற்கு {AMOUNT} செலுத்தப்பெற்றது. செயல்முறை தெளிவாகவும் நம்பகமாகவும் இருந்தது.",
-      "சரிபார்ப்பிற்கு பிறகு நான் {DATE} அன்று {AMOUNT} பெற்றேன். குழு ஆவணங்களில் உதவியது.",
-      "{DATE} அன்று {AMOUNT} பதிவுசெய்யப்பட்டது — விரைவான மற்றும் வெளிப்படையான செயல்முறை.",
-      "{DATE} அன்று {AMOUNT} பதியப்பட்டது. ஆதரவு தொழில்முறை மற்றும் விரைவு.",
-      "{DATE} அன்று எனக்கு {AMOUNT} கிடைத்தது — பாதுகாப்பான சரிபார்ப்பிற்கு நன்றி."
-    ],
-    contact_prefill: "Hello Team Kerala Lottery, I need help with participation and verification. Please assist."
-  },
-
-  // Kannada (best-effort)
-  kn: {
-    select_language_label: "ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
-    header_title: "Kerala Lottery — ವಿಶ್ವಾಸಾರ್ಹ ಡ್ರಾಗಳು ಮತ್ತು ದೃಢೀಕೃತ ವಿಜೇತರು",
-    brandline: "ಸರ್ಕಾರಿ ಮೇಲ್ವಿಚಾರಣೆಯಡಿಯಲ್ಲಿ ಡ್ರಾಗಳು • ಸಾರ್ವಜನಿಕ ಫಲಿತಾಂಶಗಳು • ಸುರಕ್ಷಿತ ಪಾವತಿ",
-    hero_alt: "Kerala Lottery ಬ್ಯಾನರ್ — ವಿಜೇತರು ಮತ್ತು ಪ್ರಕಟಣೆಗಳು",
-    banner_alt: "Kerala Lottery ಸಣ್ಣ ಬ್ಯಾನರ್",
-    overview_title: "ಆತ್ಮವಿಶ್ವಾಸದಿಂದ ಪಾಲ್ಗೊಳ್ಳಿ — ಅಧಿಕೃತ Kerala Lottery",
-    overview_lead: "Kerala State Lotteries ದೀರ್ಘ ಕಾಲದಿಂದ ಸಾರ್ವಜನಿಕ ಮತ್ತು ನಿಯಂತ್ರಿತ ಕಾರ್ಯಕ್ರಮಗಳಾಗಿವೆ. ಈ ಪುಟ ಟಿಕೆಟ್ ಖರೀದಿ, ಫಲಿತಾಂಶ ಪರಿಶೀಲನೆ ಮತ್ತು ಬಹುಮಾನ ವಿತರಣೆ ಕುರಿತು ಸ್ಪಷ್ಟ ಮಾಹಿತಿ ನೀಡುತ್ತದೆ.",
-    contact_button: "📱 WhatsApp ನಲ್ಲಿ ಸಂಪರ್ಕಿಸಿ",
-    prize_process_button: "🔎 ಬಹುಮಾನ ಪ್ರಕ್ರಿಯೆ",
-    contact_text_label: "ಸಂಪರ್ಕ / ಪ್ರಶ್ನೆಗಳು:",
-    details_title: "ವಿವರಗಳು — ವೃತ್ತಿಪರ & ಪಾರದರ್ಶಕ ಪ್ರಕ್ರಿಯೆ",
-    details_lead: "ಭಾಗವಹಿಸುವವರಿಗೆ ವಿಶ್ವಾಸಾರ್ಹ ಮಾಹಿತಿಯನ್ನು ಮತ್ತು ಸ್ಪಷ್ಟ ಪ್ರಕ್ರಿಯೆಯನ್ನು ಒದಗಿಸುವುದು ನಮ್ಮ ಗುರಿ. ಕೆಳಗಿನ ಅಂಶಗಳು ಅನ್ವಯಿಸುತ್ತವೆ:",
-    points_1: "ಅಧಿಕೃತ ಅನುಗುಣತೆ: ಡ್ರಾಗಳು ಅಧಿಕೃತ ನಿಯಮಗಳನ್ನು ಪಾಲنಸುತೆ.",
-    points_2: "ಫಲಿತಾಂಶಗಳು ಸಾರ್ವಜನಿಕ: ಗೆಲುವಿನ ಸಂಖ್ಯೆಗಳನ್ನು ಅಧಿಕೃತ ಚಾನೆಲുകളിൽ ಪ್ರಕಟಿಸಲಾಗುತ್ತದೆ.",
-    points_3: "ಪಾವತಿ ಪರಿಶೀಲನೆಯ ನಂತರ: ಟಿಕೆಟ್ ಪರಿಶೀಲನೆ ನಂತರ ಮಾತ್ರ ಪಾವತಿಗಳು ನೀಡಲಾಗುತ್ತವೆ.",
-    points_4: "ಗೌಪ್ಯತೆ: ನಾವು ಬ್ಯಾಂಕ್ OTP/ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಬೇಡಲಾಗುವುದಿಲ್ಲ.",
-    how_title: "ಪಾರದರ್ಶಕ ಬಹುಮನ ಪ್ರಕ್ರಿಯೆ — ಹೇಗೆ ಕೆಲಸಮಾಡುತ್ತದೆ",
-    step1_title: "ಅಧಿಕೃತ ಡ್ರಾ",
-    step1_text: "ಡ್ರಾಗಳು ಅಧಿಕೃತ ಮೇಲ್ವಿಚಾರಣೆಯಲ್ಲಿ ನಡೆಸಲಾಗುತ್ತವೆ.",
-    step2_title: "ಫಲಿತಾಂಶ ಪ್ರಕಟಣೆ",
-    step2_text: "ಗೆಲುವಿನ ಸಂಖ್ಯೆಗಳು ಸಾರ್ವಜನಿಕವಾಗಿ ಪ್ರಕಟಿಸಲಾಗುತ್ತವೆ.",
-    step3_title: "ಟಿಕೆಟ್ ಪರಿಶೀಲನೆ",
-    step3_text: "ಪಾವತಿಗೆ ಮೊದಲು ಟಿಕೆಟ್‌ಗಳನ್ನು ಅಧಿಕೃತ ವ್ಯವಸ್ಥೆಯಲ್ಲಿ ಪರಿಶೀಲಿಸಲಾಗುತ್ತದೆ.",
-    step4_title: "ವಿಜೇತರಿಗೆ ಪಾವತಿ",
-    step4_text: "ಅಡಮಾನ ದೃಢೀಕೃತ ನಂತರ ಪಾವತಿಗಳು ನೀಡಲಾಗುತ್ತವೆ.",
-    testimonials_title: "ಇತ್ತೀಚಿನ ಪಾಲ್ಗೊಂಡವರ ಪ್ರತಿಕ್ರಿಯೆಗಳು",
-    testimonials_note: "ಕೆಳಗಿನ ಮೊತ್ತಗಳು ಪಾಲ್ಗೊಂಡವರ ವರದಿಗಳಾಗಿವೆ; ದಿನಾಂಕಗಳು ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಪ್ರತಿದಿನ تازه ಆಗುತ್ತವೆ.",
-    faq_title: "ಅक्सर ಕೇಳುವ ಪ್ರಶ್ನೆಗಳು",
-    faq_q1: "Q: ಇದು ಸರ್ಕಾರದ ಯೋಜನೆಯೇ?",
-    faq_a1: "A: Kerala State Lotteries ರಾಜ್ಯ ಸರ್ಕಾರದ ಅಡಿಯಲ್ಲಿ ಸ೦ಚಾಲಿತವಾಗುತ್ತವೆ; ಈ ಪುಟ ಖರೀದಿ ಮತ್ತು ಪರಿಶೀಲನೆಗೆ ಸಹಾಯಮಾಡುತ್ತದೆ.",
-    faq_q2: "Q: ಪಾವತಿ ಹೇಗೆ ಪಡೆಯಲಾಗುತ್ತದೆ?",
-    faq_a2: "A: ವಿಜೇತರನ್ನು ಪರಿಶೀಲಿಸಿದ ನಂತರ ಅಧಿಕೃತ ಚಾನೆಲ್ಗಳ ಮೂಲಕ ಪಾವತಿಗಳು ಜಾರಿಗೆ ಬರುತ್ತವೆ.",
-    faq_q3: "Q: ಸಹಾಯ ಪಡೆಯಲು ಹೇಗೆ?",
-    faq_a3: "A: WhatsApp ನಲ್ಲಿ {WHATSAPP_NUMBER} ಮೂಲಕ ಸಂಪರ್ಕಿಸಿ.",
-    trust_badge: "ಏಕೆ ನಂಬಬೇಕು?",
-    trust_1: "ಅಧಿಕೃತ ಮೇಲ್ವಿಚಾರಣೆಯಡಿಯಲ್ಲಿ ಡ್ರಾಗಳು",
-    trust_2: "ಸಾರ್ವಜನಿಕವಾಗಿ ಪ್ರಕಟಿತ ಫಲಿತಾಂಶಗಳು",
-    trust_3: "ಸುರಕ್ಷಿತ ಟಿಕೆಟ್ ಪರಿಶೀಲನೆ",
-    contact_button_2: "WhatsApp ಸಂಪರ್ಕ",
-    notes_title: "ಭಾಗವಹಿಸುವಿಕೆ ಟಿಪ್ಪಣಿ",
-    notes_text: "ನಾವು ಆರ್ಡರ್ ಮತ್ತು ಪರಿಶೀಲನೆಗಳಲ್ಲಿ ಸಹಾಯ ಮಾಡುತ್ತೇವೆ. OTP/ಬ್ಯಾಂಕ್ ಪಾಸ್‌ವರ್ಡ್ಗಳನ್ನು ಕೇಳುವುದಿಲ್ಲ. ಜವಾಬ್ದಾರಿವಂತಿಕೆಗಾಗಿ ಪಾಲ್ಗೊಳ್ಳಿ.",
-    footer_text: "Kerala Lottery ಡ್ರಾಗಳು ಮತ್ತು ಫಲಿತಾಂಶಗಳು Government of Kerala ನಡವಳಿಕೆಯಲ್ಲಿ ನಿರ್ವಹಿಸಲಾಗುತ್ತವೆ. ಸಹಾಯಕ್ಕಾಗಿ {WHATSAPP_NUMBER} ಸಂಪರ್ಕಿಸಿ.",
-    testimonial_templates: [
-      "{DATE} ರಂದು ನನ್ನ ಖಾತೆಗೆ {AMOUNT} ಕ್ರೆಡಿಟ್ ಆಗಿತ್ತು. ಪ್ರಕ್ರಿಯೆ ವೃತ್ತಿಪರ ಮತ್ತು ಪಾರದರ್ಶಕವಾಗಿತ್ತು.",
-      "{DATE} ರಂದು ಪರಿಶೀಲನೆಯ ನಂತರ ನನಗೆ {AMOUNT} ಸಿಕ್ಕಿತು. ತಂಡವು ದಾಖಲೆಗಳನ್ನು ಸಜ್ಜುಗೊಳಿಸಲು ಸಹಾಯಿಸಿತು.",
-      "{DATE} ರಂದು {AMOUNT} ಪوس್ಟ್ ಮಾಡಲಾಯಿತು — ಸ್ಪಷ್ಟ ಮತ್ತು ವೇಗವಾದ ಪಾವತಿ.",
-      "{DATE} ರಂದು {AMOUNT} ದಾಖಲುಗೊಂಡಿತು. ಬೆಂಬಲ ವೃತ್ತಿಪರ ಮತ್ತು ತ್ವರಿತವಾಗಿತ್ತು.",
-      "{DATE} ರಂದು ನನಗೆ {AMOUNT} ಸಿಕ್ಕಿತು — ಭದ್ರಿತ ಪರಿಶೀಲನೆಗೆ ಧನ್ಯವಾದಗಳು."
-    ],
-    contact_prefill: "Hello Team Kerala Lottery, I need help with participation and verification. Please assist."
-  },
-
-  // Telugu (Andhra)
-  te: {
-    select_language_label: "మీ భాషను ఎంచుకోండి:",
-    header_title: "Kerala Lottery — నమ్మదగిన డ్రాజ్ & నిర్ధారించబడిన విజేతలు",
-    brandline: "ప్రభుత్వ పర్యవేక్షణలో డ్రా • పబ్లిక్ రిజల్ట్స్ • సెక్యూర్ పేయౌట్",
-    hero_alt: "Kerala Lottery బ్యానర్ — విజేతలు మరియు ప్రకటనలు",
-    banner_alt: "Kerala Lottery సెకండరీ బ్యానర్",
-    overview_title: "ఆత్మవిశ్వాసంతో పాల్గొనండి — అధికారిక Kerala Lottery",
-    overview_lead: "Kerala State Lotteries దెబ్బకు ప్రజాదరణ పొందిన మరియు నియంత్రించబడిన కార్యక్రమాలు. టికెట్ కొనుగోలు, ఫలితాల నిర్ధారణ మరియు బహుమతి పంపిణీని ఈ పేజీ ద్వారా స్పష్టంగా తెలుసుకొనండి.",
-    contact_button: "📱 WhatsApp ద్వారా సంప్రదించండి",
-    prize_process_button: "🔎 బహుమతి ప్రక్రియ",
-    contact_text_label: "సంప్రదింపు / ప్రశ్నలు:",
-    details_title: "వివరాలు — ప్రొఫెషనల్ & పారదర్శక ప్రక్రియ",
-    details_lead: "భాగస్వాములకు నమ్మకమైన సమాచారం మరియు స్పష్టమైన విధానాన్ని అందించడం మా లక్ష్యము. క్రింది పాయింట్లు వర్తిస్తాయి:",
-    points_1: "ప్రామాణిక అనుగుణత: డ్రాలు అధికారిక నియమాలు పాటిస్తాయి.",
-    points_2: "ఫలితాలు పబ్లిక్ గా: విజేత సంఖ్యలు అధికారిక చానెల్స్ లో ప్రచురించబడతాయి.",
-    points_3: "నిర్ధారణ తర్వాత పేయౌట్: టికెట్ నిర్ధారణ తర్వాతనే చెల్లింపులు విడుదలవుతాయి.",
-    points_4: "గోప్యత: మేము బ్యాంక్ OTP/పాస్వర్డ్ అడగము.",
-    how_title: "పారదర్శక బహుమతి ప్రక్రియ — ఇది ఎలా పని చేస్తుంది",
-    step1_title: "అధికారం డ్రా",
-    step1_text: "డ్రాలు అధికారిక పర్యవేక్షణలో నిర్వహిస్తారు.",
-    step2_title: "ఫలితం ప్రచురణ",
-    step2_text: "విజేత సంఖ్యలు పబ్లిక్ గా ప్రచురిస్తారు.",
-    step3_title: "టికెట్ నిర్ధారణ",
-    step3_text: "చెల్లింపు కి ముందు టికెట్లు అధికృత వ్యవస్థ ద్వారా నిర్ధారిస్తారు.",
-    step4_title: "విజేతకు చెల్లింపు",
-    step4_text: "ఐడిని నిర్ధారించిన తర్వాత చెల్లింపులు జారీ చేయబడతాయి.",
-    testimonials_title: "ఇటీవల పaticipant ఫీడ్‌బ్యాక్",
-    testimonials_note: "కింద పేర్కొన్న మొత్తాలు పాల్గొనేవారు అందించిన రిపోర్ట్స్; తేదీలు బ్రౌజర్‌లో రోజుకు ఒకసారి అప్డేట్ అవుతాయి.",
-    faq_title: "సాధారణంగా అడిగే ప్రశ్నలు",
-    faq_q1: "Q: ఇది ప్రభుత్వ పథకమా?",
-    faq_a1: "A: Kerala State Lotteries రాష్ట్రం ద్వారా నిర్వహించబడతాయి; ఈ పేజీ కొనుగోలు మరియు నిర్ధారణలో సహకరిస్తుంది.",
-    faq_q2: "Q: చెల్లింపులు ఎలా పొందబడతాయి?",
-    faq_a2: "A: విజేత నిర్ధారణ తర్వాత అధికృత ఛానెల్స్ ద్వారా చెల్లింపులు జారవేస్తాయి.",
-    faq_q3: "Q: సహాయం ఎలా పొందాలి?",
-    faq_a3: "A: WhatsApp ద్వారా {WHATSAPP_NUMBER} సంప్రదించండి.",
-    trust_badge: "ఎందుకు నమ్మాలి?",
-    trust_1: "అధికారం పర్యవేక్షణలో డ్రాలు",
-    trust_2: "పబ్లిక్ గా ప్రచురించిన ఫలితాలు",
-    trust_3: "సురక్షిత టికెట్ నిర్ధారణ",
-    contact_button_2: "WhatsApp ద్వారా సంప్రదించండి",
-    notes_title: "భాగస్వామ్యం నోట్స్",
-    notes_text: "మేము ఆర్డర్లు & నిర్ధారణలో సహాయపడతాము. OTP లేదా బ్యాంక్ పాస్వర్డ్స్ అడగము.",
-    footer_text: "Kerala Lottery డ్రాలు & ఫలితాలు Government of Kerala నిర్వహణలో ఉంటాయి. సహాయానికి {WHATSAPP_NUMBER} సంప్రదించండి.",
-    testimonial_templates: [
-      "{DATE} న నాకు {AMOUNT} నా ఖాతాకు క్రెడిట్ చేయబడింది. ప్రక్రియ బాగా నిర్వహించబడింది.",
-      "{DATE} న నేను {AMOUNT} పొందాను. బృందం డాక్యుమెంటేషన్‌లో సహాయపడింది.",
-      "{DATE} న {AMOUNT} పోస్ట్ చేయబడింది — పారదర్శకత మరియు వేగం.",
-      "{DATE} న {AMOUNT} నమోదు అయింది. మద్దతు వృత్తిపరమైనది.",
-      "{DATE} న నాకు {AMOUNT} లభించింది — ధన్యవాదాలు."
-    ],
-    contact_prefill: "Hello Team Kerala Lottery, I need help with participation and verification. Please assist."
-  },
-
-  // Bengali (best-effort)
-  bn: {
-    select_language_label: "আপনার ভাষা নির্বাচন করুন:",
-    header_title: "Kerala Lottery — বিশ্বাসযোগ্য ড্র ও যাচাইকৃত বিজয়ী",
-    brandline: "সরকারি তত্ত্বাবধানে ড্র • প্রকাশ্য ফলাফল • সুরক্ষিত অর্থপ্রদান",
-    hero_alt: "Kerala Lottery ব্যানার — বিজয়ী এবং ঘোষণা",
-    banner_alt: "Kerala Lottery সেকেন্ডারি ব্যানার",
-    overview_title: "আত্মবিশ্বাসে অংশ নিন — অফিসিয়াল Kerala Lottery",
-    overview_lead: "Kerala State Lotteries দীর্ঘদিন ধরেই জনপ্রিয় ও নিয়ন্ত্রিত কার্যক্রম। এই পৃষ্ঠা টিকিট ক্রয়, ফল যাচাই এবং পুরস্কার বিতরণ সম্পর্কে পরিষ্কার তথ্য দেয়।",
-    contact_button: "📱 WhatsApp এ যোগাযোগ করুন",
-    prize_process_button: "🔎 পুরস্কার প্রক্রিয়া",
-    contact_text_label: "যোগাযোগ / প্রশ্ন:",
-    details_title: "বিস্তারিত — পেশাদার ও স্বচ্ছ প্রক্রিয়া",
-    details_lead: "অংশগ্রহণকারীদের নির্ভরযোগ্য তথ্য এবং স্পষ্ট প্রক্রিয়া দেওয়াই লক্ষ্য। নিচের বিষয়গুলো প্রযোজ্য:",
-    points_1: "সরকারি মান: ড্রগুলি অফিসিয়াল নিয়ম মেনে চলে।",
-    points_2: "ফলাফল প্রকাশিত: বিজয়ী নম্বর অফিসিয়াল চ্যানেলে প্রকাশিত হয়।",
-    points_3: "যাচাইয়ের পর অর্থপ্রদান: টিকিট যাচাইয়ের পরে অর্থ প্রদান করা হয়।",
-    points_4: "গোপনীয়তা: আমরা কখনই ব্যাংক OTP/পাসওয়ার্ড চাই না।",
-    how_title: "স্বচ্ছ পুরস্কার প্রক্রিয়া — এটি কীভাবে কাজ করে",
-    step1_title: "অধিকারিক ড্র",
-    step1_text: "ড্রগুলি সরকারী তত্ত্বাবধানে পরিচালিত হয়।",
-    step2_title: "ফলাফল প্রকাশ",
-    step2_text: "বিজয়ী নম্বরগুলি প্রকাশ করা হয় এবং যাচাই করা যায়।",
-    step3_title: "টিকিট যাচাই",
-    step3_text: "পেমেন্টের আগে টিকিট অফিসিয়াল সিস্টেম দ্বারা যাচাই করা হয়।",
-    step4_title: "জয়ীর অর্থপ্রদান",
-    step4_text: "পরিচয় নিশ্চিত হলে অর্থপ্রদান করা হয়।",
-    testimonials_title: "সাম্প্রতিক অংশগ্রহণকারীর প্রতিক্রিয়া",
-    testimonials_note: "নিচের পরিমাণগুলি অংশগ্রহণকারীর রিপোর্ট; তারিখ ব্রাউজারে প্রতিদিন আপডেট হয়।",
-    faq_title: "প্রায়শই জিজ্ঞাসিত প্রশ্ন",
-    faq_q1: "Q: এটি কি সরকারী স্কিম?",
-    faq_a1: "A: Kerala State Lotteries রাজ্য দ্বারা পরিচালিত; এই পৃষ্ঠা ক্রয় ও যাচাইয়ে সহায়তা করে।",
-    faq_q2: "Q: অর্থপ্রদান কিভাবে হয়?",
-    faq_a2: "A: বিজয়ী যাচাইয়ের পরে অফিসিয়াল চ্যানেলে অর্থপ্রদান করা হয়।",
-    faq_q3: "Q: সহায়তা নিতে কিভাবে?",
-    faq_a3: "A: WhatsApp এ {WHATSAPP_NUMBER}-এ যোগাযোগ করুন।",
-    trust_badge: "কেন বিশ্বাস করবেন?",
-    trust_1: "অধিকৃত তত্ত্বাবধানে ড্র",
-    trust_2: "পাবলিকলি প্রকাশিত ফলাফল",
-    trust_3: "নিরাপদ টিকিট যাচাই",
-    contact_button_2: "WhatsAppে যোগাযোগ",
-    notes_title: "অংশগ্রহণ নোট",
-    notes_text: "আমরা অর্ডার ও যাচাইয়ে সাহায্য করি। আমরা কখনই OTP বা ব্যাংক পাসওয়ার্ড চাইব না। দায়িত্ব নিয়ে অংশ নিন।",
-    footer_text: "Kerala Lottery ড্র ও ফলাফল Government of Kerala দ্বারা পরিচালিত। সহায়তার জন্য {WHATSAPP_NUMBER}-এ যোগাযোগ করুন।",
-    testimonial_templates: [
-      "{DATE} এ আমার অ্যাকাউন্টে {AMOUNT} ক্রেডিট হয়েছে। প্রক্রিয়া পেশাগত ছিল।",
-      "{DATE} এ যাচাইয়ের পরে আমি {AMOUNT} পেয়েছি। দলটি কাগজপত্রে সহায়তা করেছে।",
-      "{DATE} এ {AMOUNT} পোস্ট করা হয়েছে — স্বচ্ছ ও দ্রুত পেমেন্ট।",
-      "{DATE} এ {AMOUNT} রেকর্ড করা হয়েছে। সাপোর্ট পেশাদার ও দ্রুত।",
-      "{DATE} এ আমি {AMOUNT} পেয়েছি — নিরাপদ যাচাইকরণের জন্য ধন্যবাদ।"
-    ],
-    contact_prefill: "Hello Team Kerala Lottery, I need help with participation and verification. Please assist."
-  },
-
-  // Odia (best-effort, language code 'or' or 'od' ; using 'or')
-  or: {
-    select_language_label: "ଆପଣଙ୍କର ଭାଷା ଚୟନ କରନ୍ତୁ:",
-    header_title: "Kerala Lottery — ବିଶ୍ୱସନୀୟ ଡ୍ର ଏବଂ ପ୍ରମାଣିତ ଜିତିଥିବା ଲୋକମାନେ",
-    brandline: "ସରକାରୀ ପର୍ଯ୍ୟବେକ୍ଷଣର ଡ୍ର • ସାଧାରଣ ଫଳାଫଳ • ସୁରକ୍ଷିତ ପେଆଉଟ୍",
-    hero_alt: "Kerala Lottery ବ୍ୟାନର — ବିଜେତା ଏବଂ ଘୋଷଣା",
-    banner_alt: "Kerala Lottery ସେକେଣ୍ଡରୀ ବ୍ୟାନର",
-    overview_title: "ଆତ୍ମବିଶ୍ୱାସ ସହିତ ଅଂଶ ନିଅନ୍ତୁ — ଅଧିକାରିକ Kerala Lottery",
-    overview_lead: "Kerala State Lotteries ଦୀର୍ଘ ସମୟ ଧରି ସାଧାରଣ ଏବଂ ନିୟନ୍ତ୍ରିତ କାର୍ଯ୍ୟକ୍ରମ। ଟିକେଟ୍ କ୍ରୟ, ଫଳ ଯାଞ୍ଚ ଏବଂ ପୁରସ୍କାର ବିତରଣ ଏହି ପୃଷ୍ଠାରେ ସ୍ପଷ୍ଟ ଭାବେ ବର୍ଣ୍ଣିତ।",
-    contact_button: "📱 WhatsApp ରେ ସମ୍ପର୍କ କରନ୍ତୁ",
-    prize_process_button: "🔎 ପୁରସ୍କାର ପ୍ରକ୍ରିୟା",
-    contact_text_label: "ସଂପର୍କ / ପ୍ରଶ୍ନଗୁଡିକ:",
-    details_title: "ବିସ୍ତୃତ — ପେଶାଦାର & ପାରଦର୍ଶୀ ପ୍ରକ୍ରିୟା",
-    details_lead: "ଅଂଶଗ୍ରାହୀଙ୍କୁ ବିଶ୍ୱସନୀୟ ସୂଚନା ଏବଂ ସ୍ପଷ୍ଟ ପ୍ରକ୍ରିୟା ଦେବା ଆମର ଲକ୍ଷ୍ୟ। ତଳେ ଥିବା ବିନ୍ଦୁଗୁଡିକ ପ୍ରୟୋଗ ହେବ:",
-    points_1: "ଅଧିକୃତ ଅନୁସରଣ: ଡ୍ରଗୁଡିକ ଅଧିକୃତ ନିୟମ ଅନୁସରଣ କରନ୍ତି।",
-    points_2: "ଫଳାଫଳ ପ୍ରକାଶ: ବିଜେତା ସଂଖ୍ୟା ଅଧିକାରିକ ଚ୍ୟାନେଲରେ ପ୍ରକାଶିତ ହୁଏ।",
-    points_3: "ଯାଞ୍ଚ ପରେ ପେଆଉଟ୍: ଟିକେଟ୍ ଯାଞ୍ଚ ପରେ ମାତ୍ର ପେଆଉଟ୍ ଜାରି ହୁଏ।",
-    points_4: "ଗୋପନୀୟତା: ଆମେ ବ୍ୟାଙ୍କ OTP/ପାସୱାର୍ଡ ମାଗିବୁ ନାହିଁ।",
-    how_title: "ପାରଦର୍ଶୀ ପୁରସ୍କାର ପ୍ରକ୍ରିୟା — କିପରି କାମ କରେ",
-    step1_title: "ଅଧିକୃତ ଡ୍ରା",
-    step1_text: "ଡ୍ରାଗୁଡିକ ଅଧିକୃତ ପର୍ଯ୍ୟବେକ୍ଷଣରେ ସଂଚାଳିତ ହୁଏ।",
-    step2_title: "ଫଳ ଲେଖା",
-    step2_text: "ବିଜେତା ସଂଖ୍ୟା ସାଧାରଣତଃ ପ୍ରକାଶିତ ହୁଏ ଏବଂ ଯାଞ୍ଚ କରାଯାଇପାରେ।",
-    step3_title: "ଟିକେଟ୍ ଯାଞ୍ଚ",
-    step3_text: "ପେମେଣ୍ଟ ପୂର୍ବରୁ ଟିକେଟ୍ ଅଧିକୃତ ସିଷ୍ଟମ ଦ୍ୱାରା ଯାଞ୍ଚ ହୁଏ।",
-    step4_title: "ବିଜେତା ପେଆଉଟ୍",
-    step4_text: "ପରିଚୟ ସୁନିଶ୍ଚିତ ହେଲେ ପେଆଉଟ୍ ଜାରି ହୁଏ।",
-    testimonials_title: "ସମ୍ପ୍ରତି ଅଂଶଗ୍ରାହୀ ପ୍ରତିକ୍ରିୟା",
-    testimonials_note: "ନିମ୍ନରେ ଦିଆଯାଇଥିବା ରାଶିଗୁଡିକ ଅଂଶଗ୍ରାହୀଙ୍କ ରିପୋର୍ଟ; ତାରିଖଗୁଡିକ ବ୍ରାଉଜରରେ ପ୍ରତିଦିନ ଅଦ୍ୟତନ ହେବ।",
-    faq_title: "ସାଧାରଣ ପ୍ରଶ୍ନ",
-    faq_q1: "Q: ଏହା କ governing ଣସି ସରକାରୀ ସ୍କିମ୍ ତ?",
-    faq_a1: "A: Kerala State Lotteries ରାଜ୍ୟ ଦ୍ୱାରା ପରିଚାଳିତ; ଏହି ପେଜ୍ କ୍ରୟ ଏବଂ ଯାଞ୍ଚରେ ସହାୟତା କରେ।",
-    faq_q2: "Q: ପେଆଉଟ୍ କିପରି ମିଳିଥାଏ?",
-    faq_a2: "A: ବିଜେତା ଯାଞ୍ଚ ପରେ ଅଧିକୃତ ଚ୍ୟାନେଲ୍ ମାଧ୍ୟମରେ ପେଆଉଟ୍ ଜାରି ହୁଏ।",
-    faq_q3: "Q: ସହାୟତା କିପରି ମିଳିବ?",
-    faq_a3: "A: WhatsApp ରେ {WHATSAPP_NUMBER} କୁ ସମ୍ପର୍କ କରନ୍ତୁ।",
-    trust_badge: "କାହିଁକି ଭରସା?",
-    trust_1: "ଅଧିକୃତ ପର୍ଯ୍ୟବେକ୍ଷଣ ଡ୍ରା",
-    trust_2: "ସାଧାରଣତଃ ପ୍ରକାଶିତ ଫଳ",
-    trust_3: "ସୁରକ୍ଷିତ ଟିକେଟ୍ ଯାଞ୍ଚ",
-    contact_button_2: "WhatsApp ରେ ସମ୍ପର୍କ",
-    notes_title: "ଅଂଶଗ୍ରହଣ ସୂଚନା",
-    notes_text: "ଆମେ ଅର୍ଡର୍ ଏବଂ ଯାଞ୍ଚରେ ସହାୟତା କରୁଛୁ। OTP/ବ୍ୟାଙ୍କ ପାସୱାର୍ଡ୍ ଆମେ କେବେ ମାଗିବୁ ନାହିଁ।",
-    footer_text: "Kerala Lottery ଡ୍ରା ଏବଂ ଫଳ Government of Kerala ଦ୍ୱାରା ପରିଚାଳିତ। ସହାୟତା ପାଇଁ {WHATSAPP_NUMBER} ସମ୍ପର୍କ କରନ୍ତୁ।",
-    testimonial_templates: [
-      "{DATE} ରେ ମୋ ଖାତାକୁ {AMOUNT} ଜମା ହେଲା। ପ୍ରକ୍ରିୟା ପେଶାଦାର ଓ ସ୍ପଷ୍ଟ ଥିଲା।",
-      "{DATE} ରେ ଯାଞ୍ଚ ପରେ ମୁଁ {AMOUNT} ପାଇଥିଲି। ଟିମ୍ ଡକ୍ୟୁମେଣ୍ଟସ୍ ରେ ସାହାଯ୍ୟ କଲା।",
-      "{DATE} ରେ {AMOUNT} ପୋଷ୍ଟ ହେଲା — ଯଥାର୍ଥ ଏବଂ ଦ୍ରୁତ ପେମେଣ୍ଟ।",
-      "{DATE} ରେ {AMOUNT} ରେକର୍ଡ ହେଲା। ସପୋର୍ଟ ପେଶାଦାର ଏବଂ ଦ୍ରୁତ।",
-      "{DATE} ରେ ମୋତେ {AMOUNT} ମିଳିଲା — ସୁରକ୍ଷିତ ଯାଞ୍ଚ ପାଇଁ ଧନ୍ୟବାଦ।"
-    ],
-    contact_prefill: "Hello Team Kerala Lottery, I need help with participation and verification. Please assist."
-  }
-}; // end TRANSLATIONS
-
-/* ===============================
-   Language -> locale map for dates
-   =============================== */
-const LOCALE_MAP = {
-  en: 'en-IN',
-  hi: 'hi-IN',
-  ml: 'ml-IN',
-  ta: 'ta-IN',
-  kn: 'kn-IN',
-  te: 'te-IN',
-  bn: 'bn-IN',
-  or: 'or-IN' // Odia
-};
-
-/* ===============================
-   Amounts list (as requested)
-   Will be cycled across 20 testimonials
-   =============================== */
-const AMOUNTS = [
-  "₹5,00,000",
-  "₹11,00,000",
-  "₹8,00,000",
-  "₹25,00,000",
-  "₹7,00,00,000",
-  "₹11,00,00,000",
-  "₹1,00,00,000",
-  "₹12,00,000",
-  "₹50,00,000",
-  "₹5,00,00,000"
-];
-
-/* ===============================
-   Sample Indian names/cities
-   =============================== */
-const PEOPLE = [
-  "Anil Kumar, Kochi","Sreeja Nair, Thiruvananthapuram","Ramesh K, Kollam",
-  "Leena Thomas, Ernakulam","Vishnu P, Kozhikode","Rekha Menon, Alappuzha",
-  "Suresh Das, Thrissur","Neha Raj, Malappuram","Karthik S, Palakkad",
-  "Asha M, Kannur","Mohammad Imran, Kasaragod","Priya S, Idukki",
-  "Ajith Raj, Pathanamthitta","Manju K, Wayanad","Arjun P, Kottayam",
-  "Dinesh V, Thrissur","Fatima B, Kollam","Gopinath T, Ernakulam",
-  "Smitha R, Thiruvananthapuram","Nitin S, Kochi"
-];
-
-/* Utility: format date based on locale and shift for daily variation */
-function dynamicDate(seedOffset, locale){
-  const today = new Date();
-  const base = Math.floor(today.getTime() / (1000*60*60*24)); // days since epoch
-  const offset = (seedOffset * 2) + (base % 7);
-  const d = new Date();
-  d.setDate(d.getDate() - offset);
-  const opts = { day: '2-digit', month: 'short', year: 'numeric' };
-  try {
-    return d.toLocaleDateString(locale || 'en-IN', opts);
-  } catch(e){
-    return d.toLocaleDateString('en-IN', opts);
-  }
-}
-
-/* Populate testimonials for given language */
-function populateTestimonials(lang){
-  const container = document.getElementById('testimonialsContainer');
-  container.innerHTML = '';
-  const templates = (TRANSLATIONS[lang] && TRANSLATIONS[lang].testimonial_templates) ? TRANSLATIONS[lang].testimonial_templates : TRANSLATIONS['en'].testimonial_templates;
-  const locale = LOCALE_MAP[lang] || 'en-IN';
-  const COUNT = 5;
-  for(let i=0;i<COUNT;i++){
-    const person = PEOPLE[i % PEOPLE.length];
-    const amount = AMOUNTS[i % AMOUNTS.length];
-    const date = dynamicDate(i+1, locale);
-    const tpl = templates[i % templates.length];
-    const text = tpl.replace('{AMOUNT}', amount).replace('{DATE}', date);
-
-    const div = document.createElement('div');
-    div.className = 'testimonial fade-in';
-    div.innerHTML = `
-      <img src="${BLANK_AVATAR}" alt="user" />
-      <div style="flex:1">
-        <div class="meta"><span class="test-name">${person.split(',')[0]}</span> · <span class="small">${person.split(',')[1].trim()}</span> · <span style="color:var(--accent-2);font-weight:700">${amount}</span></div>
-        <div style="margin-top:6px;color:#222">${text}</div>
-        <div class="small" style="margin-top:8px;color:var(--muted)">${(TRANSLATIONS[lang] && TRANSLATIONS[lang].test_date_label) ? TRANSLATIONS[lang].test_date_label + ': ' + date : 'Verified: ' + date}</div>
-      </div>
-    `;
-    container.appendChild(div);
-    setTimeout(()=>{ div.classList.add('show'); }, 50*i);
-  }
-}
-
-/* Helper function to format WhatsApp number for display */
-function formatWhatsAppNumber(){
-  // Format as +91 8406997885 (with space after country code)
-  return WHATSAPP_NUMBER.replace(/^(\+\d{2})(\d+)$/, '$1 $2');
-}
-
-/* Apply translations to page elements with data-i18n keys */
-function applyTranslations(lang){
-  const dict = TRANSLATIONS[lang] || TRANSLATIONS['en'];
-  const formattedNumber = formatWhatsAppNumber();
-  
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if(dict[key]) {
-      let text = dict[key];
-      // Replace {WHATSAPP_NUMBER} placeholder with formatted number
-      text = text.replace(/{WHATSAPP_NUMBER}/g, formattedNumber);
-      el.textContent = text;
+/* Stop showing notifications while user focuses inputs (safer UX) */
+[nameI, mobileI].forEach(el=>{
+  el.addEventListener("focus", ()=> {
+    if(window._notifTimer) {
+      clearInterval(window._notifTimer);
+      window._notifTimer = null;
     }
   });
-  // alt attributes with data-i18n-alt
-  document.querySelectorAll('[data-i18n-alt]').forEach(el => {
-    const key = el.getAttribute('data-i18n-alt');
-    if(dict[key]) el.setAttribute('alt', dict[key]);
+  el.addEventListener("blur", ()=> {
+    if(!window._notifTimer) startNotifCycle();
   });
-  
-  // Update contact number display
-  const contactNumberEl = document.getElementById('contactNumber');
-  if(contactNumberEl) contactNumberEl.textContent = formattedNumber;
-  
-  // Update FAQ WhatsApp number display
-  const faqWhatsAppNumberEl = document.getElementById('faqWhatsAppNumber');
-  if(faqWhatsAppNumberEl) faqWhatsAppNumberEl.textContent = formattedNumber;
-  
-  // Update WhatsApp prefill message for both buttons
-  const msg = dict.contact_prefill || TRANSLATIONS['en'].contact_prefill;
-  const waLink = `https://wa.me/${WHATSAPP_NUMBER.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`;
-  document.getElementById('waContactBtnTop').href = waLink;
-  document.getElementById('waContactBtn').href = waLink;
-  // update contact button text(s)
-  if(document.querySelector('[data-i18n="contact_button"]')) document.querySelector('[data-i18n="contact_button"]').textContent = dict.contact_button || TRANSLATIONS['en'].contact_button;
-  if(document.querySelector('[data-i18n="contact_button_2"]')) document.querySelector('[data-i18n="contact_button_2"]').textContent = dict.contact_button_2 || TRANSLATIONS['en'].contact_button_2;
-  // update testimonials container with localized templates and dates
-  populateTestimonials(lang);
-}
-
-/* Initialize language from selector */
-const langSelect = document.getElementById('langSelect');
-function setLanguage(lang){
-  applyTranslations(lang);
-  // set html lang attribute for accessibility
-  document.documentElement.lang = lang || 'en';
-}
-
-/* On load, set default language (selector default already set to en) */
-document.addEventListener('DOMContentLoaded', function(){
-  const initialLang = langSelect.value || 'en';
-  setLanguage(initialLang);
 });
 
-/* When user changes language */
-langSelect.addEventListener('change', function(e){
-  setLanguage(e.target.value);
+/* Floating whatsapp click uses same WHATSAPP_NUMBER */
+document.getElementById("waFloat").addEventListener("click", ()=>{
+  const numClean = WHATSAPP_NUMBER.replace(/\D/g,'');
+  // prefill a small message
+  const msg = "Hi, I want to book tickets.";
+  window.open("https://wa.me/"+numClean+"?text="+encodeURIComponent(msg), "_blank");
 });
-
 </script>
 </body>
 </html>
