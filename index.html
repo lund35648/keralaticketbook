@@ -7,7 +7,7 @@
 <style>
 :root{--accent:#ff4f79;--accent-dark:#d9365d;--bg:#fff3f7;--card:#fff;}
 body{margin:0;background:var(--bg);font-family:Arial,sans-serif;display:flex;justify-content:center;padding:8px;}
-.container{width:100%;max-width:400px;background:var(--card);padding:14px;border-radius:14px;box-shadow:0 4px 8px rgba(0,0,0,.14);}
+.container{width:100%;max-width:400px;background:var(--card);padding:14px;border-radius:14px;box-shadow:0 4px 8px rgba(0,0,0,.14);position:relative;z-index:10010;}
 .topLogo img{width:130px;display:block;margin:0 auto 4px;}
 .livePop{display:inline-block;padding:6px 14px;border-radius:20px;background:linear-gradient(90deg,#2ecc71,#27ae60);color:#fff;font-size:12px;font-weight:bold;animation:pulse 1.2s infinite;}
 @keyframes pulse{0%{transform:scale(1);}50%{transform:scale(1.05);}100%{transform:scale(1);}}
@@ -32,64 +32,65 @@ button:disabled{opacity:.5;cursor:not-allowed;}
 .modalBtns button{flex:1;}
 .cancelBtn{background:#ccc;color:#333;}
 
-/* Bottom popup (new) */
+/* Compact right-side bottom notifications */
 .notif-wrapper{
   position:fixed;
-  left:16px;
-  bottom:18px;
-  z-index:9999;
+  right:16px;         /* moved to right so center form not overlapped */
+  bottom:92px;        /* above whatsapp float */
+  z-index:10005;
   display:flex;
   flex-direction:column;
   gap:8px;
   pointer-events:none;
-  max-width:320px;
+  max-width:280px;
 }
 .notif{
   pointer-events:auto;
-  background:linear-gradient(90deg, rgba(255,79,121,0.06), rgba(217,54,93,0.02));
-  border:1px solid rgba(217,54,93,0.12);
-  color:#333;
-  padding:10px 12px;
-  border-radius:12px;
-  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+  background:linear-gradient(90deg, rgba(255,79,121,0.05), rgba(217,54,93,0.02));
+  border:1px solid rgba(0,0,0,0.06);
+  color:#222;
+  padding:8px 10px;
+  border-radius:10px;
+  box-shadow:0 6px 14px rgba(0,0,0,0.12);
   display:flex;
-  gap:10px;
+  gap:8px;
   align-items:center;
-  transform:translateY(14px);
+  transform:translateY(6px);
   opacity:0;
-  animation:slideIn 420ms ease forwards;
-  font-size:13px;
-  min-width:220px;
-  backdrop-filter: blur(4px);
+  animation:slideIn 320ms ease forwards;
+  font-size:12px;
+  min-width:180px;
+  max-width:280px;
+  backdrop-filter: blur(3px);
 }
-.notif.hide { animation:slideOut 360ms ease forwards; }
-@keyframes slideIn{ from{opacity:0; transform:translateY(14px) translateX(-6px) scale(.98);} to{opacity:1; transform:translateY(0) translateX(0) scale(1);} }
-@keyframes slideOut{ from{opacity:1; transform:translateY(0);} to{opacity:0; transform:translateY(18px) scale(.98);} }
+.notif.hide { animation:slideOut 280ms ease forwards; }
+@keyframes slideIn{ from{opacity:0; transform:translateY(10px) translateX(6px) scale(.99);} to{opacity:1; transform:translateY(0) translateX(0) scale(1);} }
+@keyframes slideOut{ from{opacity:1; transform:translateY(0);} to{opacity:0; transform:translateY(12px) scale(.98);} }
 
 .notif .avatar{
-  width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:13px;flex-shrink:0;
+  width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;
 }
-.notif .body{flex:1;line-height:1.1;}
-.notif .body .who{font-weight:700;font-size:13px;color:#d9365d;}
-.notif .body .mobile{font-size:12px;color:#555;margin-top:2px;}
-.notif .body .state{font-size:12px;color:#333;margin-top:2px;font-weight:600;}
-.notif .body .msg{margin-top:6px;font-size:13px;color:#333;}
-.notif .closeBtn{margin-left:8px;border:none;background:transparent;color:#666;font-size:16px;cursor:pointer;padding:6px;border-radius:8px;}
+.notif .body{flex:1;line-height:1.05;min-width:0;}
+.notif .body .who{font-weight:700;font-size:12px;color:#d9365d;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.notif .body .mobile{font-size:11px;color:#555;margin-top:2px;}
+.notif .body .state{font-size:11px;color:#333;margin-top:2px;font-weight:600;}
+.notif .body .msg{margin-top:6px;font-size:13px;color:#222;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:170px;}
+.notif .closeBtn{margin-left:8px;border:none;background:transparent;color:#666;font-size:14px;cursor:pointer;padding:6px;border-radius:8px;}
 .notif .closeBtn:focus{outline:2px solid rgba(0,0,0,.06);}
 
 /* floating whatsapp button on right (uses provided image) */
 .wa-float{
   position:fixed;
   right:16px;
-  bottom:18px;
-  z-index:10001;
+  bottom:16px;
+  z-index:10006;
   width:56px;height:56px;border-radius:50%;box-shadow:0 8px 20px rgba(0,0,0,0.18);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;
 }
 .wa-float img{width:100%;height:100%;object-fit:cover;display:block;}
 
 /* small responsive tweak */
 @media (max-width:420px){
-  .notif-wrapper{left:8px;right:8px;max-width:calc(100% - 16px);}
+  .notif-wrapper{right:12px;left:12px;max-width:calc(100% - 24px);bottom:98px;}
   .wa-float{right:12px;bottom:12px;width:48px;height:48px;}
 }
 </style>
@@ -97,6 +98,10 @@ button:disabled{opacity:.5;cursor:not-allowed;}
 
 <body>
 <div class="container">
+
+<div class="topLogo">
+<img src="https://i.postimg.cc/XvXzF7RJ/IMG-20251225-WA0003.jpg" alt="logo">
+</div>
 
 <div style="text-align:center;margin-bottom:6px;">
 <span class="livePop">🟢 LIVE BOOKING ACTIVE</span>
@@ -140,7 +145,7 @@ button:disabled{opacity:.5;cursor:not-allowed;}
 
 </div>
 
-<!-- Bottom notification wrapper -->
+<!-- Compact right-bottom notification wrapper -->
 <div class="notif-wrapper" id="notifWrapper" aria-live="polite"></div>
 
 <!-- Floating WhatsApp (uses provided image) -->
@@ -161,10 +166,10 @@ button:disabled{opacity:.5;cursor:not-allowed;}
 
 <script>
 /* ---------- CONFIG: change number here and it updates both places ---------- */
-const WHATSAPP_NUMBER = "+919576398992"; // -> change here to update everywhere
+const WHATSAPP_NUMBER = "+919576398992"; // change here to update everywhere
 const WHATSAPP_IMG_URL = "https://kerelalottery.ct.ws/wp-content/uploads/2026/02/whatsapp.jpg";
 
-/* ---------- existing script (timer + tickets) ---------- */
+/* timer + ticket logic */
 let time=1800;
 setInterval(()=>{
  let m=Math.floor(time/60),s=time%60;
@@ -193,7 +198,7 @@ for(let i=0;i<3000;i++){
  ticket.appendChild(o);
 }
 
-/* Add remaining states under the existing top ones (avoid duplicates) */
+/* append more states under top ones */
 const moreStates = [
   "Maharashtra","Gujarat","Rajasthan","Punjab","Haryana","Bihar","Uttar Pradesh",
   "Madhya Pradesh","Chhattisgarh","Odisha","West Bengal","Assam",
@@ -201,7 +206,6 @@ const moreStates = [
   "Jammu & Kashmir","Ladakh","Delhi","Goa","Puducherry","Andaman & Nicobar",
   "Dadra and Nagar Haveli and Daman & Diu","Lakshadweep"
 ];
-// append only if not present
 const existVals = [...stateSelect.options].map(o=>o.textContent.trim());
 moreStates.forEach(s=>{
   if(!existVals.includes(s)){
@@ -271,147 +275,104 @@ ${tickets}
 Total Tickets: ${ticket.selectedOptions.length}
 Amount: ${amount.value}
 Language: ${language.value}`;
- // sanitize number for wa.me
  const numClean = WHATSAPP_NUMBER.replace(/\D/g,'');
  window.open("https://wa.me/"+numClean+"?text="+encodeURIComponent(msg),"_blank");
  previewModal.style.display="none";
 }
 
-/* ---------- NEW: bottom rotating popup notifications (with states & bias to south) ---------- */
+/* ---------- Compact rotating notifications (right-bottom, max 2 shown) ---------- */
 
-/* South-leaning names (bigger list) */
-const southNames = [
-  "arun","vignesh","karthik","praveen","srinivas","ajith","rajesh","kumar","santhosh","venkat",
-  "arjun","rajeshwar","manoj","mukesh","hari","dinesh","satish","girish","rahul","naveen",
-  "sudheer","ganesh","mohan","madhu","anu","prasanna","balaji","sujith","amar","sreekanth"
+/* bigger South full names (popular/full style) */
+const southFullNames = [
+  "Vijay Kumar","Ajith Kumar","Suriya Prabhu","Dhanush Kumar","Mohanlal Nair",
+  "Mammootty Varghese","Sreekumar Nair","Ravichandran","Prakash Raj","Naveen Kumar",
+  "Arjun Prakash","Karthikeyan R","Ramesh Babu","Srinivasan K","Balaji Reddy",
+  "Santhosh Kumar","Venkatesh Rao","Ravi Shankar","Gopinath N","Manoj Kumar",
+  "Harishankar P","Murali Krishna","Sudheer Nair","Nandakumar","Sujith Kumar"
 ];
-/* a few non-south to keep it realistic */
-const otherNames = ["ankit","deepak","sumit","atul","sandeep","raj","aman","sourav","amit","ravi"];
-/* combine with heavier weight for south */
-const allNamesWeighted = [...southNames, ...southNames, ...southNames, ...otherNames]; // south x3 weight
+/* weight south names heavier */
+const namesWeighted = [...southFullNames, ...southFullNames, ...southFullNames];
 
-/* Messages/templates (use {T}) */
+/* short templates only */
 const templates = [
   "Just booked {T}",
-  "WIN ₹5 Lakh on {T}",
-  "BOOKED {T}",
-  "Lucky! {T} - Congrats",
-  "Hurry, grabbed {T}",
-  "{T} confirmed!",
-  "KL{T} — Booked now",
-  "Booked for family: {T}",
-  "Don't miss {T}",
-  "Winner alert: {T}"
+  "Booked {T}",
+  "WIN on {T}",
+  "KL{T}!",
+  "Grabbed {T}"
 ];
 
-/* All states list (used for random notification state; bias toward south) */
+/* states bias towards south */
 const southStates = ["Kerala","Tamil Nadu","Karnataka","Andhra Pradesh","Telangana","Puducherry","Goa"];
 const otherStates = ["Maharashtra","Gujarat","Rajasthan","Punjab","Haryana","Bihar","Uttar Pradesh",
-  "Madhya Pradesh","Chhattisgarh","Odisha","West Bengal","Assam",
-  "Arunachal Pradesh","Manipur","Meghalaya","Mizoram","Nagaland","Sikkim","Tripura",
-  "Jammu & Kashmir","Ladakh","Delhi","Andaman & Nicobar","Dadra and Nagar Haveli and Daman & Diu","Lakshadweep"];
-const allStatesWeighted = [...southStates, ...southStates, ...southStates, ...otherStates];
+  "Madhya Pradesh","Chhattisgarh","Odisha","West Bengal","Assam","Delhi"];
+const statesWeighted = [...southStates, ...southStates, ...southStates, ...otherStates];
 
-/* util: random ticket */
-function randTicket(){
-  return (Math.floor(Math.random()*900000)+100000); // 100000..999999
-}
+/* helper functions */
+function randTicket(){ return (Math.floor(Math.random()*900000)+100000); } // 100000..999999
+function randMobileMasked(){ const first = [9,8,7][Math.floor(Math.random()*3)]; const next = Math.floor(Math.random()*10); let last4 = ("" + (Math.floor(Math.random()*9000)+1000)); return "+91 " + first + ""+next + "xxxx" + last4; }
 
-/* util: masked mobile generator — returns +91 XXxxxx1234 style */
-function randMobileMasked(){
-  const first = [9,8,7][Math.floor(Math.random()*3)];
-  const next = Math.floor(Math.random()*10);
-  let last4 = ("" + (Math.floor(Math.random()*9000)+1000));
-  const firstTwo = "" + first + next;
-  return "+91 " + firstTwo + "xxxx" + last4;
-}
-
-/* show a notification element for a short time */
 const notifWrapper = document.getElementById("notifWrapper");
 
-function showOneNotif(opts = {}, displayMs = 5000){
-  const n = document.createElement("div");
-  n.className = "notif";
+function showOneNotif(opts={}, displayMs=4800){
+  // keep max 2 notifs visible
+  if(notifWrapper.children.length >= 2){
+    // remove oldest smoothly
+    const first = notifWrapper.children[0];
+    first.classList.add("hide");
+    setTimeout(()=>{ if(first && first.remove) first.remove(); }, 320);
+  }
 
-  const avatar = document.createElement("div");
-  avatar.className = "avatar";
-  avatar.textContent = opts.initials || (opts.name ? opts.name[0].toUpperCase() : "S");
-
-  const body = document.createElement("div");
-  body.className = "body";
-  body.innerHTML = `<div class="who">${opts.name}</div>
+  const n = document.createElement("div"); n.className="notif";
+  const avatar = document.createElement("div"); avatar.className="avatar"; avatar.textContent = (opts.name ? opts.name.split(" ").map(p=>p[0]).slice(0,2).join("") : "S");
+  const body = document.createElement("div"); body.className="body";
+  body.innerHTML = `<div class="who" title="${opts.name}">${opts.name}</div>
                     <div class="mobile">${opts.mobile}</div>
                     <div class="state">${opts.state}</div>
                     <div class="msg">${opts.message}</div>`;
-
-  const close = document.createElement("button");
-  close.className = "closeBtn";
-  close.setAttribute("aria-label","close");
-  close.innerHTML = "✕";
-  close.onclick = () => {
-    n.classList.add("hide");
-    setTimeout(()=>{ n.remove(); }, 420);
-  };
-
-  n.appendChild(avatar);
-  n.appendChild(body);
-  n.appendChild(close);
-
+  const close = document.createElement("button"); close.className="closeBtn"; close.setAttribute("aria-label","close"); close.innerHTML="✕";
+  close.onclick = () => { n.classList.add("hide"); setTimeout(()=>{ n.remove(); }, 280); };
+  n.appendChild(avatar); n.appendChild(body); n.appendChild(close);
   notifWrapper.appendChild(n);
 
-  setTimeout(()=>{
-    n.classList.add("hide");
-    setTimeout(()=>{ n.remove(); }, 420);
-  }, displayMs);
+  setTimeout(()=>{ n.classList.add("hide"); setTimeout(()=>{ if(n) n.remove(); }, 320); }, displayMs);
 }
 
-/* Scheduler: every 3.5s show a new one, each notif stays ~5.2s */
-let cycleIntervalMs = 3500;
-function startNotifCycle(){
-  generateAndShow();
-  window._notifTimer = setInterval(() => {
-    generateAndShow();
-  }, cycleIntervalMs);
-}
-
-/* Generate random notification data and show */
+/* generate and show */
 function generateAndShow(){
-  const name = allNamesWeighted[Math.floor(Math.random()*allNamesWeighted.length)];
-  const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+  const name = namesWeighted[Math.floor(Math.random()*namesWeighted.length)];
   const ticket = "KL" + randTicket();
   const tpl = templates[Math.floor(Math.random()*templates.length)];
   const message = tpl.includes("{T}") ? tpl.replace("{T}", ticket) : tpl + " " + ticket;
   const mobile = randMobileMasked();
-  const state = allStatesWeighted[Math.floor(Math.random()*allStatesWeighted.length)];
-  showOneNotif({ name: displayName, mobile, message, state }, 5200);
+  const state = statesWeighted[Math.floor(Math.random()*statesWeighted.length)];
+  showOneNotif({ name, mobile, message, state }, 4800);
 }
 
-/* Start cycle when page loaded */
+/* start cycle */
+let cycleIntervalMs = 3500;
+function startNotifCycle(){
+  generateAndShow();
+  window._notifTimer = setInterval(generateAndShow, cycleIntervalMs);
+}
 document.addEventListener("DOMContentLoaded", ()=>{
-  // ensure floating wa image uses configured URL (in case changed)
+  // ensure whatsapp image
   const waFloat = document.getElementById("waFloat");
   waFloat.querySelector("img").src = WHATSAPP_IMG_URL;
-
   startNotifCycle();
 });
 
-/* Stop showing notifications while user focuses inputs (safer UX) */
+/* stop when user focuses inputs */
 [nameI, mobileI].forEach(el=>{
   el.addEventListener("focus", ()=> {
-    if(window._notifTimer) {
-      clearInterval(window._notifTimer);
-      window._notifTimer = null;
-    }
+    if(window._notifTimer){ clearInterval(window._notifTimer); window._notifTimer = null; }
   });
-  el.addEventListener("blur", ()=> {
-    if(!window._notifTimer) startNotifCycle();
-  });
+  el.addEventListener("blur", ()=> { if(!window._notifTimer) startNotifCycle(); });
 });
 
-/* Floating whatsapp click uses same WHATSAPP_NUMBER */
+/* whatsapp float click uses same WHATSAPP_NUMBER */
 document.getElementById("waFloat").addEventListener("click", ()=>{
   const numClean = WHATSAPP_NUMBER.replace(/\D/g,'');
-  // prefill a small message
   const msg = "Hi, I want to book tickets.";
   window.open("https://wa.me/"+numClean+"?text="+encodeURIComponent(msg), "_blank");
 });
