@@ -127,7 +127,7 @@ button:disabled{opacity:.55;cursor:not-allowed;}
 
   <div class="ticketBox">
     <div class="ticketAmount" id="ticketAmount">💰 Total Amount: ₹0</div>
-    <div class="ticketTitle">🎟 Select Lucky Ticket (₹40 per ticket)</div>
+    <div class="ticketTitle">🎟 Select Lucky Ticket (₹149 per ticket)</div>
     <select id="ticket" multiple></select>
     <div class="counter" id="counter">Selected: 0 tickets</div>
     <div class="selectedList" id="selectedList"></div>
@@ -174,7 +174,7 @@ setInterval(()=>{
 },1000);
 
 /* ---------- Booking / Tickets ---------- */
-const TICKET_PRICE = 40, MIN_TICKETS = 3;
+const TICKET_PRICE = 149, MIN_TICKETS = 3;
 const ticket = document.getElementById("ticket"),
       selectedList = document.getElementById("selectedList"),
       amount = document.getElementById("amount"),
@@ -249,7 +249,7 @@ submitBtn.onclick = ()=>{
     <b>State:</b> ${stateSelect.value}<br><br>
     <b>Tickets Selected:</b><br>${sel}<br><br>
     <b>Total Tickets:</b> ${ticket.selectedOptions.length}<br>
-    <b>Price per Ticket:</b> ₹40<br>
+    <b>Price per Ticket:</b> ₹149<br>
     <b>Total Amount:</b> ${amount.value}<br><br>
     <b>Payment Mode:</b> WhatsApp Confirmation<br>
     ⚠️ Please verify details before proceeding.
